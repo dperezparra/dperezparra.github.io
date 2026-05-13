@@ -1,24 +1,24 @@
 ---
 title: >
-  Seeding the Battlefield: Post-Conflict Peacekeeping and Women's Education
+  Community Deliberation and the Transformation of Social Norms: Evidence from a Multi-Country Program Targeting Harmful Norms
 authors:
   - admin
-  - Thierry Hounsa
-  - Horace Gninafon
+  - Melchior Clerc
+  - Mathilde Lessueur
 
 author_notes:
   - ""
   - ""
   - ""
 
-date: "2025-09-03"
-publishDate: "2025-09-03T00:00:00Z"
+date: "2025-09-02"
+publishDate: "2025-09-02T00:00:00Z"
 
 publication_types: ["Work in Progress"]
-publication: "Working paper soon"
+publication: ""
 publication_short: ""
 
-slug: "pkm-married18"
+slug: "community-deliberation-norms"
 
 # Only poster and slides icons are shown. Replace url: "#" with the real
 # file path when available.
