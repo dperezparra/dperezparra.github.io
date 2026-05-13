@@ -1,27 +1,23 @@
 ---
 title: >
-  Seeding the Battlefield: Post-Conflict Peacekeeping and Women's Education
+  Beyond the Classroom? Secondary School Expansion and Female Genital Mutilation in Senegal
 authors:
   - admin
-  - Thierry Hounsa
-  - Horace Gninafon
 
 author_notes:
   - ""
-  - ""
-  - ""
 
-date: "2025-09-03"
-publishDate: "2025-09-03T00:00:00Z"
+date: "2025-09-04"
+publishDate: "2025-09-04T00:00:00Z"
 
 publication_types: ["Work in Progress"]
 publication: "Working paper soon"
 publication_short: ""
 
-slug: "pkm-married18"
+slug: "fgm-education"
 
 # Only poster and slides icons are shown. Replace url: "#" with the real
-# file path when available.
+# file path (e.g., "uploads/beyond-classroom-poster.pdf") when available.
 links:
   - type: poster
     url: "#"
