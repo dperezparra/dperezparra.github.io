@@ -1,6 +1,6 @@
 ---
 title: >
-  Beyond the Classroom? Secondary School Expansion and Female Genital Mutilation in Senegal
+  Beyond the Classroom? Secondary School Expansion and Female Genital Cutting in Senegal
 authors:
   - admin
 

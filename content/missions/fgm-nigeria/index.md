@@ -8,7 +8,7 @@ image:
   preview_only: true
   
 tags:
-  - Female Genital Mutilation
+  - Female Genital Cutting
   - Pre-marital sex
 
 share: false

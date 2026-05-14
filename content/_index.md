@@ -16,9 +16,11 @@ sections:
 
         Welcome to my personal site! I am Daniel Pérez-Parra, PhD student in Economics at the Université Gustave Eiffel (Érudite), supervised by Marine de Talancé and Catherine Bros. 
         
-        My thesis examines the persistence of harmful cultural norms in West Africa. Using geospatial data and impact evaluation techniques, I analyse which policies are effective in eradicating female genital cutting, child marriage, and intimate partner violence.
-        
-        I currently work as a Short-Term Consultant for the Africa Gender Innovation Lab at the World Bank. In 2024, I was a Visiting PhD Student at the University of Oxford's Centre for the Study of African Economies (CSAE), supervised by Stefan Dercon. Previously, I served as a Research Assistant for Noam Angrist and Jorge García-Hombrados, and as a Research Consultant for the What Works Hub for Global Education at Oxford's Blavatnik School of Government.
+        My research interests lie in development economics, with a particular focus on education and gender in West Africa. My work examines two main areas: the expansion of secondary education and the erosion of harmful social norms. Using geospatial data and causal inference methods, I study how public policies and institutional changes affect educational outcomes, gender norms, and practices such as female genital cutting.
+
+        In 2024, I was a Visiting PhD Student at the Centre for the Study of African Economies at the University of Oxford, under the supervision of Stefan Dercon.
+
+        Alongside my academic research, I have worked as a research consultant for institutions including the World Bank’s Africa Gender Innovation Lab and the What Works Hub for Global Education at the Blavatnik School of Government.
 
         
       button:

@@ -1,26 +1,27 @@
 ---
 title: >
-  Beyond the Classroom? Secondary School Expansion and Female Genital Mutilation in Senegal
+  Seeding the Battlefield: Post-Conflict Peacekeeping and Women's Education
 authors:
   - admin
+  - thierry-hounsa
+  - horace-gninafon
 
 author_notes:
   - ""
+  - ""
+  - ""
 
-date: "2025-09-04"
-publishDate: "2025-09-04T00:00:00Z"
+date: "2025-09-03"
+publishDate: "2025-09-03T00:00:00Z"
 
 publication_types: ["Work in Progress"]
 publication: "Working paper soon"
 publication_short: ""
 
-slug: "fgm-education"
+slug: "pkm-married18"
 
-# Only poster and slides icons are shown. Replace url: "#" with the real
-# file path (e.g., "uploads/beyond-classroom-poster.pdf") when available.
+# Slides icon only. Replace url: "#" with the real file path when available.
 links:
-  - type: poster
-    url: "#"
   - type: slides
     url: "#"
 

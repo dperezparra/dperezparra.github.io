@@ -84,6 +84,36 @@ work:
     summary: |
       - Course: Microeconomics II (in French)
       - Level: First-year undergraduate students
+  - position: Research Consultant
+    company_name: World Bank — Africa Gender Innovation Lab
+    icon: ''
+    date_start: 2025-06-01
+    date_end: 2026-01-31
+  - position: Research Consultant
+    company_name: What Works Hub for Global Education, University of Oxford
+    icon: ''
+    date_start: 2024-06-01
+    date_end: 2024-09-30
+  - position: Research Assistant
+    company_name: Centre for the Study of African Economies, University of Oxford
+    icon: ''
+    date_start: 2024-02-01
+    date_end: 2024-09-30
+  - position: Research Assistant
+    company_name: Universidad Autónoma de Madrid
+    icon: ''
+    date_start: 2022-10-01
+    date_end: 2023-10-31
+  - position: Research Intern
+    company_name: Université Gustave Eiffel
+    icon: ''
+    date_start: 2022-05-01
+    date_end: 2022-06-30
+  - position: Economic Affairs Intern
+    company_name: United Nations Economic Commission for Africa
+    icon: ''
+    date_start: 2021-06-01
+    date_end: 2021-09-30
 
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
