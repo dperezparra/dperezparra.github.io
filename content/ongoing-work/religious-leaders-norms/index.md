@@ -2,9 +2,9 @@
 title: >
   How Religious Leaders Shape Social Norms
 authors:
-  - admin
   - Hanna Bony
   - Jorge García-Hombrados
+  - admin
 
 author_notes:
   - ""
@@ -22,11 +22,6 @@ slug: "religious-leaders-norms"
 
 # Only poster and slides icons are shown. Replace url: "#" with the real
 # file path when available.
-links:
-  - type: poster
-    url: "#"
-  - type: slides
-    url: "#"
 
 share: false
 ---

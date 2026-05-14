@@ -25,7 +25,7 @@ sections:
       text: ''
       filters:
         folders:
-          - ongoing work
+          - ongoing-work
         exclude_featured: false
     design:
       view: citation

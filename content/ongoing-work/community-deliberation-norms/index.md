@@ -2,9 +2,9 @@
 title: >
   Community Deliberation and the Transformation of Social Norms: Evidence from a Multi-Country Program Targeting Harmful Norms
 authors:
-  - admin
   - Melchior Clerc
   - Mathilde Lessueur
+  - admin
 
 author_notes:
   - ""
@@ -19,14 +19,6 @@ publication: ""
 publication_short: ""
 
 slug: "community-deliberation-norms"
-
-# Only poster and slides icons are shown. Replace url: "#" with the real
-# file path when available.
-links:
-  - type: poster
-    url: "#"
-  - type: slides
-    url: "#"
 
 share: false
 ---
