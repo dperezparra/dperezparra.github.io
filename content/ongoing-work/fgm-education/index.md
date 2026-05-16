@@ -18,11 +18,6 @@ slug: "fgm-education"
 
 # Only poster and slides icons are shown. Replace url: "#" with the real
 # file path (e.g., "uploads/beyond-classroom-poster.pdf") when available.
-links:
-  - type: poster
-    url: "#"
-  - type: slides
-    url: "#"
 
 share: false
 ---
