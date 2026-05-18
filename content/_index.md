@@ -25,7 +25,7 @@ sections:
         
       button:
         text: Download my CV
-        url: uploads/CV_EN-28.pdf
+        url: uploads/CV_EN-42.pdf
       # Show a call-to-action button under your biography? (optional)
     design:
       # Apply a gradient background

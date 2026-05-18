@@ -7,9 +7,6 @@ authors:
 author_notes:
   - ""
 
-date: "2025-09-04"
-publishDate: "2025-09-04T00:00:00Z"
-
 publication_types: ["Work in Progress"]
 publication: "Working paper soon"
 publication_short: ""

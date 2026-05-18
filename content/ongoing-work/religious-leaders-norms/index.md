@@ -11,9 +11,6 @@ author_notes:
   - ""
   - ""
 
-date: "2025-09-01"
-publishDate: "2025-09-01T00:00:00Z"
-
 publication_types: ["Work in Progress"]
 publication: "Multiple projects in progress"
 publication_short: ""
