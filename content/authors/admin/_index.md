@@ -47,7 +47,7 @@ education:
     date_start: 2022-09-01
     date_end: 2025-10-01
     summary: |
-      - Thesis: Essays on Women's Education and Hamrful Social Norms in West Africa 
+      - Thesis: Essays on Women's Education and Harmful Social Norms in West Africa 
       - Supervisors: Marine de Talancé • Catherine Bros
       - Visiting PhD Student, supervised by Stefan Dercon (CSAE, University of Oxford)
       - Dissertation committee: Stefan Dercon (University of Oxford), Sylvie Lambert (Paris School of Economics), Melika Ben Salem (Université Gustave Eiffel), Selim Gulesci (Trinity College Dublin), and Paola Villar (Université Paris 1)
