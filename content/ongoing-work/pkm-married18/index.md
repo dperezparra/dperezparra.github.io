@@ -11,6 +11,8 @@ author_notes:
   - ""
   - ""
 
+date: 2026-01-01
+
 publication_types: ["Work in Progress"]
 publication: "Working paper soon"
 publication_short: ""
