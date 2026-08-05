@@ -1,125 +1,137 @@
-# [The Academic CV That Gets You Hired](https://github.com/HugoBlox/theme-academic-cv)
+# dperezparra.github.io/my-website
 
-[![Screenshot](.github/preview.webp)](https://hugoblox.com/templates/academic-cv/start/?utm_source=github&utm_medium=readme)
+Personal academic website of **Daniel Pérez-Parra** — PhD candidate in Economics
+at Érudite, Université Gustave Eiffel. Research, teaching and fieldwork on
+education, gender and social norms in West Africa.
 
-<h1 align="center">Build an Academic CV and Resumé That Stands Out</h1>
-
-<p align="center">
-  <strong>Your unfair advantage in academia and tech.</strong><br/>
-  Showcase your work, boost your citations, and land your dream job at places like <strong>Meta, Google, and Stanford</strong>.
-</p>
-
-<p align="center">
-  <a href="https://hugoblox.com/templates/academic-cv/start?utm_source=github&utm_medium=readme"><b>🚀 Deploy Your Free CV in 60s</b></a>
-  &nbsp;•&nbsp;
-  <a href="https://hugoblox.com/templates/?open=academic-cv&loading=true&utm_source=github&utm_medium=readme">Live Demo</a>
-  &nbsp;•&nbsp;
-  <a href="https://hugoblox.com/pro?utm_source=github&utm_medium=readme"><b>✨ Upgrade to Pro</b></a>
-</p>
-
-<p align="center">
-  Trusted by 250,000+ researchers, students, and educators worldwide.
-</p>
-
-<p align="center">
-  <a href="https://discord.gg/z8wNYzb">
-    <img src="https://img.shields.io/discord/722225264733716590?label=Join%20Discord&style=social" alt="Discord">
-  </a>
-  <a href="https://github.com/HugoBlox/theme-academic-cv">
-    <img src="https://img.shields.io/github/stars/HugoBlox/theme-academic-cv?label=Star%20Academic%20CV&style=social" alt="GitHub Stars">
-  </a>
-</p>
+Built with [Hugo](https://gohugo.io/) and the
+[Hugo Blox](https://hugoblox.com/) *Academic CV* template.
+Deployed to GitHub Pages on every push to `main`.
 
 ---
 
-## Your Career Starts Here
+## Local development
 
-The Academic CV template is designed for impact. Whether you're an AI researcher, a recent graduate, or a seasoned professor, this is the last resumé you'll ever need.
+The theme is a **Hugo module**, so you need Go as well as Hugo, and Node for the
+Tailwind CSS pipeline. Versions are pinned in `netlify.toml` and
+`.github/workflows/deploy.yml` — keep them in sync.
 
-- **✍️ Showcase Your Expertise:** Easily write content with Markdown, Jupyter, or RStudio. Display your publications, talks, and projects in a stunning, professional layout.
-- **📈 Boost Your Citations:** Automatic BibTeX import and SEO-optimized pages mean your work gets discovered more easily, increasing your research impact.
-- **💼 Land Your Dream Job:** Create a memorable online presence that impresses recruiters from top tech firms and prestigious universities.
-- **🚀 Launch in Minutes:** No coding required. The Hugo Blox Builder lets you customize everything with drag-and-drop sections.
-
-<p align="center">
-  <a href="https://hugoblox.com/templates/academic-cv/start?utm_source=github&utm_medium=readme">
-    <img src="https://img.shields.io/badge/⚡️%20Get%20Your%20CV%20in%2060s-ff4655?style=for-the-badge" alt="Deploy this template" width="400">
-  </a>
-</p>
-
----
-
-## Level Up with Pro Templates
-
-Ready to take your career to the next level? Our Pro templates offer exclusive designs and features to help you stand out even more.
-
-<!-- <p align="center">
-  <img src="" alt="Free vs Pro templates">
-</p>-->
-
-| Feature              | Academic CV (Free)       | Academic CV Pro & Resumé Pro     |
-| -------------------- | ------------------------ | -------------------------------- |
-| **Design**           | Professional & clean     | **Exclusive premium designs**    |
-| **Layouts**          | Standard resumé sections | **Advanced layouts & timelines** |
-| **Call to Action**   | Simple contact link      | **Prominent CTA buttons**        |
-| **First Impression** | Strong                   | **Unforgettable**                |
-
-<br/>
-<p align="center">
-  <a href="https://hugoblox.com/pro?utm_source=github&utm_medium=readme"><b>💎 Get the Pro Pass</b></a> — Includes all Pro templates for a one-time price.<br/>
-  <a href="https://hugoblox.com/templates/academic-cv-pro/start?utm_source=github&utm_medium=readme">✨ Deploy Academic CV Pro</a>
-  &nbsp;•&nbsp;
-  <a href="https://hugoblox.com/templates/resume-pro/start?utm_source=github&utm_medium=readme">📄 Deploy Resumé Pro</a>
-</p>
-
----
-
-## What Researchers Say
-
-> “Hugo Blox saved me 40+ hours on my lab site. BibTeX integration auto-updates publications — **our citations are up 3×**.”
-> — **Dr. Sarah Yang**, AI Researcher
-
----
-
-## Get Started in Minutes
-
-### Recommended (Fastest)
-
-Deploy your site to GitHub Pages in just 60 seconds with our browser-based starter.
-
-👉 <a href="https://hugoblox.com/templates/academic-cv/start?utm_source=github&utm_medium=readme"><b>Start with the Academic CV Template</b></a>
-
-### Prefer the Command Line?
-
-Use the local quickstart:
+| Tool | Version |
+|---|---|
+| Hugo **extended** | 0.152.1 |
+| Go | 1.21.5 |
+| Node | 22 |
+| pnpm | 10.14.0 (via `corepack`) |
 
 ```bash
-# 1. Install Hugo Extended → https://docs.hugoblox.com/getting-started/install-hugo/
-# 2. Clone this starter
-git clone https://github.com/HugoBlox/theme-academic-cv my-site
-cd my-site
-
-# 3. Run locally
-pnpm install && hugo server
+pnpm install          # Tailwind CLI + Pagefind
+pnpm dev              # hugo server --disableFastRender  ->  http://localhost:1313/
 ```
 
-For more guides, visit our documentation at **https://docs.hugoblox.com/**.
+To reproduce a production build, including the search index:
+
+```bash
+pnpm build:full       # hugo --minify && pagefind --site public
+```
+
+Search is **not** available under `pnpm dev` — Pagefind indexes `public/` after
+the fact, so you need the full build to test it.
 
 ---
 
-## Join the Community
+## Repository layout
 
-Join thousands of creators in our vibrant community to ask questions, share your work, and help us improve.
+| Path | Purpose |
+|---|---|
+| `config/_default/` | All site config: `hugo.yaml`, `params.yaml`, `menus.yaml`, `module.yaml`, `languages.yaml` |
+| `content/authors/admin/_index.md` | **Profile data.** Role, affiliations, social links, education, work history, skills, languages. Drives both the homepage bio and `/curriculum/` |
+| `content/publication/` | Working papers (one folder per paper) |
+| `content/ongoing-work/` | Work in progress |
+| `content/missions/` | Fieldwork write-ups |
+| `content/teaching.md` | Teaching page |
+| `assets/css/custom.css` | Style overrides. **This exact path** — the theme looks for it here |
+| `assets/media/icon.png` | Favicon and social-share fallback image |
+| `static/uploads/` | PDFs (CV, papers) |
 
-- 💬 <a href="https://discord.gg/z8wNYzb">Discord</a>
-- 📚 <a href="https://docs.hugoblox.com/?utm_source=github&utm_medium=readme">Docs & Guides</a>
-- 🐦 <a href="https://x.com/BuildLore">X / Twitter</a>
-- ⭐ <a href="https://github.com/HugoBlox/hugo-blox-builder">Star on GitHub</a>
+The theme itself lives in the Go module cache and is **not** in this repo.
+Never edit it: `hugo mod clean` will wipe your changes. Customise via, in order
+of preference — config → front matter → a hook partial in
+`layouts/_partials/hooks/{head-start,head-end,body-end,footer-start}/` →
+shadowing a theme template by recreating its exact path under `layouts/`.
 
 ---
 
-MIT © 2016-Present [George Cushen](https://georgecushen.com)
+## Adding content
 
-<!--START_SECTION:news-->
-<!--Updated at 2025-10-26T01:58:34.817Z-->
-<!--END_SECTION:news-->
+Each entry is a **page bundle**: a folder containing `index.md` plus its images.
+
+**A working paper** — create `content/publication/<slug>/index.md`:
+
+```yaml
+---
+title: >
+  Your paper title
+summary: >
+  * Submitted
+authors:
+  - Coauthor Name      # display name
+  - admin              # = you, resolves to content/authors/admin
+date: "2026-01-01"
+publication_types: ["Working Paper"]
+publication: Submitted # or e.g. "R&R at The Economic Journal"
+slug: "<slug>"
+abstract: >
+  ...
+tags: [Topic One, Topic Two]
+links:
+  - type: pdf
+    url: "uploads/<file>.pdf"
+image:
+  filename: "featured.png"
+  preview_only: true
+share: false
+---
+```
+
+Work in progress and fieldwork entries follow the same shape under
+`content/ongoing-work/` and `content/missions/`.
+
+Notes:
+
+- **Co-authors** are plain display names. A slug (`jane-doe`) only works if
+  `content/authors/jane-doe/` exists — otherwise the raw slug is rendered.
+- **`author_notes`** (e.g. `["Corresponding author", "", ""]`) renders a tooltip
+  next to the matching author. Add it only when at least one entry is non-empty:
+  an all-empty array renders nothing but still makes the theme emit a debug
+  `console.log` on the page.
+- **Featured images** are matched by the glob `*featured*`, which takes priority
+  over `image.filename`. Keep exactly one per folder, and set `image.filename`
+  to match so the two never disagree.
+- **PDF filenames** should be lowercase with hyphens, no spaces.
+- **Image format**: photographs → JPEG, ~2000 px on the long edge. Charts, maps
+  and other flat-colour figures → PNG (a 256-colour palette PNG is usually far
+  smaller than JPEG *and* avoids compression artefacts around text and borders).
+
+---
+
+## Deployment
+
+`.github/workflows/deploy.yml` runs on every push to `main`: build with Hugo,
+generate the Pagefind index, publish to GitHub Pages.
+
+`netlify.toml` configures an equivalent Netlify build. `enableGitInfo` is set in
+`config/_default/hugo.yaml` and deliberately **not** duplicated as
+`HUGO_ENABLEGITINFO` in `netlify.toml` — the two used to disagree.
+
+`.github/workflows/import-publications.yml` converts a root-level
+`publications.bib` into `content/publication/` and opens a PR. It is dormant
+until such a file is added.
+
+---
+
+## Licence
+
+Site content (text, images, PDFs) © Daniel Pérez-Parra, licensed
+[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) — as
+configured under `footer.copyright.license` in `config/_default/params.yaml`.
+The underlying Hugo Blox template is MIT licensed — see `LICENSE.md`.
