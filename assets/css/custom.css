@@ -24,6 +24,57 @@
 }
 
 /* ---------------------------------------------------------------------------
+ * Institution logo pinned to the top-right of the homepage biography block.
+ * Rendered from `design.corner_logo` by the shadowed resume-biography template.
+ * ------------------------------------------------------------------------- */
+
+#profile.resume-biography {
+  position: relative;
+}
+
+.profile-corner-logo {
+  position: absolute;
+  /* #profile spans the full section width, so these insets are measured from
+   * the viewport edge - without them the logo sits flush against it. */
+  top: 0.5rem;
+  right: 1.75rem;
+  display: block;
+  width: 150px;
+  max-width: 34vw;
+  line-height: 0;
+  transition: opacity 0.15s ease;
+}
+
+.profile-corner-logo:hover {
+  opacity: 0.8;
+}
+
+.profile-corner-logo img {
+  width: 100%;
+  height: auto;
+}
+
+/* The lockup's wordmark is dark blue, which loses contrast on a dark
+ * background - sit it on a white panel there. */
+.dark .profile-corner-logo {
+  padding: 0.5rem 0.625rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+}
+
+/* Below ~700px the absolutely-positioned logo would collide with the centred
+ * avatar (avatar right edge = (W+320)/2 overlaps logo left edge = W-178 once
+ * W < ~676px). Drop it back into the flow above the avatar instead. */
+@media (max-width: 767px) {
+  .profile-corner-logo {
+    position: static;
+    align-self: flex-end;
+    width: 104px;
+    margin: 0.5rem 1rem 0 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
  * Social links (email / GitHub / LinkedIn) as buttons rather than bare icons.
  * Styled to match the "Download my CV" button below the biography.
  * ------------------------------------------------------------------------- */

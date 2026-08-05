@@ -84,6 +84,26 @@
 {{ end }}
 
 <div id="profile" class="resume-biography flex justify-center items-center flex-col dark:text-white">
+
+  {{/* CUSTOMISED: optional institution logo pinned to the top-right of the
+       block. Configured under `design.corner_logo` in the page front matter;
+       positioned by `.profile-corner-logo` in assets/css/custom.css. */}}
+  {{ with $block.design.corner_logo }}
+    {{ $logo := resources.Get (path.Join "media" .filename) }}
+    {{ if $logo }}
+      {{ $img := cond (eq (path.Ext .filename) ".svg") $logo ($logo.Process "Resize 400x webp") }}
+      <a class="profile-corner-logo"
+         {{ with .url }}href="{{ . }}" target="_blank" rel="noopener"{{ end }}
+         aria-label="{{ .alt | default "Institution" }}">
+        <img src="{{ $img.RelPermalink }}" alt="{{ .alt | default "" }}"
+             {{ with $img.Width }}width="{{ . }}"{{ end }}
+             {{ with $img.Height }}height="{{ . }}"{{ end }} />
+      </a>
+    {{ else }}
+      {{ warnf "corner_logo `%s` not found in assets/media/" .filename }}
+    {{ end }}
+  {{ end }}
+
   {{ if $avatar }}
 
   <div class="avatar-wrapper {{ if $img }}-mt-[105px]{{else}}mt-10{{end}}" style="width: {{$display_size}}px; height: {{$display_size}}px;">
