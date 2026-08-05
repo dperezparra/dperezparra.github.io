@@ -13,18 +13,21 @@ superuser: true
 highlight_name: true
 
 # Role/position/tagline
-role: Postdoctoral Researcher
+role: Postdoctoral Researcher in Economics
 
 # Organizations/Affiliations to display in Biography block.
 # IRD is the employing institution; the two universities are the host labs
-# attached to this position.
+# attached to this position, so they share one line.
+# `group:` renders its members on a single line separated by a dot - see the
+# shadowed template at layouts/partials/hbx/blocks/resume-biography/block.html
 organizations:
   - name: French National Research Institute for Sustainable Development (IRD)
     url: https://en.ird.fr/
-  - name: Université Paris-Dauphine (LEDa-DIAL)
-    url: https://leda.dauphine.fr/
-  - name: Université Paris 1 Panthéon-Sorbonne (CES)
-    url: https://centredeconomiesorbonne.cnrs.fr/
+  - group:
+      - name: Université Paris-Dauphine (LEDa-DIAL)
+        url: https://leda.dauphine.fr/
+      - name: Université Paris 1 Panthéon-Sorbonne (CES)
+        url: https://centredeconomiesorbonne.cnrs.fr/
 
 # Social network links
 # Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.

@@ -52,12 +52,29 @@ the fact, so you need the full build to test it.
 | `assets/css/custom.css` | Style overrides. **This exact path** — the theme looks for it here |
 | `assets/media/icon.png` | Favicon and social-share fallback image |
 | `static/uploads/` | PDFs (CV, papers) |
+| `layouts/partials/hbx/blocks/resume-biography/block.html` | **Shadowed theme template** — see below |
 
 The theme itself lives in the Go module cache and is **not** in this repo.
 Never edit it: `hugo mod clean` will wipe your changes. Customise via, in order
 of preference — config → front matter → a hook partial in
 `layouts/_partials/hooks/{head-start,head-end,body-end,footer-start}/` →
 shadowing a theme template by recreating its exact path under `layouts/`.
+
+### The one shadowed template
+
+`layouts/partials/hbx/blocks/resume-biography/block.html` is a copy of the
+theme's biography block with a **single** change, marked `CUSTOMISED` in the
+file: an `organizations` entry may carry a `group:` list, whose members render
+on one line separated by a dot. That is what puts the two host labs on a single
+line under IRD in `content/authors/admin/_index.md`.
+
+Blocks are mounted from the theme's `blox/<id>/block.html` to
+`layouts/partials/hbx/blocks/<id>/block.html`, and `biography` is an alias for
+`resume-biography` — hence that path.
+
+**On upgrading `blox-tailwind`**, diff this file against the new upstream block
+and re-apply the one change. Deleting the file is always a safe fallback: each
+affiliation then gets its own line again.
 
 ---
 

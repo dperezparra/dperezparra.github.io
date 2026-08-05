@@ -22,3 +22,60 @@
 .dark #profile.resume-biography > h3 {
   color: var(--color-primary-400);
 }
+
+/* ---------------------------------------------------------------------------
+ * Social links (email / GitHub / LinkedIn) as buttons rather than bare icons.
+ * Styled to match the "Download my CV" button below the biography.
+ * ------------------------------------------------------------------------- */
+
+#profile .network-icon {
+  gap: 0.625rem;
+}
+
+/* The theme sets a right margin on every item; the gap above replaces it. */
+#profile .network-icon li {
+  margin-right: 0;
+}
+
+/* ...and scales the icon on hover, which looks wrong on a bordered button. */
+#profile .network-icon li:hover {
+  transform: none;
+}
+
+#profile .network-icon li > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* >=44px keeps these comfortable tap targets on mobile. */
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  color: rgb(17 24 39);
+  background-color: #fff;
+  border: 1px solid rgb(229 231 235);
+  border-radius: 0.5rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+#profile .network-icon li > a:hover {
+  background-color: rgb(243 244 246);
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-700);
+}
+
+#profile .network-icon li > a:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.dark #profile .network-icon li > a {
+  color: rgb(209 213 219);
+  background-color: rgb(31 41 55);
+  border-color: rgb(75 85 99);
+}
+
+.dark #profile .network-icon li > a:hover {
+  background-color: rgb(55 65 81);
+  border-color: var(--color-primary-400);
+  color: #fff;
+}
