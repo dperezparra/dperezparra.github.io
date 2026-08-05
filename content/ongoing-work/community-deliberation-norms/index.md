@@ -6,10 +6,6 @@ authors:
   - Mathilde Lessueur
   - admin
 
-author_notes:
-  - ""
-  - ""
-  - ""
   
 date: 2026-01-01
   

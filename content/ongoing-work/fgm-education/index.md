@@ -6,9 +6,6 @@ authors:
   
 date: 2026-01-01
 
-author_notes:
-  - ""
-
 publication_types: ["Work in Progress"]
 publication: "Working paper soon"
 publication_short: ""

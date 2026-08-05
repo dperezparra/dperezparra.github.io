@@ -7,15 +7,12 @@ authors:
   - Jorge García-Hombrados
   - admin
   - Ricardo Ciacci
-author_notes:
-  - ""
-  - ""
 date: "2025-09-01"
 publishDate: "2025-09-01T00:00:00Z"
 
 # Keep this as a working paper (or change to article-journal later)
 publication_types: ["Working Paper"]
-publication:
+publication: Submitted
 publication_short: ""
 
 abstract: >

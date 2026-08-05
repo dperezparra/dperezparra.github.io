@@ -16,7 +16,7 @@ main:
   - name: Fieldwork
     url: fieldwork/
     weight: 40
-  - name: Teaching Materials
+  - name: Teaching
     url: teaching/
     weight: 50
 

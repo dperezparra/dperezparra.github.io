@@ -5,11 +5,8 @@ summary: >
   * R&R at The Economic Journal
 authors:
   - Andrés Barrios-Fernández
-  - Jorge García-Hombrados,
+  - Jorge García-Hombrados
   - admin
-author_notes:
-  - ""
-  - ""
 date: "2025-09-01"
 publishDate: "2025-09-01T00:00:00Z"
 
@@ -26,7 +23,7 @@ slug: "plan-cuadrante"
 
 links:
   - type: pdf
-    url: "uploads/Plan Cuadrante.pdf"
+    url: "uploads/plan-cuadrante.pdf"
 
 tags:
   - Police Effectiveness

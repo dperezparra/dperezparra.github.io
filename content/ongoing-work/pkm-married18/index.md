@@ -3,13 +3,8 @@ title: >
   Seeding the Battlefield: Post-Conflict Peacekeeping and Women's Education
 authors:
   - admin
-  - thierry-hounsa
-  - horace-gninafon
-
-author_notes:
-  - ""
-  - ""
-  - ""
+  - Thierry Hounsa
+  - Horace Gninafon
 
 date: 2026-01-01
 
