@@ -46,14 +46,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* >=44px keeps these comfortable tap targets on mobile. */
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-  padding: 0.5rem 0.75rem;
+  /* Equal width and height + a full radius makes these circles.
+   * 2.75rem = 44px, the minimum comfortable tap target on mobile. */
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
   color: rgb(17 24 39);
   background-color: #fff;
   border: 1px solid rgb(229 231 235);
-  border-radius: 0.5rem;
+  border-radius: 9999px;
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
@@ -78,4 +79,62 @@
   background-color: rgb(55 65 81);
   border-color: var(--color-primary-400);
   color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+ * Teaching page: two-column course list.
+ * The `.teaching-courses` wrapper only exists in content/teaching.md, so these
+ * rules are naturally scoped to that page.
+ * ------------------------------------------------------------------------- */
+
+/* Keep the intro in scale with the course list below it; the theme's prose
+ * defaults (lg:prose-xl) are much larger than the course entries. */
+.teaching-intro {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.teaching-courses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 2rem;
+  margin-top: 2rem;
+}
+
+/* Single column on narrow screens, where two would be unreadably tight. */
+@media (max-width: 640px) {
+  .teaching-courses {
+    grid-template-columns: 1fr;
+  }
+}
+
+.teaching-courses .course + .course {
+  margin-top: 1.5rem;
+}
+
+/* Course titles in the site's accent colour, at a smaller size than the
+ * surrounding prose defaults. The `.prose` rules they override are written
+ * with :where(), which contributes no specificity, so these win. */
+.teaching-courses h3 {
+  margin: 0 0 0.15rem;
+  font-size: 1rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--color-primary-600);
+}
+
+.dark .teaching-courses h3 {
+  color: var(--color-primary-400);
+}
+
+.teaching-courses .meta {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: rgb(107 114 128);
+}
+
+.dark .teaching-courses .meta {
+  color: rgb(156 163 175);
 }
