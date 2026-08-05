@@ -7,9 +7,6 @@ main:
   - name: Home
     url: /
     weight: 10
-  - name: Short CV
-    url: curriculum/
-    weight: 20   
   - name: Research
     url: research/
     weight: 30

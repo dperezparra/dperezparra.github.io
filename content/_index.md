@@ -14,18 +14,13 @@ sections:
       username: admin
       text: |
 
-        Welcome to my personal site! I am Daniel Pérez-Parra, PhD student in Economics at the Université Gustave Eiffel (Érudite), supervised by Marine de Talancé and Catherine Bros. 
-        
-        My research interests lie in development economics, with a particular focus on education and gender in West Africa. My work examines two main areas: the expansion of secondary education and the erosion of harmful social norms. Using geospatial data and causal inference methods, I study how public policies and institutional changes affect educational outcomes, gender norms, and practices such as female genital cutting.
+        Welcome to my personal site! I am Daniel Pérez-Parra, Postdoctoral Researcher at the French National Research Institute for Sustainable Development (IRD), based at Université Paris-Dauphine (LEDa-DIAL) and Université Paris 1 Panthéon-Sorbonne (CES). I completed my PhD in Economics at the Université Gustave Eiffel (Érudite) in 2026.
 
-        In 2024, I was a Visiting PhD Student at the Centre for the Study of African Economies at the University of Oxford, under the supervision of Stefan Dercon.
+        My research interests lie in development economics and applied microeconomics, with a particular focus on education and gender in West Africa. My work examines two main areas: the expansion of secondary education and the erosion of harmful social norms. Using geospatial data and causal inference methods, I study how public policies and institutional changes affect educational outcomes, gender norms, and practices such as female genital cutting.
 
-        Alongside my academic research, I have worked as a research consultant for institutions including the World Bank’s Africa Gender Innovation Lab and the What Works Hub for Global Education at the Blavatnik School of Government.
-
-        
       button:
         text: Download my CV
-        url: uploads/CV_EN-42.pdf
+        url: uploads/daniel-perez-parra-cv.pdf
       # Show a call-to-action button under your biography? (optional)
     design:
       # Apply a gradient background

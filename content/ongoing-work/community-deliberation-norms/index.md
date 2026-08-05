@@ -1,9 +1,9 @@
 ---
 title: >
-  Community Deliberation and the Transformation of Social Norms: Evidence from a Multi-Country Program Targeting Harmful Norms
+  Revising the Norm from Within: Collective Deliberation and Social Change
 authors:
   - Melchior Clerc
-  - Mathilde Lessueur
+  - Mathilde Lesueur
   - admin
 
   

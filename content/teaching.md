@@ -13,13 +13,13 @@ sections:
     content:
       title: 'Teaching'
       text: |
-        I teach quantitative and applied economics at the **Université Gustave
-        Eiffel**, at both master's and undergraduate level. Course materials are
-        available on request — please [get in touch](mailto:daniel.perezp@outlook.es).
+        I teach applied and quantitative economics at master's level at the
+        **Université Gustave Eiffel**. Course materials are available on
+        request — please [get in touch](mailto:daniel.perezparra@ird.fr).
 
         ### Impact Evaluation Methods
 
-        *Master's (M2) · in English · January–May 2026 · Lecturer*
+        *Master's, year 2 · in English · since 2026*
 
         An applied course on the methods used to estimate the causal effects of
         policies and programmes. It covers randomised controlled trials and the
@@ -29,11 +29,22 @@ sections:
         credibly recover, and on implementation in Stata and R using data from
         real evaluations.
 
-        ### Microeconomics II
+        ### Geospatial Analysis: Data and Inference
 
-        *Undergraduate (L1) · in French · January–May 2026 · Teaching Assistant*
+        *Master's, years 1–2 · in English · since 2026*
 
-        Tutorials accompanying the second-semester microeconomics course:
-        consumer and producer theory, market structure, and welfare analysis,
-        worked through problem sets and applied exercises.
+        An introduction to working with spatial data in economic research:
+        sources of geospatial data, joining them to survey and administrative
+        records, and the inference problems that spatial structure creates.
+        Students work hands-on in R, building up to designs that exploit
+        geographic variation in exposure to a policy.
+
+        ### Development Economics Seminar
+
+        *Master's, year 1 · in English · since 2026*
+
+        A reading seminar on current research in development economics.
+        Students present and discuss recent empirical papers, with attention to
+        research design, identification, and how each paper's evidence bears on
+        policy.
 ---

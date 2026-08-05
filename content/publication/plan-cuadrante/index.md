@@ -1,6 +1,6 @@
 ---
 title: > 
-  Effects of geographic specialization on police effectiveness
+  Boots in the Beat: Effects of Beat Policing on Victimization and Crime Perception
 summary: > 
   * R&R at The Economic Journal
 authors:

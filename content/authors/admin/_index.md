@@ -13,20 +13,24 @@ superuser: true
 highlight_name: true
 
 # Role/position/tagline
-role: PhD Candidate in Economics
+role: Postdoctoral Researcher
 
-# Organizations/Affiliations to display in Biography block
+# Organizations/Affiliations to display in Biography block.
+# IRD is the employing institution; the two universities are the host labs
+# attached to this position.
 organizations:
-  - name: Université Gustave Eiffel
-    url: https://www.univ-gustave-eiffel.fr/
-  - name: Érudite
-    url: https://erudite.univ-paris-est.fr/
+  - name: French National Research Institute for Sustainable Development (IRD)
+    url: https://en.ird.fr/
+  - name: Université Paris-Dauphine (LEDa-DIAL)
+    url: https://leda.dauphine.fr/
+  - name: Université Paris 1 Panthéon-Sorbonne (CES)
+    url: https://centredeconomiesorbonne.cnrs.fr/
 
 # Social network links
 # Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.
 profiles:
   - icon: at-symbol
-    url: 'mailto:daniel.perezp@outlook.es'
+    url: 'mailto:daniel.perezparra@ird.fr'
     label: E-mail Me
   - icon: brands/github
     url: https://github.com/dperezparra

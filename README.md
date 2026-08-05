@@ -44,7 +44,7 @@ the fact, so you need the full build to test it.
 | Path | Purpose |
 |---|---|
 | `config/_default/` | All site config: `hugo.yaml`, `params.yaml`, `menus.yaml`, `module.yaml`, `languages.yaml` |
-| `content/authors/admin/_index.md` | **Profile data.** Role, affiliations, social links, education, work history, skills, languages. Drives both the homepage bio and `/curriculum/` |
+| `content/authors/admin/_index.md` | **Profile data.** Role, affiliations, social links. Drives the homepage biography block and the author byline on papers |
 | `content/publication/` | Working papers (one folder per paper) |
 | `content/ongoing-work/` | Work in progress |
 | `content/missions/` | Fieldwork write-ups |
