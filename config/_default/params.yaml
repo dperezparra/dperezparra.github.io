@@ -15,7 +15,9 @@ marketing:
     local_business_type: ''
     org_name: ''
     description: 'Daniel Pérez-Parra — research, teaching and fieldwork on gender, health, norms and community development.'
-    twitter: 'GetResearchDev'
+    # Twitter/X handle for `twitter:site` card meta. Left empty on purpose -
+    # this was the starter template's own handle. Add yours to enable it.
+    twitter: ''
   analytics:
     google_analytics: ''
     baidu_tongji: ''
@@ -35,15 +37,20 @@ header:
     align: center
     show_search: true
     show_theme_chooser: true
-    show_language: false
+    # The theme reads `show_translations`, not `show_language`.
+    show_translations: false
 # Site footer
 footer:
   copyright:
     notice: '© {year} Daniel Pérez-Parra. This work is licensed under {license}'
+    # Renders as CC BY-NC-ND 4.0.
+    # NOTE: `share_alike` only takes effect when `allow_derivatives` is true -
+    # ND and SA are mutually exclusive. To publish as CC BY-NC-SA instead, set
+    # allow_derivatives: true and share_alike: true.
     license:
       enable: true
       allow_derivatives: false
-      share_alike: true
+      share_alike: false
       allow_commercial: false
 
 # Localization

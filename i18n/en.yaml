@@ -1,0 +1,8 @@
+# Labels for the custom `publication_types` used in content/publication/ and
+# content/ongoing-work/. The theme looks up `pub_<type>` and falls back to a
+# title-cased version of the raw string; defining them here yields the same
+# output without the MISSING_TRANSLATION build warnings.
+- id: 'pub_Working Paper'
+  translation: 'Working Paper'
+- id: 'pub_Work in Progress'
+  translation: 'Work in Progress'

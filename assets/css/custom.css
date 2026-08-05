@@ -1,0 +1,24 @@
+/* ---------------------------------------------------------------------------
+ * Site-specific style overrides.
+ *
+ * The theme loads this file only from this exact path - see `fileExists
+ * "assets/css/custom.css"` in blox-tailwind's `_partials/site_head.html`.
+ *
+ * It is NOT run through Tailwind, so `@apply` and utility classes are
+ * unavailable here. Write plain CSS, using the theme's custom properties.
+ * Those are shade-suffixed only (--color-primary-50 ... --color-primary-950);
+ * a bare --color-primary does not exist.
+ * ------------------------------------------------------------------------- */
+
+/* Accent the role/tagline shown under the name on the homepage.
+ * The biography block renders it as a direct <h3> child of
+ * `#profile.resume-biography` - see blox/resume-biography/block.html.
+ * That selector is specific enough to win without !important. */
+#profile.resume-biography > h3 {
+  color: var(--color-primary-600);
+}
+
+/* Lighter shade on dark backgrounds, where purple-600 reads as near-black. */
+.dark #profile.resume-biography > h3 {
+  color: var(--color-primary-400);
+}
