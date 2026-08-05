@@ -23,7 +23,11 @@ removePathAccents: true
 
 build:
   writeStats: true
-enableGitInfo: false
+# Derive page Lastmod from git history. Both deploy paths support this:
+# the GitHub Pages workflow checks out with fetch-depth: 0, and Netlify
+# provides full history. This is the single source of truth - do not also
+# set HUGO_ENABLEGITINFO in netlify.toml.
+enableGitInfo: true
 summaryLength: 30
 pagination:
   pagerSize: 10

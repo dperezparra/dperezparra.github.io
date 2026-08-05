@@ -1,21 +1,21 @@
 [build]
   command = """
     set -e
-    echo "=== Starting Blog build process ==="
+    echo "=== Starting build process ==="
     echo "Node version: $(node --version)"
     echo "pnpm version: $(pnpm --version)"
     echo "Hugo version: $(hugo version)"
     echo "Go version: $(go version || echo 'Go not available')"
-    
+
     echo "=== Installing dependencies ==="
-    pnpm install --verbose
-    
+    pnpm install --frozen-lockfile
+
     echo "=== Running Hugo build ==="
-    hugo --gc --minify -b $URL --logLevel debug --printI18nWarnings --printPathWarnings
-    
+    hugo --gc --minify -b $URL --printI18nWarnings --printPathWarnings
+
     echo "=== Running Pagefind indexing ==="
-    pnpm dlx pagefind --source 'public' --verbose
-    
+    pnpm exec pagefind --site public
+
     echo "=== Build completed successfully ==="
   """
   publish = "public"
@@ -24,11 +24,11 @@
   HUGO_VERSION = "0.152.1"
   GO_VERSION = "1.21.5"
   NODE_VERSION = "22"
-  HUGO_ENABLEGITINFO = "true"
+  # NOTE: enableGitInfo is set in config/_default/hugo.yaml. Do not duplicate
+  # it here as HUGO_ENABLEGITINFO - the two previously disagreed.
   HUGO_LOG_I18N_WARNINGS = "true"
   HUGO_LOG_WARNINGS = "true"
   FORCE_COLOR = "1"
-  PNPM_LOG_LEVEL = "debug"
 
 [context.production.environment]
   HUGO_ENV = "production"
@@ -38,9 +38,9 @@
     set -e
     echo "=== Deploy Preview Build ==="
     echo "Deploy URL: $DEPLOY_PRIME_URL"
-    pnpm install --verbose
-    hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL --logLevel debug --printI18nWarnings --printPathWarnings
-    pnpm dlx pagefind --source 'public' --verbose
+    pnpm install --frozen-lockfile
+    hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL --printI18nWarnings --printPathWarnings
+    pnpm exec pagefind --site public
   """
 
 [context.branch-deploy]
@@ -48,9 +48,9 @@
     set -e
     echo "=== Branch Deploy Build ==="
     echo "Deploy URL: $DEPLOY_PRIME_URL"
-    pnpm install --verbose
-    hugo --gc --minify -b $DEPLOY_PRIME_URL --logLevel debug --printI18nWarnings --printPathWarnings
-    pnpm dlx pagefind --source 'public' --verbose
+    pnpm install --frozen-lockfile
+    hugo --gc --minify -b $DEPLOY_PRIME_URL --printI18nWarnings --printPathWarnings
+    pnpm exec pagefind --site public
   """
 
 [[plugins]]

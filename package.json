@@ -1,17 +1,22 @@
 {
-  "name": "hugo-blox-academic-cv-starter",
+  "name": "dperezparra-website",
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@10.14.0",
-  "description": "Academic CV starter template for Hugo Blox with Tailwind CSS v4",
+  "description": "Personal academic website of Daniel Pérez-Parra, built with Hugo Blox",
   "scripts": {
     "dev": "hugo server --disableFastRender",
-    "build": "hugo --minify"
+    "build": "hugo --minify",
+    "index": "pagefind --site public",
+    "build:full": "hugo --minify && pagefind --site public"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.12",
     "@tailwindcss/typography": "^0.5.10",
     "preact": "^10.27.2",
     "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "pagefind": "^1.4.0"
   }
 }
