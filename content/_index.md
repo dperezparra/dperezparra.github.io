@@ -25,13 +25,6 @@ sections:
     design:
       # Apply a gradient background
       css_class: hbx-bg-gradient
-      # Institution logo pinned to the top-right of this block.
-      # Rendered by the shadowed template at
-      # layouts/partials/hbx/blocks/resume-biography/block.html
-      corner_logo:
-        filename: ird-logo.png
-        url: https://en.ird.fr/
-        alt: 'Institut de Recherche pour le Développement (IRD)'
       banner:
         # Upload your cover image to the `assets/media/` folder and reference it here
         filename: ''
