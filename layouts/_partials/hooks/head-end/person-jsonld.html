@@ -1,0 +1,79 @@
+{{/* ---------------------------------------------------------------------------
+     schema.org/Person structured data for the homepage.
+
+     WHY: blox-tailwind's `jsonld/main.html` emits only a bare `WebSite` block
+     on the homepage. When `marketing.seo.site_type` is "Person" it adds
+     nothing at all - there is no `jsonld/person.html` in the theme - so search
+     engines get no entity to attach the name to. This supplies one.
+
+     Built from content/authors/admin/_index.md, so it stays in step with the
+     profile instead of duplicating it. Injected through the theme's `head-end`
+     hook, so no template is shadowed.
+--------------------------------------------------------------------------- */}}
+
+{{ if .IsHome }}
+  {{ with site.GetPage "/authors/admin" }}
+    {{ $p := .Params }}
+
+    {{/* Affiliations. An `organizations` entry may hold a `group:` list (used
+         to put the two host labs on one line), so flatten those out. */}}
+    {{ $affiliation := slice }}
+    {{ range $p.organizations }}
+      {{ with .group }}
+        {{ range . }}
+          {{ $o := dict "@type" "Organization" "name" .name }}
+          {{ with .url }}{{ $o = merge $o (dict "url" .) }}{{ end }}
+          {{ $affiliation = $affiliation | append $o }}
+        {{ end }}
+      {{ else }}
+        {{ $o := dict "@type" "Organization" "name" .name }}
+        {{ with .url }}{{ $o = merge $o (dict "url" .) }}{{ end }}
+        {{ $affiliation = $affiliation | append $o }}
+      {{ end }}
+    {{ end }}
+
+    {{/* `sameAs` is what lets Google link this site to the same person on
+         GitHub and LinkedIn. The e-mail profile is pulled out separately. */}}
+    {{ $sameAs := slice }}
+    {{ $email := "" }}
+    {{ range $p.profiles }}
+      {{ $u := .url | default "" }}
+      {{ if hasPrefix $u "mailto:" }}
+        {{ $email = strings.TrimPrefix "mailto:" $u }}
+      {{ else if or (hasPrefix $u "http://") (hasPrefix $u "https://") }}
+        {{ $sameAs = $sameAs | append $u }}
+      {{ end }}
+    {{ end }}
+
+    {{ $alumniOf := slice }}
+    {{ range $p.education }}
+      {{ with .institution }}
+        {{ $alumniOf = $alumniOf | append (dict "@type" "CollegeOrUniversity" "name" .) }}
+      {{ end }}
+    {{ end }}
+
+    {{ $image := "" }}
+    {{ with (.Resources.ByType "image").GetMatch "*avatar*" }}
+      {{ $image = (.Fill "600x600 Center").Permalink }}
+    {{ end }}
+
+    {{ $person := dict
+        "@context" "https://schema.org"
+        "@type" "Person"
+        "name" .Title
+        "url" site.Home.Permalink
+    }}
+    {{ with $p.first_name }}{{ $person = merge $person (dict "givenName" .) }}{{ end }}
+    {{ with $p.last_name }}{{ $person = merge $person (dict "familyName" .) }}{{ end }}
+    {{ with $p.role }}{{ $person = merge $person (dict "jobTitle" .) }}{{ end }}
+    {{ with site.Params.marketing.seo.description }}{{ $person = merge $person (dict "description" .) }}{{ end }}
+    {{ with $image }}{{ $person = merge $person (dict "image" .) }}{{ end }}
+    {{ with $email }}{{ $person = merge $person (dict "email" .) }}{{ end }}
+    {{ with $p.interests }}{{ $person = merge $person (dict "knowsAbout" .) }}{{ end }}
+    {{ if $affiliation }}{{ $person = merge $person (dict "affiliation" $affiliation) }}{{ end }}
+    {{ if $alumniOf }}{{ $person = merge $person (dict "alumniOf" $alumniOf) }}{{ end }}
+    {{ if $sameAs }}{{ $person = merge $person (dict "sameAs" $sameAs) }}{{ end }}
+
+    <script type="application/ld+json">{{ $person | jsonify | safeJS }}</script>
+  {{ end }}
+{{ end }}

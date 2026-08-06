@@ -40,12 +40,15 @@ profiles:
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/daniel-pérez-parra
 
+# Published as schema.org `knowsAbout` in the homepage Person structured data
+# (see layouts/_partials/hooks/head-end/person-jsonld.html). Kept in step with
+# the "Fields of Interest" section of the CV.
 interests:
   - Development Economics
   - Applied Microeconomics
-  - Harmful Cultural Norms
+  - Harmful Social Norms
   - Economics of Education
-  - Security Provision
+  - Security Economics
 
 education:
   - area: PhD - Economics
