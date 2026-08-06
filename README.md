@@ -51,7 +51,7 @@ the fact, so you need the full build to test it.
 | `content/teaching.md` | Teaching page |
 | `assets/css/custom.css` | Style overrides. **This exact path** — the theme looks for it here |
 | `assets/media/icon.png` | Favicon and social-share fallback image (IRD symbol) |
-| `assets/media/ird-mark.png` | IRD symbol shown in the navbar |
+| `assets/media/{ird-mark,dauphine-logo,paris1-logo}.png` | Institution logos shown in the navbar, in config order. Hidden below 1024px, where the navbar has no room |
 | `static/uploads/` | PDFs (CV, papers) |
 | `layouts/` | **Shadowed theme templates** — see below |
 
@@ -69,7 +69,7 @@ single change marked `CUSTOMISED`, and each carries a header comment saying so.
 | File | Change | If you delete it |
 |---|---|---|
 | `layouts/partials/hbx/blocks/resume-biography/block.html` | An `organizations` entry may carry a `group:` list, rendered on one line separated by a dot — this is what puts the two host labs on a single line under IRD | Each affiliation gets its own line again |
-| `layouts/partials/components/headers/navbar.html` | Optional institution logo just before the search button, from `header.navbar.institution_logo` | The navbar logo disappears |
+| `layouts/partials/components/headers/navbar.html` | Institution logos just before the search button, from the `header.navbar.institution_logos` list | The navbar logos disappear |
 
 Blocks are mounted from the theme's `blox/<id>/block.html` to
 `layouts/partials/hbx/blocks/<id>/block.html`, and `biography` is an alias for

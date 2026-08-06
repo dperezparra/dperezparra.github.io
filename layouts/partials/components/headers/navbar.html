@@ -152,24 +152,27 @@
 
     <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
 
-      {{/* CUSTOMISED: institution logo, shown immediately before the search
-           button. Configured via `header.navbar.institution_logo` in
-           config/_default/params.yaml; styled by `.navbar-institution-logo`
-           in assets/css/custom.css. */}}
-      {{ with site.Params.header.navbar.institution_logo }}
-        {{ $ilogo := resources.Get (path.Join "media" .filename) }}
-        {{ if $ilogo }}
-          {{ $img := cond (eq (path.Ext .filename) ".svg") $ilogo ($ilogo.Process "Resize x90 webp") }}
-          <a class="navbar-institution-logo"
-             {{ with .url }}href="{{ . }}" target="_blank" rel="noopener"{{ end }}
-             {{ with .title }}title="{{ . }}"{{ end }}
-             aria-label="{{ .alt | default "Institution" }}">
-            <img src="{{ $img.RelPermalink }}" alt="{{ .alt | default "" }}"
-                 width="{{ $img.Width }}" height="{{ $img.Height }}" loading="eager" />
-          </a>
-        {{ else }}
-          {{ warnf "institution_logo `%s` not found in assets/media/" .filename }}
-        {{ end }}
+      {{/* CUSTOMISED: institution logos, shown immediately before the search
+           button, in the order listed. Configured via
+           `header.navbar.institution_logos` in config/_default/params.yaml;
+           styled by `.navbar-institution-logos` in assets/css/custom.css. */}}
+      {{ with site.Params.header.navbar.institution_logos }}
+        <div class="navbar-institution-logos">
+          {{ range . }}
+            {{ $ilogo := resources.Get (path.Join "media" .filename) }}
+            {{ if $ilogo }}
+              {{ $img := cond (eq (path.Ext .filename) ".svg") $ilogo ($ilogo.Process "Resize x120 webp") }}
+              <a {{ with .url }}href="{{ . }}" target="_blank" rel="noopener"{{ end }}
+                 {{ with .title }}title="{{ . }}"{{ end }}
+                 aria-label="{{ .alt | default "Institution" }}">
+                <img src="{{ $img.RelPermalink }}" alt="{{ .alt | default "" }}"
+                     width="{{ $img.Width }}" height="{{ $img.Height }}" loading="eager" />
+              </a>
+            {{ else }}
+              {{ warnf "institution logo `%s` not found in assets/media/" .filename }}
+            {{ end }}
+          {{ end }}
+        </div>
       {{ end }}
 
       {{/* Show site search? */}}

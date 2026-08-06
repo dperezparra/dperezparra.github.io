@@ -39,16 +39,24 @@ header:
     show_theme_chooser: true
     # The theme reads `show_translations`, not `show_language`.
     show_translations: false
-    # Institution logo shown just before the search button.
+    # Institution logos shown just before the search button, in this order.
     # Rendered by the shadowed navbar at
     # layouts/partials/components/headers/navbar.html
-    # Uses the IRD symbol rather than the full lockup: at navbar height the
+    # IRD uses the symbol rather than the full lockup: at navbar height the
     # "Institut de Recherche pour le Développement" wordmark is illegible.
-    institution_logo:
-      filename: ird-mark.png
-      url: https://en.ird.fr/
-      alt: 'Institut de Recherche pour le Développement (IRD)'
-      title: 'Institut de Recherche pour le Développement (IRD)'
+    institution_logos:
+      - filename: ird-mark.png
+        url: https://en.ird.fr/
+        alt: 'Institut de Recherche pour le Développement (IRD)'
+        title: 'Institut de Recherche pour le Développement (IRD)'
+      - filename: dauphine-logo.png
+        url: https://leda.dauphine.fr/
+        alt: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
+        title: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
+      - filename: paris1-logo.png
+        url: https://centredeconomiesorbonne.cnrs.fr/
+        alt: 'Université Paris 1 Panthéon-Sorbonne (CES)'
+        title: 'Université Paris 1 Panthéon-Sorbonne (CES)'
 # Site footer
 footer:
   copyright:
