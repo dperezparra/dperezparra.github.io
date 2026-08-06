@@ -51,7 +51,7 @@ the fact, so you need the full build to test it.
 | `content/teaching.md` | Teaching page |
 | `assets/css/custom.css` | Style overrides. **This exact path** — the theme looks for it here |
 | `assets/media/icon.png` | Favicon and social-share fallback image (IRD symbol) |
-| `assets/media/{ird-mark,dauphine-logo,paris1-logo}.png` | Institution logos shown in the navbar, in config order. Hidden below 1024px, where the navbar has no room |
+| `assets/media/{ird-mark,dauphine-logo,paris1-logo}.png` | Affiliation logos. All three appear below the CV button on the homepage; IRD alone sits in the navbar |
 | `static/uploads/` | PDFs (CV, papers) |
 | `layouts/` | **Shadowed theme templates** — see below |
 
@@ -63,13 +63,17 @@ shadowing a theme template by recreating its exact path under `layouts/`.
 
 ### Shadowed templates
 
-Two theme files are shadowed. Each is a **verbatim** copy of upstream with a
-single change marked `CUSTOMISED`, and each carries a header comment saying so.
+Two theme files are shadowed. Each is a **verbatim** copy of upstream apart
+from changes marked `CUSTOMISED`, and each carries a header comment saying so.
 
-| File | Change | If you delete it |
+| File | Changes | If you delete it |
 |---|---|---|
-| `layouts/partials/hbx/blocks/resume-biography/block.html` | An `organizations` entry may carry a `group:` list, rendered on one line separated by a dot — this is what puts the two host labs on a single line under IRD | Each affiliation gets its own line again |
-| `layouts/partials/components/headers/navbar.html` | Institution logos just before the search button, from the `header.navbar.institution_logos` list | The navbar logos disappear |
+| `layouts/partials/hbx/blocks/resume-biography/block.html` | **(1)** an `organizations` entry may carry a `group:` list, rendered on one line separated by a dot — this puts the two host labs on a single line under IRD; **(2)** `design.institution_logos` renders a centred logo row below the CV button | Affiliations go back to one per line, and the homepage logo row disappears |
+| `layouts/partials/components/headers/navbar.html` | Institution logos just before the search button, from the `header.navbar.institution_logos` list | The navbar logo disappears |
+
+Logos are configured in two places, deliberately: `params.yaml` holds the
+single IRD mark for the navbar (all three would not fit), while
+`content/_index.md` holds all three for the homepage row.
 
 Blocks are mounted from the theme's `blox/<id>/block.html` to
 `layouts/partials/hbx/blocks/<id>/block.html`, and `biography` is an alias for

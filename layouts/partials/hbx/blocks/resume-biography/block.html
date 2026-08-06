@@ -171,4 +171,27 @@
   </svg> {{.text}}</a>
   {{ end }}
 
+  {{/* CUSTOMISED: institution logos in a centred row below the button.
+       Configured under `design.institution_logos` in the page front matter;
+       spaced and sized by `.profile-institution-logos` in
+       assets/css/custom.css. */}}
+  {{ with $block.design.institution_logos }}
+    <div class="profile-institution-logos">
+      {{ range . }}
+        {{ $l := resources.Get (path.Join "media" .filename) }}
+        {{ if $l }}
+          {{ $img := cond (eq (path.Ext .filename) ".svg") $l ($l.Process "Resize x160 webp") }}
+          <a {{ with .url }}href="{{ . }}" target="_blank" rel="noopener"{{ end }}
+             {{ with .title }}title="{{ . }}"{{ end }}
+             aria-label="{{ .alt | default "Institution" }}">
+            <img src="{{ $img.RelPermalink }}" alt="{{ .alt | default "" }}"
+                 width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy" />
+          </a>
+        {{ else }}
+          {{ warnf "institution logo `%s` not found in assets/media/" .filename }}
+        {{ end }}
+      {{ end }}
+    </div>
+  {{ end }}
+
 </div>

@@ -25,6 +25,22 @@ sections:
     design:
       # Apply a gradient background
       css_class: hbx-bg-gradient
+      # Affiliation logos, centred in a row below the CV button.
+      # Rendered by the shadowed template at
+      # layouts/partials/hbx/blocks/resume-biography/block.html
+      institution_logos:
+        - filename: ird-mark.png
+          url: https://en.ird.fr/
+          alt: 'Institut de Recherche pour le Développement (IRD)'
+          title: 'Institut de Recherche pour le Développement (IRD)'
+        - filename: dauphine-logo.png
+          url: https://leda.dauphine.fr/
+          alt: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
+          title: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
+        - filename: paris1-logo.png
+          url: https://centredeconomiesorbonne.cnrs.fr/
+          alt: 'Université Paris 1 Panthéon-Sorbonne (CES)'
+          title: 'Université Paris 1 Panthéon-Sorbonne (CES)'
       banner:
         # Upload your cover image to the `assets/media/` folder and reference it here
         filename: ''

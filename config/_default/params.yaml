@@ -44,19 +44,13 @@ header:
     # layouts/partials/components/headers/navbar.html
     # IRD uses the symbol rather than the full lockup: at navbar height the
     # "Institut de Recherche pour le Développement" wordmark is illegible.
+    # Only IRD here - the full set of three is shown on the homepage, below the
+    # CV button (see `design.institution_logos` in content/_index.md).
     institution_logos:
       - filename: ird-mark.png
         url: https://en.ird.fr/
         alt: 'Institut de Recherche pour le Développement (IRD)'
         title: 'Institut de Recherche pour le Développement (IRD)'
-      - filename: dauphine-logo.png
-        url: https://leda.dauphine.fr/
-        alt: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
-        title: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
-      - filename: paris1-logo.png
-        url: https://centredeconomiesorbonne.cnrs.fr/
-        alt: 'Université Paris 1 Panthéon-Sorbonne (CES)'
-        title: 'Université Paris 1 Panthéon-Sorbonne (CES)'
 # Site footer
 footer:
   copyright:

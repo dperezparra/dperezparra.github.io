@@ -74,6 +74,63 @@
 }
 
 /* ---------------------------------------------------------------------------
+ * Affiliation logos, centred in a row below the "Download my CV" button.
+ * Rendered from `design.institution_logos` by the shadowed biography block.
+ * ------------------------------------------------------------------------- */
+
+.profile-institution-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem 2.25rem;
+  /* Requested separation from the CV button above. CSS treats 1cm as 37.8px,
+   * so this is roughly 76px. */
+  margin-top: 2cm;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+}
+
+/* Dauphine and Paris 1 are dark navy and lose contrast on a dark background;
+ * give the row a white ground there. Same box in both themes, so switching
+ * theme does not shift the layout. */
+.dark .profile-institution-logos {
+  background-color: #fff;
+}
+
+.profile-institution-logos a {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  transition: opacity 0.15s ease;
+}
+
+.profile-institution-logos a:hover {
+  opacity: 0.75;
+}
+
+/* Capped on height AND width: these lockups run from 2:1 (IRD) to 7.6:1
+ * (Dauphine), so matching on height alone would leave Dauphine far too wide. */
+.profile-institution-logos img {
+  width: auto;
+  height: auto;
+  max-height: 2.75rem;
+  max-width: 10rem;
+}
+
+@media (max-width: 640px) {
+  .profile-institution-logos {
+    margin-top: 1.25cm;
+    gap: 1.25rem 1.5rem;
+  }
+
+  .profile-institution-logos img {
+    max-height: 2.25rem;
+    max-width: 7.5rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
  * Social links (email / GitHub / LinkedIn) as buttons rather than bare icons.
  * Styled to match the "Download my CV" button below the biography.
  * ------------------------------------------------------------------------- */
