@@ -13,6 +13,9 @@ main:
   - name: Fieldwork
     url: fieldwork/
     weight: 40
+  - name: Datasets
+    url: datasets/
+    weight: 45
   - name: Teaching
     url: teaching/
     weight: 50

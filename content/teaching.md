@@ -15,7 +15,7 @@ sections:
     content:
       title: 'Teaching'
       text: |
-        <p class="teaching-intro">I teach applied and quantitative economics at
+        <p class="page-intro">I teach applied and quantitative economics at
         the <strong>Université Gustave Eiffel</strong>. Course materials are
         available on request — please
         <a href="mailto:daniel.perezparra@ird.fr">get in touch</a>.</p>

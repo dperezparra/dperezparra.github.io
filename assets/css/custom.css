@@ -85,8 +85,8 @@
   justify-content: center;
   gap: 1.5rem 2.25rem;
   /* Requested separation from the CV button above. CSS treats 1cm as 37.8px,
-   * so this is roughly 76px. */
-  margin-top: 2cm;
+   * so this is roughly 57px. */
+  margin-top: 1.5cm;
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
 }
@@ -120,7 +120,7 @@
 
 @media (max-width: 640px) {
   .profile-institution-logos {
-    margin-top: 1.25cm;
+    margin-top: 1cm;
     gap: 1.25rem 1.5rem;
   }
 
@@ -189,18 +189,22 @@
 }
 
 /* ---------------------------------------------------------------------------
- * Teaching page: two-column course list.
- * The `.teaching-courses` wrapper only exists in content/teaching.md, so these
- * rules are naturally scoped to that page.
+ * Shared: an intro paragraph on a landing page. The theme's prose defaults
+ * (lg:prose-xl) are much larger than the content that usually follows, so this
+ * brings the opening line back into scale. Used on /teaching/ and /datasets/.
  * ------------------------------------------------------------------------- */
 
-/* Keep the intro in scale with the course list below it; the theme's prose
- * defaults (lg:prose-xl) are much larger than the course entries. */
-.teaching-intro {
+.page-intro {
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.65;
 }
+
+/* ---------------------------------------------------------------------------
+ * Teaching page: two-column course list.
+ * The `.teaching-courses` wrapper only exists in content/teaching.md, so these
+ * rules are naturally scoped to that page.
+ * ------------------------------------------------------------------------- */
 
 .teaching-courses {
   display: grid;

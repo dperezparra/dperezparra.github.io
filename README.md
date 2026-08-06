@@ -49,6 +49,7 @@ the fact, so you need the full build to test it.
 | `content/ongoing-work/` | Work in progress |
 | `content/missions/` | Fieldwork write-ups |
 | `content/teaching.md` | Teaching page |
+| `content/datasets/_index.md` | Datasets page — a placeholder until there are entries; the file explains how to switch it to a `collection` block |
 | `assets/css/custom.css` | Style overrides. **This exact path** — the theme looks for it here |
 | `assets/media/icon.png` | Favicon and social-share fallback image (IRD symbol) |
 | `assets/media/{ird-mark,dauphine-logo,paris1-logo}.png` | Affiliation logos. All three appear below the CV button on the homepage; IRD alone sits in the navbar |
