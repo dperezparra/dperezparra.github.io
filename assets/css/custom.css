@@ -24,6 +24,34 @@
 }
 
 /* ---------------------------------------------------------------------------
+ * Keep the nav links centred on the page, independent of what sits either side.
+ *
+ * The theme lays the navbar out with `justify-between` and a zero-width brand
+ * on the left, which makes the links' centre land at half the left edge of the
+ * right-hand controls. Anything added on the right - the search and theme
+ * buttons, and now the IRD logo - therefore drags the links leftwards, away
+ * from the centred avatar below.
+ *
+ * Giving the two flanking groups an equal flex basis makes them share the free
+ * space evenly, so the links sit on the true centre whatever their width. They
+ * stay in normal flow, so the navbar keeps its height.
+ * ------------------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  /* .order-0 = brand (left), .order-1 = search/theme/logo group (right).
+   * The mobile menu button uses `lg:order-1`, a differently-named class, so it
+   * is not matched here. */
+  .navbar > .order-0,
+  .navbar > .order-1 {
+    flex: 1 1 0;
+  }
+
+  .navbar > .order-1 {
+    justify-content: flex-end;
+  }
+}
+
+/* ---------------------------------------------------------------------------
  * Institution logos in the navbar, immediately before the search button.
  * Rendered from `header.navbar.institution_logos` by the shadowed navbar.
  * ------------------------------------------------------------------------- */
