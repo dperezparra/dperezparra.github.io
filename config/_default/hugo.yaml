@@ -5,8 +5,12 @@
 
 # Website name
 title: Daniel Pérez-Parra
-# Website URL
-baseURL: 'https://dperezparra.github.io/my-website/'
+# Website URL.
+# NOTE: the GitHub Pages workflow overrides this at build time with the real
+# Pages base URL (`--baseURL "${{ steps.pages.outputs.base_url }}/"`), so the
+# deployed site follows whatever the repository is called. This value is what
+# local builds and `hugo server` use.
+baseURL: 'https://dperezparra.github.io/'
 
 ############################
 ## LANGUAGE

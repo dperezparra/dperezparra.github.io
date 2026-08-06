@@ -1,4 +1,4 @@
-# dperezparra.github.io/my-website
+# dperezparra.github.io
 
 Personal academic website of **Daniel Pérez-Parra** — PhD candidate in Economics
 at Érudite, Université Gustave Eiffel. Research, teaching and fieldwork on
