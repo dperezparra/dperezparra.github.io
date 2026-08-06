@@ -6,8 +6,10 @@ authors:
   
 date: 2026-01-01
 
+# Display order in the Work in Progress list
+weight: 30
+
 publication_types: ["Work in Progress"]
-publication: "Working paper soon"
 publication_short: ""
 
 slug: "fgm-education"

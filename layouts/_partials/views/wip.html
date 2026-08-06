@@ -1,0 +1,36 @@
+{{/* ---------------------------------------------------------------------------
+     Custom collection view: "wip" (work in progress).
+
+     This is an ADDITION, not an override - the theme has no views/wip.html, and
+     `functions/render_view` resolves views by name, so nothing upstream is
+     shadowed. Select it with `design.view: wip` on a collection block.
+
+     Why not the built-in `citation` view: it hard-codes an APA-style year
+     "(2026)." and trails the entry with the `publication` string, neither of
+     which suits a list of unpublished projects. It also opens with a large
+     `mt-16 sm:mt-20` gap under the block title.
+
+     Renders, per entry: the title, then co-authors (the site owner is dropped -
+     it is his own list), then an optional status such as "Early stage project"
+     taken from the `publication` front-matter field.
+--------------------------------------------------------------------------- */}}
+
+{{ $item := .item }}
+
+{{/* Co-authors only: `admin` is the site owner and is left implicit. */}}
+{{ $coauthors := slice }}
+{{ range $item.Params.authors }}
+  {{ if ne (lower .) "admin" }}
+    {{ $coauthors = $coauthors | append . }}
+  {{ end }}
+{{ end }}
+
+<li class="wip-item">
+  <a class="wip-title" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>
+  {{ with $coauthors }}
+    <p class="wip-authors">with {{ delimit . ", " " and " }}</p>
+  {{ end }}
+  {{ with $item.Params.publication }}
+    <p class="wip-status">{{ . | markdownify }}</p>
+  {{ end }}
+</li>

@@ -76,6 +76,20 @@ Logos are configured in two places, deliberately: `params.yaml` holds the
 single IRD mark for the navbar (all three would not fit), while
 `content/_index.md` holds all three for the homepage row.
 
+### Added templates (not overrides)
+
+These add to the theme rather than replacing anything, so they carry no upgrade
+cost:
+
+| File | Purpose |
+|---|---|
+| `layouts/_partials/views/wip{,--start,--end}.html` | A `wip` collection view, selected with `design.view: wip`. Used for Work in Progress on `/research/`: title, co-authors, optional status — no citation year, no trailing publication string. The built-in `citation` view hard-codes the year and opens with a large gap under the heading. |
+| `layouts/_partials/hooks/head-end/person-jsonld.html` | `schema.org/Person` structured data on the homepage (see the SEO note above). |
+
+Work in Progress ordering comes from `weight` in each
+`content/ongoing-work/*/index.md`, with `sort_by: Weight` on the block — the
+entries all share one date, so date sorting was arbitrary.
+
 Blocks are mounted from the theme's `blox/<id>/block.html` to
 `layouts/partials/hbx/blocks/<id>/block.html`, and `biography` is an alias for
 `resume-biography` — hence that path.

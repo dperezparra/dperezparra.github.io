@@ -8,8 +8,11 @@ authors:
 
 date: 2026-01-01
 
+# Display order in the Work in Progress list
+weight: 40
+
 publication_types: ["Work in Progress"]
-publication: "Multiple projects in progress"
+publication: "Early stage project"
 publication_short: ""
 
 slug: "religious-leaders-norms"

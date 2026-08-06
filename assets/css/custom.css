@@ -10,6 +10,16 @@
  * a bare --color-primary does not exist.
  * ------------------------------------------------------------------------- */
 
+/* Trim the homepage avatar down from the theme's `large` preset (320px).
+ * The theme writes the size as an inline style on both the wrapper and the
+ * <img>, so !important is the only way to override it from here. The source
+ * image is still generated at 640px, so it stays sharp on retina screens. */
+#profile .avatar-wrapper,
+#profile .avatar-wrapper .avatar {
+  width: 270px !important;
+  height: 270px !important;
+}
+
 /* Accent the role/tagline shown under the name on the homepage.
  * The biography block renders it as a direct <h3> child of
  * `#profile.resume-biography` - see blox/resume-biography/block.html.
@@ -214,6 +224,116 @@
   background-color: rgb(55 65 81);
   border-color: var(--color-primary-400);
   color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+ * Research page.
+ *
+ * Both blocks carry a `css_class` (set in content/research/_index.md) which
+ * the theme puts on the <section>, so these rules stay off the Fieldwork page,
+ * which uses the same card view.
+ * ------------------------------------------------------------------------- */
+
+/* Sections default to 6rem of padding top and bottom, which left ~12rem
+ * between the two blocks. Pull Work in Progress up under Working Papers. */
+.research-papers {
+  padding-bottom: 1.5rem;
+}
+
+.research-wip {
+  padding-top: 0;
+}
+
+/* Slightly smaller working-paper cards: a narrower grid and less inner
+ * padding. The card markup is the theme's, so target its structure. */
+.research-papers .container {
+  max-width: 880px;
+}
+
+.research-papers .container .grid {
+  gap: 2rem;
+}
+
+.research-papers [role='article'] > div:last-child {
+  padding: 1.5rem;
+}
+
+/* The narrower card made the footer "Read more" wrap onto two lines. Scope
+ * this to the card footer only: a looser selector also caught the title link
+ * (the sole <a> inside its <h3>, so it matches a:last-of-type) and clipped
+ * long paper titles. */
+.research-papers [role='article'] .justify-between a {
+  white-space: nowrap;
+}
+
+/* ...and make sure titles keep wrapping normally. */
+.research-papers [role='article'] h3,
+.research-papers [role='article'] h3 a {
+  white-space: normal;
+}
+
+/* --- Work in Progress list (custom `wip` view) --------------------------- */
+
+.wip-wrapper {
+  /* The built-in citation view opens with mt-16/sm:mt-20; this sits much
+   * closer to the "Work in Progress" heading, as intended.
+   * Width matches the working-paper grid above so the two blocks share one
+   * column and their left edges line up. */
+  width: 100%;
+  max-width: 880px;
+  margin: 0.25rem auto 0;
+  /* Mirrors the card grid's `px-8 xl:px-5`, so the two columns line up. */
+  padding: 0 2rem;
+}
+
+@media (min-width: 1280px) {
+  .wip-wrapper {
+    padding: 0 1.25rem;
+  }
+}
+
+.wip-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wip-item + .wip-item {
+  margin-top: 1.5rem;
+}
+
+.wip-title {
+  display: block;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--color-primary-600);
+  text-decoration: none;
+}
+
+.dark .wip-title {
+  color: var(--color-primary-400);
+}
+
+.wip-title:hover {
+  text-decoration: underline;
+}
+
+.wip-authors,
+.wip-status {
+  margin: 0.2rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: rgb(107 114 128);
+}
+
+.dark .wip-authors,
+.dark .wip-status {
+  color: rgb(156 163 175);
+}
+
+.wip-status {
+  font-style: italic;
 }
 
 /* ---------------------------------------------------------------------------
