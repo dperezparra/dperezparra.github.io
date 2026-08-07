@@ -618,7 +618,13 @@
 .dataset-panel-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .dataset-panel-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .dataset-panel-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.dataset-panel-grid--1 { grid-template-columns: minmax(0, 1fr); }
+/* A lone figure has no neighbour to be read against, so it does not need the
+ * full column - half width sits better against the text. */
+.dataset-panel-grid--1 {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 50%;
+  margin: 0 auto;
+}
 
 .dataset-panel img {
   display: block;
@@ -731,6 +737,12 @@
   margin-top: 0.9rem;
 }
 
+/* A half-width figure is centred, so its legend has to follow it rather than
+ * hang off the left margin. */
+.dataset-panel-grid--1 + .dataset-legend {
+  justify-content: center;
+}
+
 .dataset-legend-label {
   font-size: 0.6875rem;
   font-weight: 700;
@@ -767,6 +779,13 @@
   height: 0.85rem;
   border-radius: 0.15rem;
   border: 1px solid rgb(0 0 0 / 0.12);
+}
+
+/* Point maps get round swatches sized like the marks they stand for. */
+.dataset-swatch--dot {
+  border-radius: 50%;
+  border-color: transparent;
+  flex: none;
 }
 
 /* provenance + access */
@@ -863,6 +882,11 @@
   .dataset-panel-grid--3,
   .dataset-panel-grid--2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Half a phone-width column is not a map any more. */
+  .dataset-panel-grid--1 {
+    max-width: none;
   }
 
   .dataset-part-text {

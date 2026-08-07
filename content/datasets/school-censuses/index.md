@@ -48,16 +48,6 @@ dataset:
           label: 'Senior Secondary'
           value: '3,242'
           alt: 'Map of Nigeria showing the location of senior secondary schools'
-      caption: >
-        Each dot is one school. Primary provision reaches almost every
-        settlement, while senior secondary schools concentrate in the cities and
-        along the main corridors — the spatial gap that motivates the education
-        chapters of my thesis. The counts below each map are the register's
-        totals; the dots are those with usable coordinates, which is 97% of
-        pre-primary, 95% of primary and 94% of junior secondary records but only
-        54% of senior secondary — that last panel is the register's weakest
-        geocoding and the senior secondary map should be read as indicative
-        rather than complete.
       collection: >
         Web-scraped from [NEMIS](https://nemiserp.com), the national education
         management information system, with
@@ -95,13 +85,6 @@ dataset:
           - {color: '#a78bfa', text: '20–39'}
           - {color: '#7c3aed', text: '40–79'}
           - {color: '#5b21b6', text: '80+'}
-      caption: >
-        Mapped at commune level — 544 communes — with all three panels on one
-        absolute scale, so they can be read against each other: middle and
-        secondary schools are scarce almost everywhere, while primary provision
-        is dense across the country. 98.8% of the 18,952 establishments matched
-        a commune boundary; the pale areas are the remainder, mostly communes
-        that OpenStreetMap does not yet carry.
       collection: >
         Obtained directly from officials at the Ministry of Education. **Access
         to the Senegalese census is subject to their agreement**, so a request

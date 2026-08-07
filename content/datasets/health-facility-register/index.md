@@ -34,36 +34,19 @@ dataset:
         point, and I keep that subset as a separate file.
       panels:
         - image: 'datasets/nigeria-health-facilities.png'
-          alt: 'Map of Nigeria showing primary health care centres as small green dots, with public hospitals in blue and private hospitals in orange drawn on top'
+          alt: 'Map of Nigeria showing primary health care centres as small light green dots and hospitals as larger dark green dots'
       legend:
-        label: 'Facility type'
+        label: 'Mapped facilities'
+        dots: true
         items:
-          - {color: '#2a78d6', text: 'Public hospital (1,354)'}
-          - {color: '#d95926', text: 'Private hospital (4,645)'}
-          - {color: '#199e70', text: 'Primary health care (35,324)'}
-      caption: >
-        One dot per facility. The small green marks are the primary health care
-        mesh, which reaches almost every ward in the country; the larger dots
-        are hospitals, coloured by who runs them. The split is the striking
-        part — private hospitals cluster hard in the south west and the
-        south east, around Lagos, Ibadan, Onitsha and Aba, while public
-        hospitals are spread thinly but evenly right across the north. Counts
-        in the legend are the facilities that carry a usable point, 98.2% of the
-        register; the primary health care mesh is itself 29,083 public and
-        6,241 private, a split the map does not draw.
+          - {color: '#10b981', size: '0.45rem', text: 'Primary health care (35,324)'}
+          - {color: '#059669', size: '0.8rem', text: 'Hospital (5,999)'}
       collection: >
         Downloaded from the Federal Ministry of Health's Health Facility
-        Registry at hfr.e4eweb.space while the portal was still up — it has
-        since gone offline, so the register as it stood is now hard to come by.
-        About one facility in eight arrived with no coordinate at all, 5,070 in
-        total, and I geocoded those myself in R: three address strings each,
-        from the bare facility name up to name, ward, local government area and
-        state, every one of them put through both the Google Maps geocoder via
-        `ggmap` and OpenStreetMap's Nominatim, and then reconciled. 4,391 came
-        back with a usable point — 87% of what was attempted, and only nine of
-        those landed outside the national outline. The flag marking which points
-        came from that pass travels with the data, so you can drop them if your
-        design needs only the register's own coordinates.
+        Registry at hfr.e4eweb.space, which has since gone offline. About one
+        facility in eight came with no coordinate, and I geocoded those myself
+        in R through Google Maps and OpenStreetMap, recovering 4,391 of them.
+        A flag in the data marks which points came from that pass.
 
   closing: 'It is the backbone of my ongoing work on health facility expansion and fertility in Nigeria.'
   access: >

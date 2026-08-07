@@ -3,8 +3,8 @@
 Regenerate the Nigerian health facility map shown on /datasets/.
 
 One combined map: the national outline, the primary health care mesh underneath,
-and the hospitals on top split by ownership. Output goes to
-assets/media/datasets/, where Hugo picks it up.
+and the hospitals on top. Output goes to assets/media/datasets/, where Hugo
+picks it up.
 
     python3 scripts/build_health_maps.py
 
@@ -20,24 +20,34 @@ SOURCE DATA (not in this repo - it is not openly published):
 
 DESIGN NOTES
 
-  * ONE map rather than a facet set, unlike the school maps next door. Three
-    series is exactly the cap a point map allows - it is an all-pairs form, so
-    every pair of hues has to separate, not just neighbours - and the question
-    here is where the three overlap, which small multiples would hide.
+  * ONE map rather than a facet set, unlike the school maps next door: the
+    question here is where the two layers of the system overlap, which small
+    multiples would hide.
 
-  * Palette: #2a78d6 / #d95926 / #199e70. Validated with the dataviz validator
-    at --pairs all against BOTH surfaces, #ffffff and #17181c, and it passes
-    every check on both with no warnings - which is what lets one transparent
-    PNG serve light and dark mode. The blue/orange pair is the strongest of the
-    three (CVD dE 25.4, normal 32.3), so it carries public vs private, the
-    distinction a reader most needs to make. Aqua takes the PHC mesh, whose
-    weaker pairings (dE 9.4 vs orange) are backed by a large size difference -
-    identity there never rests on hue alone.
+  * Palette: two steps of one green, emerald 500 #10b981 for primary care and
+    emerald 600 #059669 for hospitals - 0.7 degrees apart in hue, so it really
+    is green on green. Level of care is ORDERED, so this is an ordinal ramp
+    rather than a categorical pair.
 
-  * Size encodes TYPE, not ownership: both hospital classes are drawn at the
-    same radius. Only the draw order differs - private (4,645) first, public
-    (1,354) last - so the rarer class is not buried under the commoner one.
-    That is a rendering concession, not an encoding; the marks are identical.
+    The thing that decides these values is that ONE transparent PNG has to
+    serve both themes. A translucent mesh tracks whatever surface it sits on -
+    pale on white, dim on dark - while an opaque mark does not, so the pair
+    separates in both directions as long as the hospital step sits near the
+    middle. Worst-case separation across the two surfaces, in OKLab L:
+
+        mesh @a90 + #059669   0.205   <- chosen
+        mesh @a90 + #047857   0.117
+        mesh @a130 + #047857  0.040   (invisible on dark)
+
+    A deeper hospital step looks better in isolation on white and then
+    disappears into #17181c, which is exactly the trap. #059669 is 3.8:1 on
+    white and 4.7:1 on dark, so it clears both surfaces on its own too.
+
+  * Size reinforces the same order: hospitals are drawn much larger, so the two
+    never rely on colour alone - and the legend repeats that size difference.
+    The gap has to be big because the map is shown at half the column width; at
+    440 px the downscale averages a small mark towards the surface. Sizes were
+    picked by rendering at the real display size and looking, not at 1:1.
 
   * Backgrounds are transparent and all text lives in HTML, so labels stay
     crisp, themed and translatable.
@@ -61,13 +71,13 @@ NE_URL = ("https://raw.githubusercontent.com/nvkelso/natural-earth-vector/"
 
 # Same frame as build_school_maps.py - do not change one without the other.
 LON0, LON1, LAT0, LAT1 = 2.6860, 14.6197, 4.2774, 13.8729
-WIDTH, SUPERSAMPLE = 1120, 2
+# The map is shown at half the text column, ~440 CSS px, so 880 is a 2x asset.
+WIDTH, SUPERSAMPLE = 880, 2
 
-#            rgb                    radius  alpha
-PHC     = ((0x19, 0x9E, 0x70), 1.5, 95)
-PRIVATE = ((0xD9, 0x59, 0x26), 3.4, 235)
-PUBLIC  = ((0x2A, 0x78, 0xD6), 3.4, 245)
-GAP = 1.7      # surface gap punched around every hospital mark, in render px
+#             rgb                    radius  alpha
+PHC      = ((0x10, 0xB9, 0x81), 1.4, 90)
+HOSPITAL = ((0x05, 0x96, 0x69), 5.6, 250)
+GAP = 2.4      # surface gap punched around every hospital mark, in render px
 
 
 def nigeria_ring(cache="/tmp/ne50_countries.geojson"):
@@ -106,13 +116,8 @@ def main():
     print(f"  self-geocoded rows kept: {(inside.geolocated_R == 1).sum():,} "
           f"of {(df.geolocated_R == 1).sum():,}")
 
-    layers = [
-        ("PHC",              inside[inside.facility_type == "PHC"],                       PHC),
-        ("Private hospital", inside[(inside.facility_type == "Hospital")
-                                    & (inside.ownership == "Private")],                   PRIVATE),
-        ("Public hospital",  inside[(inside.facility_type == "Hospital")
-                                    & (inside.ownership == "Public")],                    PUBLIC),
-    ]
+    phc = inside[inside.facility_type == "PHC"]
+    hospital = inside[inside.facility_type == "Hospital"]
 
     img = Image.new("RGBA", (WIDTH * SUPERSAMPLE, height * SUPERSAMPLE), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img, "RGBA")           # composites onto what is there
@@ -125,26 +130,19 @@ def main():
             x, y = project(lon, lat)
             fn([x - r, y - r, x + r, y + r])
 
-    hosp = [(sub, spec) for name, sub, spec in layers if name != "PHC"]
+    # PHC mesh first; then every hospital clears a gap in it before any hospital
+    # is drawn, so the gap reads as page surface in either theme and no hospital
+    # erases its neighbour.
+    rgb, r, alpha = PHC
+    marks(phc, r, lambda box: draw.ellipse(box, fill=rgb + (alpha,)))
 
-    # PHC mesh first, then every hospital mark clears a gap in it before any
-    # hospital is drawn - so the gap reads as page surface in either theme, and
-    # no hospital erases another of the same pass.
-    for name, sub, (rgb, r, alpha) in layers:
-        if name != "PHC":
-            continue
-        marks(sub, r, lambda box, c=rgb + (alpha,): draw.ellipse(box, fill=c))
+    rgb, r, alpha = HOSPITAL
+    marks(hospital, r + GAP, lambda box: punch.ellipse(box, fill=(0, 0, 0, 0)))
+    marks(hospital, r, lambda box: draw.ellipse(box, fill=rgb + (alpha,)))
 
-    for sub, (_, r, _) in hosp:
-        marks(sub, r + GAP, lambda box: punch.ellipse(box, fill=(0, 0, 0, 0)))
-
-    for i, (sub, (rgb, r, alpha)) in enumerate(hosp):
-        if i:   # re-clear, so public and private also keep a gap between them
-            marks(sub, r + GAP, lambda box: punch.ellipse(box, fill=(0, 0, 0, 0)))
-        marks(sub, r, lambda box, c=rgb + (alpha,): draw.ellipse(box, fill=c))
-
-    for label, sub, (rgb, _, _) in layers:
-        print(f"  {label:18s} {len(sub):7,} points  "
+    for label, sub, (rgb, _, _) in [("Primary health care", phc, PHC),
+                                    ("Hospital", hospital, HOSPITAL)]:
+        print(f"  {label:20s} {len(sub):7,} points  "
               f"#{rgb[0]:02x}{rgb[1]:02x}{rgb[2]:02x}")
 
     os.makedirs(OUT, exist_ok=True)
