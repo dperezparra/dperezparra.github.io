@@ -7,7 +7,7 @@ weight: 10
 # layouts/_partials/views/dataset.html
 dataset:
   index: '01'
-  region: 'Senegal · Nigeria — primary through secondary'
+  region: 'Nigeria · Senegal — pre-primary through secondary'
   stats:
     - value: '160,615'
       label: 'schools listed'
@@ -17,59 +17,93 @@ dataset:
       label: 'pupil enrolments'
     - value: '1801–2024'
       label: 'founding years'
-  panels:
-    - image: 'datasets/nigeria-pre-primary.png'
-      label: 'Pre-Primary'
-      value: '1,106'
-      alt: 'Map of Nigeria showing the location of pre-primary schools'
-    - image: 'datasets/nigeria-primary.png'
-      label: 'Primary'
-      value: '105,894'
-      alt: 'Map of Nigeria showing the location of primary schools'
-    - image: 'datasets/nigeria-junior-secondary.png'
-      label: 'Junior Secondary'
-      value: '31,421'
-      alt: 'Map of Nigeria showing the location of junior secondary schools'
-    - image: 'datasets/nigeria-senior-secondary.png'
-      label: 'Senior Secondary'
-      value: '3,242'
-      alt: 'Map of Nigeria showing the location of senior secondary schools'
-  panels_caption: >
-    Every geocoded school in the Nigerian register, split by level. Each dot is
-    one school; 133,428 of 141,663 records carry coordinates that fall inside
-    the country. Primary provision reaches almost every settlement, while
-    senior secondary schools concentrate in cities and along the main corridors
-    — the spatial gap that motivates the education chapters of my thesis.
-  components:
-    - name: 'Nigeria — geocoded school register'
+
+  parts:
+    - name: 'Nigeria'
+      subtitle: '141,663 schools, geocoded to the individual school'
       detail: >
-        141,663 schools with a unique code, name, state, LGA, level, sector and
-        year of establishment. 133,428 carry usable point coordinates. Covers 39
-        state entries and 670 local government areas. 77,774 private and 63,889
-        public. Founding years run from 1801 to 2024, with a median of 2006.
-    - name: 'Nigeria — enrolment tables'
-      detail: >
-        204,090 school records across four files, giving enrolment by grade and
-        by sex: pre-primary (ECCD 1–2 and Nursery 1–3), primary (P1–P6), junior
-        secondary (JSS 1–3) and senior secondary (SS 1–3), together roughly 41.7
-        million pupil enrolments, each with state, LGA, sector and an
+        Every school listed in the national register, each with a unique code,
+        name, state, LGA, level, sector and year of establishment. 133,428 carry
+        point coordinates that fall inside the country. The register spans 39
+        state entries and 670 local government areas, and splits 77,774 private
+        against 63,889 public; founding years run from 1801 to 2024, with a
+        median of 2006. Alongside it sit four enrolment tables — 204,090 school
+        records and roughly 41.7 million pupil enrolments, broken down by grade
+        and by sex from ECCD and nursery through to SS3, each with sector and an
         urban/rural marker.
-    - name: 'Senegal — Ministry of Education register'
+      panels:
+        - image: 'datasets/nigeria-pre-primary.png'
+          label: 'Pre-Primary'
+          value: '1,106'
+          alt: 'Map of Nigeria showing the location of pre-primary schools'
+        - image: 'datasets/nigeria-primary.png'
+          label: 'Primary'
+          value: '105,894'
+          alt: 'Map of Nigeria showing the location of primary schools'
+        - image: 'datasets/nigeria-junior-secondary.png'
+          label: 'Junior Secondary'
+          value: '31,421'
+          alt: 'Map of Nigeria showing the location of junior secondary schools'
+        - image: 'datasets/nigeria-senior-secondary.png'
+          label: 'Senior Secondary'
+          value: '3,242'
+          alt: 'Map of Nigeria showing the location of senior secondary schools'
+      caption: >
+        Each dot is one school. Primary provision reaches almost every
+        settlement, while senior secondary schools concentrate in the cities and
+        along the main corridors — the spatial gap that motivates the education
+        chapters of my thesis.
+      collection: >
+        Web-scraped from [NEMIS](https://nemiserp.com), the national education
+        management information system, with
+        [Javier Martínez](https://x.com/javimartzs). That site is only
+        intermittently available; the scrape captured every school listed during
+        a window when it was running reliably.
+
+    - name: 'Senegal'
+      subtitle: '18,952 establishments from the Ministry of Education register'
       detail: >
         16,297 primary and 2,655 secondary establishments, each with its
-        administrative code, region, department, inspectorate, commune, public /
-        private / community status, teaching cycle, an urban/rural marker and a
-        founding year (1822–2024 for primary, 1886–2024 for secondary). Located
-        to commune level: 14 regions, 47 departments and roughly 550 communes.
+        administrative code, region, department, inspectorate and commune,
+        public / private / community status, teaching cycle, an urban/rural
+        marker and a founding year — 1822 to 2024 for primary, 1886 to 2024 for
+        secondary. Coverage is national: 14 regions, 47 departments and roughly
+        550 communes.
+      panels:
+        - image: 'datasets/senegal-petite-enfance.png'
+          label: 'Petite enfance'
+          value: '5,116'
+          alt: 'Map of Senegal shaded by the number of pre-school establishments per department'
+        - image: 'datasets/senegal-primaire.png'
+          label: 'Primaire'
+          value: '11,181'
+          alt: 'Map of Senegal shaded by the number of primary schools per department'
+        - image: 'datasets/senegal-moyen-secondaire.png'
+          label: 'Moyen & secondaire'
+          value: '2,655'
+          alt: 'Map of Senegal shaded by the number of middle and secondary schools per department'
+      legend:
+        label: 'Schools per department'
+        items:
+          - {color: '#ede9fe', text: '1–49'}
+          - {color: '#c4b5fd', text: '50–99'}
+          - {color: '#a78bfa', text: '100–199'}
+          - {color: '#7c3aed', text: '200–349'}
+          - {color: '#5b21b6', text: '350+'}
+      caption: >
+        All three panels share one absolute scale, so they can be read against
+        each other: middle and secondary schools are scarce almost everywhere,
+        while primary provision is dense across the country. Mapped by
+        department rather than commune — the census locates schools to commune,
+        but no available boundary layer matches those names well enough (62.7%
+        against GADM's communes, 78% even with fuzzy matching), whereas
+        department covers 100% of the 18,952 establishments.
+      collection: >
+        Obtained directly from officials at the Ministry of Education.
+        Department boundaries from
+        [geoBoundaries](https://www.geoboundaries.org) (CC BY 3.0 IGO).
 
-  provenance: >
-    The Senegalese register was obtained directly from officials at the Ministry
-    of Education. The Nigerian data was web-scraped from
-    [NEMIS](https://nemiserp.com), the national education management information
-    system, with [Javier Martínez](https://x.com/javimartzs). That site is
-    intermittently available; the scrape captured every school listed during a
-    window when it was running reliably. Both are still in use in my PhD
-    chapters.
+  closing: 'Both are still in use in some of my ongoing papers.'
   access: >
     Neither dataset is openly published, and both are shared as a public good
     with researchers and master's students. I ask for a short note on the
@@ -81,9 +115,9 @@ dataset:
 
 abstract: >
   Two national school registers assembled for my work on secondary school
-  expansion in West Africa: a Ministry of Education census for Senegal, and a
-  complete web-scrape of the Nigerian school management system, geocoded to
-  the individual school.
+  expansion in West Africa: a complete web-scrape of the Nigerian school
+  management system, geocoded to the individual school, and a Ministry of
+  Education census for Senegal.
 
 slug: 'school-censuses'
 share: false

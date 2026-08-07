@@ -5,13 +5,13 @@
      `functions/render_view` resolves views by name. Select it with
      `design.view: dataset` on a collection block.
 
-     Each entry is a numbered record: index, title, lead, headline figures, an
-     optional row of small-multiple images (used for the school maps), the
-     components that make up the dataset, a provenance note, and the access
-     terms with a request button.
+     Shape of an entry: a numbered header, a lead, headline figures, then one
+     `parts` block per component of the dataset - each with its own maps and
+     its own collection note - followed by a closing line, the access terms and
+     a request button.
 
      Everything comes from the `dataset` block in the entry's front matter, so
-     adding a dataset is a content edit.
+     adding or reordering a dataset is a content edit.
 --------------------------------------------------------------------------- */}}
 
 {{ $item := .item }}
@@ -41,49 +41,64 @@
     </ul>
   {{ end }}
 
-  {{/* Small multiples. One image per panel, each labelled - identity comes
-       from the label, so the marks can share a single validated hue. */}}
-  {{ with $d.panels }}
-    <figure class="dataset-panels">
-      <div class="dataset-panel-grid">
-        {{ range . }}
-          {{ $img := resources.Get (path.Join "media" .image) }}
-          {{ if $img }}
-            <div class="dataset-panel">
-              <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
-                   alt="{{ .alt | default .label }}" loading="lazy" decoding="async" />
-              <p class="dataset-panel-label">{{ .label }}</p>
-              {{ with .value }}<p class="dataset-panel-value">{{ . }}</p>{{ end }}
+  {{ range $d.parts }}
+    {{/* Hold onto the part: inside `with .panels` below the dot rebinds to the
+         panels slice, so .legend / .caption would not resolve. */}}
+    {{ $part := . }}
+    <section class="dataset-part">
+      <header class="dataset-part-head">
+        <h4>{{ .name }}</h4>
+        {{ with .subtitle }}<p class="dataset-part-sub">{{ . }}</p>{{ end }}
+      </header>
+
+      {{ with .detail }}<div class="dataset-part-text">{{ . | markdownify }}</div>{{ end }}
+
+      {{/* Small multiples. One image per panel, labelled - identity comes from
+           the label, so the marks can share one validated hue or ramp. */}}
+      {{ with .panels }}
+        <figure class="dataset-panels">
+          <div class="dataset-panel-grid dataset-panel-grid--{{ len . }}">
+            {{ range . }}
+              {{ $img := resources.Get (path.Join "media" .image) }}
+              {{ if $img }}
+                <div class="dataset-panel">
+                  <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
+                       alt="{{ .alt | default .label }}" loading="lazy" decoding="async" />
+                  <p class="dataset-panel-label">{{ .label }}</p>
+                  {{ with .value }}<p class="dataset-panel-value">{{ . }}</p>{{ end }}
+                </div>
+              {{ else }}
+                {{ warnf "dataset panel image `%s` not found in assets/media/" .image }}
+              {{ end }}
+            {{ end }}
+          </div>
+
+          {{/* Scale legend, for panels that encode magnitude by shade. */}}
+          {{ with $part.legend }}
+            <div class="dataset-legend">
+              {{ with .label }}<span class="dataset-legend-label">{{ . }}</span>{{ end }}
+              <ul>
+                {{ range .items }}
+                  <li><span class="dataset-swatch" style="background:{{ .color }}"></span>{{ .text }}</li>
+                {{ end }}
+              </ul>
             </div>
-          {{ else }}
-            {{ warnf "dataset panel image `%s` not found in assets/media/" .image }}
           {{ end }}
-        {{ end }}
-      </div>
-      {{ with $d.panels_caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
-    </figure>
+
+          {{ with $part.caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+        </figure>
+      {{ end }}
+
+      {{ with .collection }}
+        <p class="dataset-note"><span class="dataset-note-label">Collection</span>{{ . | markdownify }}</p>
+      {{ end }}
+    </section>
   {{ end }}
 
-  {{ with $d.components }}
-    <div class="dataset-components">
-      {{ range . }}
-        <div class="dataset-component">
-          <h4>{{ .name }}</h4>
-          {{ with .detail }}<p>{{ . | markdownify }}</p>{{ end }}
-        </div>
-      {{ end }}
-    </div>
-  {{ end }}
+  {{ with $d.closing }}<p class="dataset-closing">{{ . | markdownify }}</p>{{ end }}
 
-  {{ if or $d.provenance $d.access }}
-    <div class="dataset-notes">
-      {{ with $d.provenance }}
-        <p><span class="dataset-note-label">Collection</span>{{ . | markdownify }}</p>
-      {{ end }}
-      {{ with $d.access }}
-        <p><span class="dataset-note-label">Access</span>{{ . | markdownify }}</p>
-      {{ end }}
-    </div>
+  {{ with $d.access }}
+    <p class="dataset-note"><span class="dataset-note-label">Access</span>{{ . | markdownify }}</p>
   {{ end }}
 
   {{ with $d.request_url }}
