@@ -468,10 +468,11 @@
   padding-top: 0;
 }
 
-/* Sections default to 6rem top and bottom; close most of that gap so the first
- * record sits just under the introduction. */
+/* Sections default to 6rem top and bottom, which left the first record adrift.
+ * 3rem keeps it clearly tied to the introduction while still reading as a
+ * separate block - 1rem was too tight. */
 .datasets-intro {
-  padding-bottom: 1rem;
+  padding-bottom: 3rem;
 }
 
 .dataset-wrapper {
