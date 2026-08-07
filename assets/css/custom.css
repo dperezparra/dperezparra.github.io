@@ -483,11 +483,17 @@
   list-style: none;
 }
 
+/* Text on the left, map and photograph stacked on the right. */
 .mission {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
   gap: 0 2.5rem;
   align-items: start;
+}
+
+.mission-media {
+  display: flex;
+  flex-direction: column;
 }
 
 .mission + .mission {
@@ -550,8 +556,10 @@
   fill: rgb(228 228 231);
 }
 
+/* Sits above the map and centred on it. */
 .mission-map-caption {
-  margin: 0.5rem 0 0;
+  margin: 0 0 0.6rem;
+  text-align: center;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -642,11 +650,64 @@
   color: rgb(212 212 216);
 }
 
-/* --- the photograph, spanning both columns --- */
+/* Links inside the narrative (e.g. a co-author's homepage) need to read as
+ * links; unstyled they were indistinguishable from the surrounding text. */
+.mission-text a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(209 213 217);
+  text-underline-offset: 2px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.mission-text a:hover {
+  color: var(--color-primary-600);
+  text-decoration-color: currentColor;
+}
+
+.dark .mission-text a {
+  text-decoration-color: rgb(82 89 99);
+}
+
+.dark .mission-text a:hover {
+  color: var(--color-primary-400);
+}
+
+/* --- credits --- */
+
+.mission-credits {
+  margin-top: 1.1rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: rgb(113 113 122);
+}
+
+.mission-credits p {
+  margin: 0.2rem 0 0;
+}
+
+.mission-credit-label {
+  display: inline-block;
+  margin-right: 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-primary-600);
+}
+
+.dark .mission-credits {
+  color: rgb(161 161 170);
+}
+
+.dark .mission-credit-label {
+  color: var(--color-primary-400);
+}
+
+/* --- the photograph, directly under the map and the same width --- */
 
 .mission-photo {
-  grid-column: 1 / -1;
-  margin: 1.75rem 0 0;
+  margin: 1.5rem 0 0;
 }
 
 .mission-photo img {
@@ -661,11 +722,13 @@
 @media (max-width: 767px) {
   .mission {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
-  .mission-map {
-    max-width: 260px;
+  /* Keep the map and the photo the same width when stacked, as on desktop. */
+  .mission-media {
+    max-width: 320px;
+    margin: 0 auto;
   }
 
   .mission-text {
