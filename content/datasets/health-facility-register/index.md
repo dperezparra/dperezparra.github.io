@@ -14,7 +14,7 @@ dataset:
     - value: '41,323'
       label: 'mapped points'
     - value: '4,391'
-      label: 'geocoded by hand'
+      label: 'coordinates I added'
     - value: '1901–2024'
       label: 'opening years'
 
@@ -55,14 +55,15 @@ dataset:
         Downloaded from the Federal Ministry of Health's Health Facility
         Registry at hfr.e4eweb.space while the portal was still up — it has
         since gone offline, so the register as it stood is now hard to come by.
-        Roughly a tenth of the facilities arrived without usable coordinates,
-        and I geocoded 4,391 of those myself in R from the facility name, ward,
-        local government area and state, using the Google Maps geocoding API
-        through `ggmap` and falling back on OpenStreetMap where Google returned
-        nothing. Every result was checked against the administrative unit it was
-        supposed to fall in, and the flag marking which points came from that
-        pass travels with the data, so you can drop them if your design needs
-        only the register's own coordinates.
+        About one facility in eight arrived with no coordinate at all, 5,070 in
+        total, and I geocoded those myself in R: three address strings each,
+        from the bare facility name up to name, ward, local government area and
+        state, every one of them put through both the Google Maps geocoder via
+        `ggmap` and OpenStreetMap's Nominatim, and then reconciled. 4,391 came
+        back with a usable point — 87% of what was attempted, and only nine of
+        those landed outside the national outline. The flag marking which points
+        came from that pass travels with the data, so you can drop them if your
+        design needs only the register's own coordinates.
 
   closing: 'It is the backbone of my ongoing work on health facility expansion and fertility in Nigeria.'
   access: >
@@ -78,8 +79,8 @@ dataset:
 abstract: >
   The national register of Nigerian health facilities — every hospital and
   primary health care centre, public and private — cleaned, dated and geocoded,
-  including 4,391 facilities I located by hand where the register gave no
-  coordinates.
+  including 4,391 facilities I placed on the map myself where the register gave
+  no coordinates.
 
 slug: 'health-facility-register'
 share: false
