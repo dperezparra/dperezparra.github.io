@@ -64,13 +64,18 @@ shadowing a theme template by recreating its exact path under `layouts/`.
 
 ### Shadowed templates
 
-Two theme files are shadowed. Each is a **verbatim** copy of upstream apart
+Four theme files are shadowed. Each is a **verbatim** copy of upstream apart
 from changes marked `CUSTOMISED`, and each carries a header comment saying so.
 
 | File | Changes | If you delete it |
 |---|---|---|
 | `layouts/partials/hbx/blocks/resume-biography/block.html` | **(1)** an `organizations` entry may carry a `group:` list, rendered on one line separated by a dot — this puts the two host labs on a single line under IRD; **(2)** `design.institution_logos` renders a centred logo row below the CV button | Affiliations go back to one per line, and the homepage logo row disappears |
 | `layouts/partials/components/headers/navbar.html` | Institution logos just before the search button, from the `header.navbar.institution_logos` list | The navbar logo disappears |
+| `layouts/_partials/views/card.html` | **(1)** co-authors listed under the summary, linked via `data/author_links.yaml`; **(2)** the single-author avatar byline removed from the footer | Paper cards show the old first-author-with-avatar byline and no co-author links |
+| `layouts/single.html` | **(1)** one dot separator between all authors; **(2)** read time floored at 1, so pages never say "0 minute read" | Authors separate inconsistently and pages read "0 minute read" |
+
+The card changes affect `/research/` only in practice — `/fieldwork/` uses the
+same view, but its entries have no `authors`, so both are no-ops there.
 
 Logos are configured in two places, deliberately: `params.yaml` holds the
 single IRD mark for the navbar (all three would not fit), while
@@ -115,15 +120,16 @@ title: >
 summary: >
   * Submitted
 authors:
-  - Coauthor Name      # display name
+  - Coauthor Name      # display name; add their homepage to data/author_links.yaml
   - admin              # = you, resolves to content/authors/admin
 date: "2026-01-01"
+hide_date: true        # papers show authors and read time, not a date
 publication_types: ["Working Paper"]
 publication: Submitted # or e.g. "R&R at The Economic Journal"
 slug: "<slug>"
 abstract: >
   ...
-tags: [Topic One, Topic Two]
+tags: [Economics of Crime]   # one topic; the card chip shows the first tag
 links:
   - type: pdf
     url: "uploads/<file>.pdf"

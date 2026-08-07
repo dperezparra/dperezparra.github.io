@@ -2,13 +2,16 @@
 title: > 
   Shifting the Value of Norms: Fast Internet, Premarital Sex, and the Erosion of Female Genital Cutting
 summary: > 
-  * Submitted
+  Submitted
 authors:
   - Jorge García-Hombrados
   - admin
-  - Ricardo Ciacci
-date: "2025-09-01"
-publishDate: "2025-09-01T00:00:00Z"
+  - Riccardo Ciacci
+date: "2026-08-07"
+publishDate: "2026-08-07T00:00:00Z"
+# The date is not shown on the page (see layouts/single.html); it only drives
+# ordering and the sitemap.
+hide_date: true
 
 # Keep this as a working paper (or change to article-journal later)
 publication_types: ["Working Paper"]
@@ -21,9 +24,9 @@ abstract: >
 # Lock this page’s URL (optional but recommended)
 slug: "fgm-3g"
 
+# One topic per paper - the card shows the first tag as its chip.
 tags:
-  - Female Genital Cutting
-  - Pre-marital sex
+  - Gender Economics
 
 links:
   - type: pdf

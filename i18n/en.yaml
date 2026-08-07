@@ -6,3 +6,7 @@
   translation: 'Working Paper'
 - id: 'pub_Work in Progress'
   translation: 'Work in Progress'
+
+# Theme default is "min read"; spelled out here so pages read "1 minute read".
+- id: minute_read
+  translation: 'minute read'

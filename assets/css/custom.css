@@ -272,6 +272,39 @@
   white-space: normal;
 }
 
+/* Co-authors under the status line inside a working-paper card. */
+.card-coauthors {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: rgb(107 114 128);
+}
+
+.dark .card-coauthors {
+  color: rgb(156 163 175);
+}
+
+.card-coauthors a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(209 213 217);
+  text-underline-offset: 2px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.card-coauthors a:hover {
+  color: var(--color-primary-600);
+  text-decoration-color: currentColor;
+}
+
+.dark .card-coauthors a {
+  text-decoration-color: rgb(82 89 99);
+}
+
+.dark .card-coauthors a:hover {
+  color: var(--color-primary-400);
+}
+
 /* --- Work in Progress list (custom `wip` view) --------------------------- */
 
 .wip-wrapper {

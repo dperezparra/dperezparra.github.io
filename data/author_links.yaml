@@ -4,7 +4,8 @@
 # content entries exactly, accents included - the lookup is by literal string.
 # A co-author with no entry here simply renders as plain text.
 #
-# Used by layouts/_partials/views/wip.html (the Work in Progress list).
+# Used by layouts/_partials/views/wip.html (Work in Progress) and by the
+# shadowed card view (working-paper boxes on /research/).
 
 'Jorge García-Hombrados': 'https://sites.google.com/view/jgarciahombrados/home'
 'Andrés Barrios-Fernández': 'https://andresbarriosf.github.io'
@@ -13,3 +14,4 @@
 'Thierry Hounsa': 'https://www.economics.ox.ac.uk/people/thierry-hounsa'
 'Horace Gninafon': 'https://sites.google.com/view/horacegninafon/research'
 'Hanna Bony': 'https://www.hannabony.com/home'
+'Riccardo Ciacci': 'https://sites.google.com/site/riccardociacci/home'
