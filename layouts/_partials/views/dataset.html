@@ -81,16 +81,15 @@
 
           {{/* Scale legend, for panels that encode magnitude by shade. */}}
           {{ with $part.legend }}
-            {{ $legend := . }}
             <div class="dataset-legend">
               {{ with .label }}<span class="dataset-legend-label">{{ . }}</span>{{ end }}
               <ul>
                 {{ range .items }}
-                  {{/* `dots` + a per-item `size` let the key repeat the marks it
-                       stands for. Two steps of one hue are hard to tell apart in
-                       two identical squares, but not when the swatches differ in
-                       shape and size the way the marks do. */}}
-                  <li><span class="dataset-swatch{{ if $legend.dots }} dataset-swatch--dot{{ end }}"
+                  {{/* Optional `shape` and `size` let the key repeat the marks it
+                       stands for. Two soft steps of one hue are hard to tell
+                       apart in two identical squares - but not when the swatches
+                       are the circle and the triangle that are on the map. */}}
+                  <li><span class="dataset-swatch{{ with .shape }} dataset-swatch--{{ . }}{{ end }}"
                             style="background:{{ .color }}{{ with .size }};width:{{ . }};height:{{ . }}{{ end }}"></span>{{ .text }}</li>
                 {{ end }}
               </ul>

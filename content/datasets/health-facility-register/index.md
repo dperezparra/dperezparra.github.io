@@ -37,13 +37,12 @@ dataset:
           alt: 'Map of Nigeria showing primary health care centres as small light green dots and hospitals as larger dark green dots'
       legend:
         label: 'Mapped facilities'
-        dots: true
         items:
-          - {color: '#10b981', size: '0.45rem', text: 'Primary health care (35,324)'}
-          - {color: '#059669', size: '0.8rem', text: 'Hospital (5,999)'}
+          - {color: '#6ee7b7', shape: 'dot', size: '0.5rem', text: 'Primary health care (35,324)'}
+          - {color: '#10b981', shape: 'triangle', size: '0.8rem', text: 'Hospital (5,999)'}
       collection: >
         Downloaded from the Federal Ministry of Health's Health Facility
-        Registry at hfr.e4eweb.space, which has since gone offline. About one
+        Registry site, which has since gone offline. About one
         facility in eight came with no coordinate, and I geocoded those myself
         in R through Google Maps and OpenStreetMap, recovering 4,391 of them.
         A flag in the data marks which points came from that pass.

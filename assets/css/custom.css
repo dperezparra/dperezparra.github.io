@@ -781,11 +781,20 @@
   border: 1px solid rgb(0 0 0 / 0.12);
 }
 
-/* Point maps get round swatches sized like the marks they stand for. */
+/* Point maps get swatches shaped and sized like the marks they stand for. */
+.dataset-swatch--dot,
+.dataset-swatch--triangle {
+  border: 0;
+  flex: none;
+}
+
 .dataset-swatch--dot {
   border-radius: 50%;
-  border-color: transparent;
-  flex: none;
+}
+
+.dataset-swatch--triangle {
+  border-radius: 0;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
 
 /* provenance + access */

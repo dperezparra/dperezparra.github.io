@@ -24,30 +24,31 @@ DESIGN NOTES
     question here is where the two layers of the system overlap, which small
     multiples would hide.
 
-  * Palette: two steps of one green, emerald 500 #10b981 for primary care and
-    emerald 600 #059669 for hospitals - 0.7 degrees apart in hue, so it really
-    is green on green. Level of care is ORDERED, so this is an ordinal ramp
-    rather than a categorical pair.
+  * SHAPE carries the distinction: circles for primary care, triangles for
+    hospitals. That is what lets the colour go pastel - emerald 300 #6ee7b7 for
+    the mesh and emerald 500 #10b981 for the hospitals, 2.5 degrees apart in
+    hue, so it reads as one soft green rather than two colours.
 
-    The thing that decides these values is that ONE transparent PNG has to
-    serve both themes. A translucent mesh tracks whatever surface it sits on -
-    pale on white, dim on dark - while an opaque mark does not, so the pair
-    separates in both directions as long as the hospital step sits near the
-    middle. Worst-case separation across the two surfaces, in OKLab L:
+    Colour alone would not carry it at these values. ONE transparent PNG has to
+    serve both themes, and a translucent mesh tracks whatever surface it sits
+    on - pale on white, dim on dark - while an opaque mark does not. Worst-case
+    separation across the two surfaces, in OKLab L:
 
-        mesh @a90 + #059669   0.205   <- chosen
-        mesh @a90 + #047857   0.117
-        mesh @a130 + #047857  0.040   (invisible on dark)
+        #6ee7b7 @a120 + #10b981   0.164   <- chosen
+        #a7f3d0 @a120 + #10b981   0.131   (mesh near-invisible on white)
+        #6ee7b7 @a150 + #059669   0.009   (the two collapse on dark)
 
-    A deeper hospital step looks better in isolation on white and then
-    disappears into #17181c, which is exactly the trap. #059669 is 3.8:1 on
-    white and 4.7:1 on dark, so it clears both surfaces on its own too.
+    0.164 is below what colour alone should carry, which is precisely why the
+    shapes are there. #10b981 is 2.5:1 on white and 7.0:1 on dark, so the
+    hospital mark clears both surfaces on its own.
 
-  * Size reinforces the same order: hospitals are drawn much larger, so the two
-    never rely on colour alone - and the legend repeats that size difference.
-    The gap has to be big because the map is shown at half the column width; at
-    440 px the downscale averages a small mark towards the surface. Sizes were
-    picked by rendering at the real display size and looking, not at 1:1.
+  * Hospital marks are also drawn larger, and larger than a like-for-like
+    triangle would be: an equilateral triangle covers only ~41% of its
+    circumcircle, so matching a circle's visual weight already takes a bigger
+    radius before any deliberate size step. The map is shown at half the column
+    width and at 440 px the downscale rounds a small triangle back into a blob,
+    so sizes were picked by rendering at the real display size and looking, not
+    at 1:1.
 
   * Backgrounds are transparent and all text lives in HTML, so labels stay
     crisp, themed and translatable.
@@ -75,9 +76,9 @@ LON0, LON1, LAT0, LAT1 = 2.6860, 14.6197, 4.2774, 13.8729
 WIDTH, SUPERSAMPLE = 880, 2
 
 #             rgb                    radius  alpha
-PHC      = ((0x10, 0xB9, 0x81), 1.4, 90)
-HOSPITAL = ((0x05, 0x96, 0x69), 5.6, 250)
-GAP = 2.4      # surface gap punched around every hospital mark, in render px
+PHC      = ((0x6E, 0xE7, 0xB7), 1.6, 120)   # circles
+HOSPITAL = ((0x10, 0xB9, 0x81), 7.4, 250)   # triangles; radius is the circumradius
+GAP = 2.6      # surface gap punched around every hospital mark, in render px
 
 
 def nigeria_ring(cache="/tmp/ne50_countries.geojson"):
@@ -125,20 +126,29 @@ def main():
     draw.line(outline + [outline[0]], fill=(156, 163, 175, 200),
               width=2 * SUPERSAMPLE, joint="curve")
 
-    def marks(sub, r, fn):
+    def circles(sub, r, fn):
         for lon, lat in zip(sub.lon.values, sub.lat.values):
             x, y = project(lon, lat)
             fn([x - r, y - r, x + r, y + r])
+
+    # Upward-pointing equilateral triangle, r = circumradius. Sitting the
+    # centroid on the point rather than the apex keeps the mark visually
+    # centred on the facility.
+    SIN30, COS30 = 0.5, 0.8660254
+    def triangles(sub, r, fn):
+        for lon, lat in zip(sub.lon.values, sub.lat.values):
+            x, y = project(lon, lat)
+            fn([(x, y - r), (x + COS30 * r, y + SIN30 * r), (x - COS30 * r, y + SIN30 * r)])
 
     # PHC mesh first; then every hospital clears a gap in it before any hospital
     # is drawn, so the gap reads as page surface in either theme and no hospital
     # erases its neighbour.
     rgb, r, alpha = PHC
-    marks(phc, r, lambda box: draw.ellipse(box, fill=rgb + (alpha,)))
+    circles(phc, r, lambda box: draw.ellipse(box, fill=rgb + (alpha,)))
 
     rgb, r, alpha = HOSPITAL
-    marks(hospital, r + GAP, lambda box: punch.ellipse(box, fill=(0, 0, 0, 0)))
-    marks(hospital, r, lambda box: draw.ellipse(box, fill=rgb + (alpha,)))
+    triangles(hospital, r + GAP, lambda pts: punch.polygon(pts, fill=(0, 0, 0, 0)))
+    triangles(hospital, r, lambda pts: draw.polygon(pts, fill=rgb + (alpha,)))
 
     for label, sub, (rgb, _, _) in [("Primary health care", phc, PHC),
                                     ("Hospital", hospital, HOSPITAL)]:
