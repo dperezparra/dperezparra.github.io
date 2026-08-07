@@ -10,12 +10,15 @@
      which suits a list of unpublished projects. It also opens with a large
      `mt-16 sm:mt-20` gap under the block title.
 
-     Renders, per entry: the title, then co-authors (the site owner is dropped -
-     it is his own list), then an optional status such as "Early stage project"
-     taken from the `publication` front-matter field.
+     Renders, per entry: the title (deliberately NOT a link - these entries have
+     no page body, so a click led nowhere), then co-authors, each linked to
+     their homepage where one is listed in data/author_links.yaml, then an
+     optional status such as "Early stage project" taken from the `publication`
+     front-matter field.
 --------------------------------------------------------------------------- */}}
 
 {{ $item := .item }}
+{{ $author_links := site.Data.author_links | default dict }}
 
 {{/* Co-authors only: `admin` is the site owner and is left implicit. */}}
 {{ $coauthors := slice }}
@@ -25,10 +28,22 @@
   {{ end }}
 {{ end }}
 
+{{/* Build each name as markup, linked when we know a homepage for them, so the
+     list can still be joined with a natural ", " / " and ". */}}
+{{ $rendered := slice }}
+{{ range $coauthors }}
+  {{ $name := . | htmlEscape }}
+  {{ with index $author_links . }}
+    {{ $rendered = $rendered | append (printf `<a href="%s" target="_blank" rel="noopener">%s</a>` . $name) }}
+  {{ else }}
+    {{ $rendered = $rendered | append $name }}
+  {{ end }}
+{{ end }}
+
 <li class="wip-item">
-  <a class="wip-title" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>
-  {{ with $coauthors }}
-    <p class="wip-authors">with {{ delimit . ", " " and " }}</p>
+  <h3 class="wip-title">{{ $item.Title }}</h3>
+  {{ with $rendered }}
+    <p class="wip-authors">with {{ delimit . ", " " and " | safeHTML }}</p>
   {{ end }}
   {{ with $item.Params.publication }}
     <p class="wip-status">{{ . | markdownify }}</p>

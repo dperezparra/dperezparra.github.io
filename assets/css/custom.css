@@ -302,21 +302,17 @@
   margin-top: 1.5rem;
 }
 
+/* Plain heading, not a link: these entries have no page body of their own. */
 .wip-title {
-  display: block;
+  margin: 0;
   font-size: 1.05rem;
   line-height: 1.4;
   font-weight: 600;
   color: var(--color-primary-600);
-  text-decoration: none;
 }
 
 .dark .wip-title {
   color: var(--color-primary-400);
-}
-
-.wip-title:hover {
-  text-decoration: underline;
 }
 
 .wip-authors,
@@ -330,6 +326,29 @@
 .dark .wip-authors,
 .dark .wip-status {
   color: rgb(156 163 175);
+}
+
+/* Co-author homepages. Underlined on hover only, so the line stays calm while
+ * still reading as clickable. */
+.wip-authors a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(209 213 217);
+  text-underline-offset: 2px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.wip-authors a:hover {
+  color: var(--color-primary-600);
+  text-decoration-color: currentColor;
+}
+
+.dark .wip-authors a {
+  text-decoration-color: rgb(82 89 99);
+}
+
+.dark .wip-authors a:hover {
+  color: var(--color-primary-400);
 }
 
 .wip-status {

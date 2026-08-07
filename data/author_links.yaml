@@ -1,0 +1,15 @@
+# External homepages for co-authors.
+#
+# Keys MUST match the display names used in the `authors:` front matter of
+# content entries exactly, accents included - the lookup is by literal string.
+# A co-author with no entry here simply renders as plain text.
+#
+# Used by layouts/_partials/views/wip.html (the Work in Progress list).
+
+'Jorge García-Hombrados': 'https://sites.google.com/view/jgarciahombrados/home'
+'Andrés Barrios-Fernández': 'https://andresbarriosf.github.io'
+'Mathilde Lesueur': 'https://mathilde-lesueur.github.io'
+'Melchior Clerc': 'https://melchiorclerc.github.io'
+'Thierry Hounsa': 'https://www.economics.ox.ac.uk/people/thierry-hounsa'
+'Horace Gninafon': 'https://sites.google.com/view/horacegninafon/research'
+'Hanna Bony': 'https://www.hannabony.com/home'
