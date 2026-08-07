@@ -92,6 +92,9 @@
       {{ with .collection }}
         <p class="dataset-note"><span class="dataset-note-label">Collection</span>{{ . | markdownify }}</p>
       {{ end }}
+      {{ with .caveats }}
+        <p class="dataset-note"><span class="dataset-note-label">Known limits</span>{{ . | markdownify }}</p>
+      {{ end }}
     </section>
   {{ end }}
 
