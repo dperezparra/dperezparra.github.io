@@ -1,0 +1,94 @@
+{{/* ---------------------------------------------------------------------------
+     Custom collection view: "dataset".
+
+     An ADDITION, not an override - the theme has no views/dataset.html, and
+     `functions/render_view` resolves views by name. Select it with
+     `design.view: dataset` on a collection block.
+
+     Each entry is a numbered record: index, title, lead, headline figures, an
+     optional row of small-multiple images (used for the school maps), the
+     components that make up the dataset, a provenance note, and the access
+     terms with a request button.
+
+     Everything comes from the `dataset` block in the entry's front matter, so
+     adding a dataset is a content edit.
+--------------------------------------------------------------------------- */}}
+
+{{ $item := .item }}
+{{ $d := $item.Params.dataset }}
+
+<li class="dataset">
+  <div class="dataset-head">
+    {{ with $d.index }}<span class="dataset-index">{{ . }}</span>{{ end }}
+    <div>
+      <h3 class="dataset-title">{{ $item.Title }}</h3>
+      {{ with $d.region }}<p class="dataset-region">{{ . }}</p>{{ end }}
+    </div>
+  </div>
+
+  {{ with $item.Params.abstract }}
+    <div class="dataset-lead">{{ . | markdownify }}</div>
+  {{ end }}
+
+  {{ with $d.stats }}
+    <ul class="dataset-stats">
+      {{ range . }}
+        <li>
+          <span class="dataset-stat-value">{{ .value }}</span>
+          <span class="dataset-stat-label">{{ .label }}</span>
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+
+  {{/* Small multiples. One image per panel, each labelled - identity comes
+       from the label, so the marks can share a single validated hue. */}}
+  {{ with $d.panels }}
+    <figure class="dataset-panels">
+      <div class="dataset-panel-grid">
+        {{ range . }}
+          {{ $img := resources.Get (path.Join "media" .image) }}
+          {{ if $img }}
+            <div class="dataset-panel">
+              <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
+                   alt="{{ .alt | default .label }}" loading="lazy" decoding="async" />
+              <p class="dataset-panel-label">{{ .label }}</p>
+              {{ with .value }}<p class="dataset-panel-value">{{ . }}</p>{{ end }}
+            </div>
+          {{ else }}
+            {{ warnf "dataset panel image `%s` not found in assets/media/" .image }}
+          {{ end }}
+        {{ end }}
+      </div>
+      {{ with $d.panels_caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+    </figure>
+  {{ end }}
+
+  {{ with $d.components }}
+    <div class="dataset-components">
+      {{ range . }}
+        <div class="dataset-component">
+          <h4>{{ .name }}</h4>
+          {{ with .detail }}<p>{{ . | markdownify }}</p>{{ end }}
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+
+  {{ if or $d.provenance $d.access }}
+    <div class="dataset-notes">
+      {{ with $d.provenance }}
+        <p><span class="dataset-note-label">Collection</span>{{ . | markdownify }}</p>
+      {{ end }}
+      {{ with $d.access }}
+        <p><span class="dataset-note-label">Access</span>{{ . | markdownify }}</p>
+      {{ end }}
+    </div>
+  {{ end }}
+
+  {{ with $d.request_url }}
+    <p class="dataset-cta">
+      <a href="{{ . }}">{{ $d.request_label | default "Request this dataset" }}</a>
+    </p>
+  {{ end }}
+</li>

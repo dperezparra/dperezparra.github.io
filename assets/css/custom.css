@@ -461,6 +461,318 @@
 }
 
 /* ---------------------------------------------------------------------------
+ * Datasets: numbered data records (custom `dataset` view).
+ * ------------------------------------------------------------------------- */
+
+.datasets-list {
+  padding-top: 0;
+}
+
+.dataset-wrapper {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (min-width: 1280px) {
+  .dataset-wrapper {
+    padding: 0 1.25rem;
+  }
+}
+
+.dataset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dataset + .dataset {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgb(228 228 231);
+}
+
+.dark .dataset + .dataset {
+  border-top-color: rgb(63 63 70);
+}
+
+.dataset-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.dataset-index {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-primary-600);
+  opacity: 0.35;
+}
+
+.dark .dataset-index {
+  color: var(--color-primary-400);
+}
+
+.dataset-title {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  font-weight: 700;
+  color: rgb(24 24 27);
+}
+
+.dark .dataset-title {
+  color: rgb(244 244 245);
+}
+
+.dataset-region {
+  margin: 0.3rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary-600);
+}
+
+.dark .dataset-region {
+  color: var(--color-primary-400);
+}
+
+.dataset-lead {
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgb(63 63 70);
+}
+
+.dataset-lead p {
+  margin: 0;
+}
+
+.dark .dataset-lead {
+  color: rgb(212 212 216);
+}
+
+/* headline figures */
+.dataset-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+  margin: 1.5rem 0 0;
+  padding: 1.1rem 0;
+  list-style: none;
+  border-top: 1px solid rgb(228 228 231);
+  border-bottom: 1px solid rgb(228 228 231);
+}
+
+.dark .dataset-stats {
+  border-color: rgb(63 63 70);
+}
+
+.dataset-stats li {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.dataset-stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-primary-600);
+}
+
+.dark .dataset-stat-value {
+  color: var(--color-primary-400);
+}
+
+.dataset-stat-label {
+  margin-top: 0.2rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(113 113 122);
+}
+
+.dark .dataset-stat-label {
+  color: rgb(161 161 170);
+}
+
+/* small multiples */
+.dataset-panels {
+  margin: 2rem 0 0;
+}
+
+.dataset-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.dataset-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dataset-panel-label {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(63 63 70);
+}
+
+.dark .dataset-panel-label {
+  color: rgb(228 228 231);
+}
+
+.dataset-panel-value {
+  margin: 0.1rem 0 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: rgb(113 113 122);
+}
+
+.dark .dataset-panel-value {
+  color: rgb(161 161 170);
+}
+
+.dataset-panels figcaption {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: rgb(113 113 122);
+}
+
+.dark .dataset-panels figcaption {
+  color: rgb(161 161 170);
+}
+
+/* what the dataset is made of */
+.dataset-components {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.dataset-component h4 {
+  margin: 0 0 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: rgb(24 24 27);
+}
+
+.dark .dataset-component h4 {
+  color: rgb(244 244 245);
+}
+
+.dataset-component p {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: rgb(82 82 91);
+}
+
+.dark .dataset-component p {
+  color: rgb(212 212 216);
+}
+
+/* provenance + access */
+.dataset-notes {
+  margin-top: 1.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: rgb(82 82 91);
+}
+
+.dataset-notes p {
+  margin: 0.5rem 0 0;
+}
+
+.dark .dataset-notes {
+  color: rgb(212 212 216);
+}
+
+.dataset-note-label {
+  display: inline-block;
+  margin-right: 0.45rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-primary-600);
+}
+
+.dark .dataset-note-label {
+  color: var(--color-primary-400);
+}
+
+.dataset-notes a,
+.dataset-lead a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(209 213 217);
+  text-underline-offset: 2px;
+}
+
+.dataset-notes a:hover,
+.dataset-lead a:hover {
+  color: var(--color-primary-600);
+  text-decoration-color: currentColor;
+}
+
+.dark .dataset-notes a,
+.dark .dataset-lead a {
+  text-decoration-color: rgb(82 89 99);
+}
+
+.dataset-cta {
+  margin: 1.5rem 0 0;
+}
+
+.dataset-cta a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--color-primary-600);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.dataset-cta a:hover {
+  background-color: var(--color-primary-700);
+}
+
+.dark .dataset-cta a {
+  background-color: var(--color-primary-500);
+}
+
+.dark .dataset-cta a:hover {
+  background-color: var(--color-primary-400);
+}
+
+@media (max-width: 767px) {
+  .dataset-stats,
+  .dataset-panel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dataset-components {
+    grid-template-columns: 1fr;
+  }
+
+  .dataset-index {
+    font-size: 1.75rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
  * Fieldwork: map-anchored mission entries (custom `mission` view).
  * ------------------------------------------------------------------------- */
 
