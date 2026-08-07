@@ -26,6 +26,9 @@ fieldwork:
       label: 'participants'
     - value: '6'
       label: 'religious leaders'
+  # Page path of the paper presenting these results. The link text is taken
+  # from that page's own title, so retitling the paper updates this too.
+  paper: '/publication/fgm-3g'
   funding: 'Érudite, Université Gustave Eiffel'
   collaborators: 'Hadiza Kande Jidda, Anthony Ekere, Stephen Adibe, and Susan Michael'
 

@@ -696,8 +696,29 @@
   color: var(--color-primary-600);
 }
 
+.mission-credits a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(209 213 217);
+  text-underline-offset: 2px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.mission-credits a:hover {
+  color: var(--color-primary-600);
+  text-decoration-color: currentColor;
+}
+
 .dark .mission-credits {
   color: rgb(161 161 170);
+}
+
+.dark .mission-credits a {
+  text-decoration-color: rgb(82 89 99);
+}
+
+.dark .mission-credits a:hover {
+  color: var(--color-primary-400);
 }
 
 .dark .mission-credit-label {

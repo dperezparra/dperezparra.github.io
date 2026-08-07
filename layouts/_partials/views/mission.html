@@ -53,8 +53,16 @@
     {{ end }}
 
     {{ with $fw }}
-      {{ if or .funding .collaborators }}
+      {{/* Resolve the paper page once, so a missing/renamed page degrades to
+           nothing rather than a dead link. */}}
+      {{ $paper := "" }}
+      {{ with .paper }}{{ $paper = site.GetPage . }}{{ end }}
+
+      {{ if or $paper .funding .collaborators }}
         <div class="mission-credits">
+          {{ with $paper }}
+            <p><span class="mission-credit-label">Qualitative results in</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+          {{ end }}
           {{ with .funding }}
             <p><span class="mission-credit-label">Funding</span>{{ . }}</p>
           {{ end }}
