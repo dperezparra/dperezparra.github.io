@@ -58,11 +58,6 @@ dataset:
         54% of senior secondary — that last panel is the register's weakest
         geocoding and the senior secondary map should be read as indicative
         rather than complete.
-      caveats: >
-        Coordinates are missing or placeholder for 8,235 records — blank fields,
-        or sentinels such as `10000,10000` — and 2 founding years are impossible
-        (2211). Nothing has been silently corrected: the files are shared as
-        scraped, and these are the checks I would run first.
       collection: >
         Web-scraped from [NEMIS](https://nemiserp.com), the national education
         management information system, with
@@ -107,9 +102,6 @@ dataset:
         is dense across the country. 98.8% of the 18,952 establishments matched
         a commune boundary; the pale areas are the remainder, mostly communes
         that OpenStreetMap does not yet carry.
-      caveats: >
-        Founding year is missing for 5.0% of primary and 3.2% of secondary
-        establishments. Field names and category labels are in French.
       collection: >
         Obtained directly from officials at the Ministry of Education. **Access
         to the Senegalese census is subject to their agreement**, so a request
@@ -119,11 +111,12 @@ dataset:
 
   closing: 'Both are still in use in some of my ongoing papers.'
   access: >
-    Neither dataset is openly published, and both are shared as a public good
-    with researchers and master's students. I ask for a short note on the
-    intended use so I can explain how each was assembled, what it does and does
-    not support, and the conditions attached — in particular that it is not
-    redistributed and that the source is credited.
+    Neither dataset is openly published, so I share them as a public good with
+    researchers and master's students. Just send me a short note about what you
+    are working on: I'll explain how the data was put together and what it can
+    and cannot answer, and the only conditions are that it is not redistributed
+    and that the source is credited. Always glad to hear what people are using
+    it for :)
   request_url: 'mailto:daniel.perezparra@ird.fr?subject=Dataset%20request%3A%20School%20Censuses%20of%20Nigeria%20and%20Senegal'
   request_label: 'Request access'
 
