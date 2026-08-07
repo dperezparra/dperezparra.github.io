@@ -14,7 +14,12 @@
      no page body, so a click led nowhere), then co-authors, each linked to
      their homepage where one is listed in data/author_links.yaml, then an
      optional status such as "Early stage project" taken from the `publication`
-     front-matter field.
+     front-matter field, and finally an expandable abstract.
+
+     The abstract uses a native <details>/<summary>, so it needs no JavaScript
+     and stays keyboard-accessible. Entries with no `abstract` in front matter
+     fall back to "Abstract not available yet." - so publishing a real one is
+     just a matter of adding the field.
 --------------------------------------------------------------------------- */}}
 
 {{ $item := .item }}
@@ -48,4 +53,14 @@
   {{ with $item.Params.publication }}
     <p class="wip-status">{{ . | markdownify }}</p>
   {{ end }}
+  <details class="wip-abstract">
+    <summary>Abstract</summary>
+    <div class="wip-abstract-body">
+      {{ with $item.Params.abstract }}
+        {{ . | markdownify }}
+      {{ else }}
+        <p>Abstract not available yet.</p>
+      {{ end }}
+    </div>
+  </details>
 </li>

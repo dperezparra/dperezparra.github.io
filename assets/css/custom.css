@@ -341,11 +341,11 @@
   font-size: 1.05rem;
   line-height: 1.4;
   font-weight: 600;
-  color: var(--color-primary-600);
+  color: rgb(24 24 27);
 }
 
 .dark .wip-title {
-  color: var(--color-primary-400);
+  color: rgb(244 244 245);
 }
 
 .wip-authors,
@@ -386,6 +386,78 @@
 
 .wip-status {
   font-style: italic;
+}
+
+/* Expandable abstract. The toggle carries the site's accent purple - the same
+ * colour as the role line on the homepage - while the abstract itself stays in
+ * normal body text so it is comfortable to read. */
+.wip-abstract {
+  margin-top: 0.4rem;
+}
+
+.wip-abstract > summary {
+  display: inline-flex;
+  align-items: baseline;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--color-primary-600);
+  list-style: none;
+}
+
+/* Hide the browser's default disclosure triangle so the caret below is the
+ * only marker, and identical across engines. */
+.wip-abstract > summary::-webkit-details-marker {
+  display: none;
+}
+
+.wip-abstract > summary::before {
+  content: '\25B8';
+  display: inline-block;
+  width: 0.75rem;
+  transition: transform 0.15s ease;
+}
+
+.wip-abstract[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.wip-abstract > summary:hover {
+  color: var(--color-primary-700);
+}
+
+.wip-abstract > summary:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.dark .wip-abstract > summary {
+  color: var(--color-primary-400);
+}
+
+.dark .wip-abstract > summary:hover {
+  color: var(--color-primary-300);
+}
+
+.wip-abstract-body {
+  margin-top: 0.4rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid rgb(228 228 231);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgb(82 82 91);
+  text-align: justify;
+}
+
+.wip-abstract-body p {
+  margin: 0;
+}
+
+.dark .wip-abstract-body {
+  border-left-color: rgb(63 63 70);
+  color: rgb(212 212 216);
 }
 
 /* ---------------------------------------------------------------------------
