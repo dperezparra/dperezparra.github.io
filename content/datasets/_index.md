@@ -22,7 +22,8 @@ sections:
         than a download link: each of these datasets carries assumptions about
         how it was assembled that determine what it can and cannot be used for,
         and I would rather explain them than have the data used in ways it does
-        not support. Write to me with a short note on what you have in mind.</p>
+        not support. Write to me with a short note on what you have in mind —
+        I'd be happy to help and guide :)</p>
 
   - block: collection
     design:
