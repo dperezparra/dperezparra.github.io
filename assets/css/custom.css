@@ -468,6 +468,12 @@
   padding-top: 0;
 }
 
+/* Sections default to 6rem top and bottom; close most of that gap so the first
+ * record sits just under the introduction. */
+.datasets-intro {
+  padding-bottom: 1rem;
+}
+
 .dataset-wrapper {
   width: 100%;
   max-width: 880px;

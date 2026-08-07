@@ -9,7 +9,8 @@ design:
 sections:
   - block: markdown
     design:
-      css_class: page-wide
+      # `datasets-intro` pulls the first record up towards this paragraph.
+      css_class: 'page-wide datasets-intro'
     content:
       title: 'Datasets'
       text: |

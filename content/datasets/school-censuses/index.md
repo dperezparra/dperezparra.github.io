@@ -73,35 +73,36 @@ dataset:
         - image: 'datasets/senegal-petite-enfance.png'
           label: 'Petite enfance'
           value: '5,116'
-          alt: 'Map of Senegal shaded by the number of pre-school establishments per department'
+          alt: 'Map of Senegal shaded by the number of pre-school establishments per commune'
         - image: 'datasets/senegal-primaire.png'
           label: 'Primaire'
           value: '11,181'
-          alt: 'Map of Senegal shaded by the number of primary schools per department'
+          alt: 'Map of Senegal shaded by the number of primary schools per commune'
         - image: 'datasets/senegal-moyen-secondaire.png'
           label: 'Moyen & secondaire'
           value: '2,655'
-          alt: 'Map of Senegal shaded by the number of middle and secondary schools per department'
+          alt: 'Map of Senegal shaded by the number of middle and secondary schools per commune'
       legend:
-        label: 'Schools per department'
+        label: 'Schools per commune'
         items:
-          - {color: '#ede9fe', text: '1–49'}
-          - {color: '#c4b5fd', text: '50–99'}
-          - {color: '#a78bfa', text: '100–199'}
-          - {color: '#7c3aed', text: '200–349'}
-          - {color: '#5b21b6', text: '350+'}
+          - {color: '#ede9fe', text: '1–9'}
+          - {color: '#c4b5fd', text: '10–19'}
+          - {color: '#a78bfa', text: '20–39'}
+          - {color: '#7c3aed', text: '40–79'}
+          - {color: '#5b21b6', text: '80+'}
       caption: >
-        All three panels share one absolute scale, so they can be read against
-        each other: middle and secondary schools are scarce almost everywhere,
-        while primary provision is dense across the country. Mapped by
-        department rather than commune — the census locates schools to commune,
-        but no available boundary layer matches those names well enough (62.7%
-        against GADM's communes, 78% even with fuzzy matching), whereas
-        department covers 100% of the 18,952 establishments.
+        Mapped at commune level — 544 communes — with all three panels on one
+        absolute scale, so they can be read against each other: middle and
+        secondary schools are scarce almost everywhere, while primary provision
+        is dense across the country. 98.8% of the 18,952 establishments matched
+        a commune boundary; the pale areas are the remainder, mostly communes
+        that OpenStreetMap does not yet carry.
       collection: >
-        Obtained directly from officials at the Ministry of Education.
-        Department boundaries from
-        [geoBoundaries](https://www.geoboundaries.org) (CC BY 3.0 IGO).
+        Obtained directly from officials at the Ministry of Education. **Access
+        to the Senegalese census is subject to their agreement**, so a request
+        for it is passed on to the Ministry rather than granted directly.
+        Commune boundaries from
+        [OpenStreetMap](https://www.openstreetmap.org/copyright) (ODbL).
 
   closing: 'Both are still in use in some of my ongoing papers.'
   access: >
