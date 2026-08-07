@@ -80,11 +80,11 @@ dataset:
       legend:
         label: 'Schools per commune'
         items:
-          - {color: '#ede9fe', text: '1–9'}
-          - {color: '#c4b5fd', text: '10–19'}
-          - {color: '#a78bfa', text: '20–39'}
-          - {color: '#7c3aed', text: '40–79'}
-          - {color: '#5b21b6', text: '80+'}
+          - {color: '#cde2fb', text: '1–9'}
+          - {color: '#9ec5f4', text: '10–19'}
+          - {color: '#6da7ec', text: '20–39'}
+          - {color: '#3987e5', text: '40–79'}
+          - {color: '#256abf', text: '80+'}
       collection: >
         Obtained directly from officials at the Ministry of Education. **Access
         to the Senegalese census is subject to their agreement**, so a request

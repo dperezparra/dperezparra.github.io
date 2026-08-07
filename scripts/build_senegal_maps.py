@@ -46,6 +46,14 @@ DESIGN NOTES
 
   * Sequential ramp: one hue, light to dark, lightness strictly decreasing
     (asserted at run time). Sequential encodes magnitude - never a rainbow.
+    Steps 100/200/300/400/500 of the validated blue ramp, a pastel blue whose
+    OKLab L falls in near-equal increments of 0.093-0.095, so no bin boundary
+    reads as a bigger jump than the others. Step 300 is also the hue the
+    Nigeria dot maps use, which ties the two halves of the record together.
+    A sequential ramp is allowed to recede into the surface at the near-zero
+    end, which is why the lightest step does not have to clear the 2:1 floor an
+    ordinal ramp would owe; the darkest step is 3.3:1 on #17181c, so the top
+    bin still reads in dark mode.
   * One ABSOLUTE scale shared by all three panels, so they are comparable.
   * Transparent background, labels in HTML, so one asset serves both themes.
 """
@@ -72,7 +80,7 @@ relation["boundary"="administrative"]["admin_level"="8"](area.sn);
 out geom;"""
 
 WIDTH, SUPERSAMPLE = 840, 2
-RAMP = ["#ede9fe", "#c4b5fd", "#a78bfa", "#7c3aed", "#5b21b6"]
+RAMP = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf"]
 BREAKS = [10, 20, 40, 80]              # upper edges; 5 bins, tail open
 NODATA = "#f4f4f5"
 

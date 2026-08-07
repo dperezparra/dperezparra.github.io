@@ -17,11 +17,17 @@ SOURCE DATA (not in this repo - it is not openly published):
 
 DESIGN NOTES
 
-  * One hue for every panel, #7c3aed - the site accent. Identity comes from the
-    panel label, not from colour, so there is no categorical palette to get
-    wrong. That hue was checked with the dataviz validator and passes every
-    check against BOTH the light and the dark surface, which is why a single
-    transparent PNG serves both themes.
+  * One hue for every panel, #6da7ec - a pastel blue, step 300 of the validated
+    blue sequential ramp, and the middle step of the ramp the Senegal
+    choropleths use, so the two halves of this record read as one dataset.
+    Identity comes from the panel label, not from colour, so there is no
+    categorical palette to get wrong.
+
+    A single transparent PNG serves both themes, so the hue has to hold up
+    against #ffffff AND #17181c: this one is 2.5:1 and 7.1:1. Lighter blues
+    were tried and rejected - #93c5fd and #7dd3fc fall to ~0.05 OKLab L off the
+    white surface at the alpha the 105k-point primary panel needs, which is
+    close to not being there at all.
 
   * Faceting rather than one combined map is deliberate twice over: a point map
     is an all-pairs form, where a validated categorical palette tops out at
@@ -54,7 +60,7 @@ NE_URL = ("https://raw.githubusercontent.com/nvkelso/natural-earth-vector/"
 # for any pin placed on these maps.
 LON0, LON1, LAT0, LAT1 = 2.6860, 14.6197, 4.2774, 13.8729
 WIDTH, SUPERSAMPLE = 840, 2
-DOT = (0x7C, 0x3A, 0xED)
+DOT = (0x6D, 0xA7, 0xEC)
 
 LEVELS = [
     ("Pre-Primary", "pre-primary"),
@@ -65,14 +71,20 @@ LEVELS = [
 
 
 def dot_style(n):
-    """Bigger, more opaque dots when there are fewer of them."""
+    """Bigger, more opaque dots when there are fewer of them.
+
+    The alphas are ~30% above what the old violet used, because #6da7ec is a
+    lighter hue and the same alpha put roughly 40% less of it between the dot
+    and a white page. The step-up tapers off for the sparse panels, where dots
+    barely overlap and the deficit matters least.
+    """
     if n > 50_000:
-        return 1.5, 72
+        return 1.5, 95
     if n > 10_000:
-        return 1.9, 92
+        return 1.9, 120
     if n > 2_000:
-        return 2.8, 150
-    return 3.4, 195
+        return 2.8, 185
+    return 3.4, 235
 
 
 def nigeria_ring(cache="/tmp/ne50_countries.geojson"):
