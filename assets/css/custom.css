@@ -767,6 +767,39 @@
 }
 
 /* ---------------------------------------------------------------------------
+ * `page-wide`: put a plain markdown block on the same column and type scale as
+ * the custom views used by /research/ and /fieldwork/.
+ *
+ * Without this, the theme's markdown block sits in a 607px `max-w-prose`
+ * column at the theme's `lg:prose-xl` size, while the custom views use an
+ * 880px column at 0.875rem. Clicking between sections made the page jump and
+ * the type size change. Applied via `design.css_class: page-wide`.
+ * ------------------------------------------------------------------------- */
+
+.page-wide .max-w-prose {
+  max-width: 880px;
+}
+
+/* Matches the 2rem / 1.25rem insets of .wip-wrapper and .mission-wrapper, so
+ * the left edge lines up with Research and Fieldwork to the pixel. */
+.page-wide > div {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (min-width: 1280px) {
+  .page-wide > div {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+.page-wide .prose {
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+/* ---------------------------------------------------------------------------
  * Shared: an intro paragraph on a landing page. The theme's prose defaults
  * (lg:prose-xl) are much larger than the content that usually follows, so this
  * brings the opening line back into scale. Used on /teaching/ and /datasets/.
@@ -774,7 +807,7 @@
 
 .page-intro {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   line-height: 1.65;
 }
 

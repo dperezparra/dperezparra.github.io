@@ -12,6 +12,10 @@ sections:
   # Raw HTML is allowed here (goldmark unsafe rendering is on in the theme);
   # `.teaching-courses` is styled in assets/css/custom.css.
   - block: markdown
+    design:
+      # Aligns this page's column and type size with /research/ and /fieldwork/
+      # - see `.page-wide` in assets/css/custom.css.
+      css_class: page-wide
     content:
       title: 'Teaching'
       text: |

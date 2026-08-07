@@ -27,6 +27,10 @@ sections:
   # content/datasets/<slug>/index.md (plus an optional featured.png), following
   # the same front-matter shape as content/publication/<slug>/index.md.
   - block: markdown
+    design:
+      # Aligns this page's column and type size with /research/ and /fieldwork/
+      # - see `.page-wide` in assets/css/custom.css.
+      css_class: page-wide
     content:
       title: 'Datasets'
       text: |
