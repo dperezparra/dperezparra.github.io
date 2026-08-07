@@ -485,24 +485,20 @@
 
 /* Text on the left, map and photograph stacked on the right.
  *
- * The 1.05 ratio is measured, not guessed: the text column re-wraps in steps,
- * and 1.05 is the widest the media column can get while the text still fits in
- * the same number of lines. Anything below it makes the text taller again. */
+ * The map and photo are deliberately the smaller of the two columns. An
+ * earlier version widened them to 1.05fr and stretched the column so both
+ * sides ended level; reverted by preference - the media column now sits at its
+ * natural height and ends above the text. */
 .mission {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
   gap: 0 2.5rem;
-  align-items: stretch;
+  align-items: start;
 }
 
-/* `stretch` above makes this column as tall as the text; `space-between` then
- * pins the map to the top and the photo to the bottom, so the two columns end
- * level. Absorbing the difference in the gap keeps the photograph uncropped -
- * stretching the image itself would have cut about 14% off its sides. */
 .mission-media {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .mission + .mission {
