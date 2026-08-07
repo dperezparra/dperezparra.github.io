@@ -88,12 +88,36 @@ cost:
 
 | File | Purpose |
 |---|---|
-| `layouts/_partials/views/wip{,--start,--end}.html` | A `wip` collection view, selected with `design.view: wip`. Used for Work in Progress on `/research/`: title, co-authors, optional status — no citation year, no trailing publication string. The built-in `citation` view hard-codes the year and opens with a large gap under the heading. |
+| `layouts/_partials/views/wip{,--start,--end}.html` | A `wip` collection view, selected with `design.view: wip`. Used for Work in Progress on `/research/`: title, co-authors, optional status, and an expandable abstract. The built-in `citation` view hard-codes the year and opens with a large gap under the heading. |
+| `layouts/_partials/views/mission{,--start,--end}.html` | A `mission` collection view, selected with `design.view: mission`. Used for `/fieldwork/`: a map of the country with a pin per site, beside the dates, headline figures and narrative, with the photograph full width beneath. |
 | `layouts/_partials/hooks/head-end/person-jsonld.html` | `schema.org/Person` structured data on the homepage (see the SEO note above). |
 
 Work in Progress ordering comes from `weight` in each
 `content/ongoing-work/*/index.md`, with `sort_by: Weight` on the block — the
-entries all share one date, so date sorting was arbitrary.
+entries all share one date, so date sorting was arbitrary. An entry with no
+`abstract` field shows "Abstract not available yet." — add the field to publish
+a real one.
+
+### Adding a fieldwork mission
+
+Create `content/missions/<slug>/index.md` with a `featured.jpg` and this block:
+
+```yaml
+fieldwork:
+  map: nigeria              # key in data/maps.yaml
+  dates: 'November – December 2024'
+  sites:
+    - {name: 'Abuja',   lat: 9.0765, lon: 7.3986}
+    - {name: 'Calabar', lat: 4.9757, lon: 8.3417}
+  stats:
+    - {value: '10', label: 'focus groups'}
+```
+
+Pins are plotted from real coordinates, so they land where the places actually
+are. **For a new country**, add its outline to `data/maps.yaml` — that file
+documents the exact projection to use, and the outlines come from Natural Earth
+(public domain). The map is inline SVG: no mapping library, no JavaScript, and
+nothing fetched at run time.
 
 Blocks are mounted from the theme's `blox/<id>/block.html` to
 `layouts/partials/hbx/blocks/<id>/block.html`, and `biography` is an alias for

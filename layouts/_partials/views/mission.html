@@ -1,0 +1,84 @@
+{{/* ---------------------------------------------------------------------------
+     Custom collection view: "mission" (fieldwork).
+
+     An ADDITION, not an override - the theme has no views/mission.html, and
+     `functions/render_view` resolves views by name. Select it with
+     `design.view: mission` on a collection block.
+
+     Layout: a map of the country with a pin at each site visited, beside the
+     mission title, dates, headline figures and narrative; the field photograph
+     runs full width beneath.
+
+     The map outline comes from data/maps.yaml, already projected into a
+     0,0 -> width,height box. Pins are placed here with the SAME linear mapping,
+     so the two always agree:
+         x = (lon - lon_min) / (lon_max - lon_min) * width
+         y = (lat_max - lat) / (lat_max - lat_min) * height
+
+     Everything is inline SVG - no mapping library, no JavaScript, no tiles to
+     request at run time.
+--------------------------------------------------------------------------- */}}
+
+{{ $item := .item }}
+{{ $fw := $item.Params.fieldwork }}
+{{ $map := "" }}
+{{ with $fw }}{{ with .map }}{{ $map = index (site.Data.maps | default dict) . }}{{ end }}{{ end }}
+
+<li class="mission">
+
+  {{ with $map }}
+    <div class="mission-map">
+      <svg viewBox="-10 -10 {{ add .width 20 }} {{ add .height 20 }}" role="img"
+           aria-label="Map of {{ .label }} showing the fieldwork sites">
+        <path class="mission-map-land" d="{{ .path | safeHTMLAttr }}" />
+        {{ $m := . }}
+        {{ range $fw.sites }}
+          {{ $x := mul (div (sub .lon $m.lon_min) (sub $m.lon_max $m.lon_min)) $m.width }}
+          {{ $y := mul (div (sub $m.lat_max .lat) (sub $m.lat_max $m.lat_min)) $m.height }}
+          <g class="mission-pin">
+            <circle cx="{{ $x }}" cy="{{ $y }}" r="9" class="mission-pin-halo" />
+            <circle cx="{{ $x }}" cy="{{ $y }}" r="5" class="mission-pin-dot" />
+            <text x="{{ add $x 14 }}" y="{{ add $y 5 }}">{{ .name }}</text>
+          </g>
+        {{ end }}
+      </svg>
+      <p class="mission-map-caption">{{ .label }}</p>
+    </div>
+  {{ end }}
+
+  <div class="mission-body">
+    <h3 class="mission-title">{{ $item.Title }}</h3>
+
+    {{ with $fw }}
+      <p class="mission-when">
+        {{- with .sites -}}
+          {{- $names := slice -}}
+          {{- range . }}{{ $names = $names | append .name }}{{ end -}}
+          {{ delimit $names ", " " & " }}
+        {{- end -}}
+        {{- with .dates }} &middot; {{ . }}{{ end -}}
+      </p>
+
+      {{ with .stats }}
+        <ul class="mission-stats">
+          {{ range . }}
+            <li><span class="mission-stat-value">{{ .value }}</span><span class="mission-stat-label">{{ .label }}</span></li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ end }}
+
+    {{ with $item.Params.abstract }}
+      <div class="mission-text">{{ . | markdownify }}</div>
+    {{ end }}
+  </div>
+
+  {{ with partial "functions/get_featured_image.html" $item }}
+    {{ $img := .Fill "1600x700 Center" }}
+    <figure class="mission-photo">
+      <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
+           alt="{{ $item.Title | plainify }}" loading="lazy" decoding="async" />
+    </figure>
+  {{ end }}
+
+</li>

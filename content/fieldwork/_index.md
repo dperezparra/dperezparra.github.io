@@ -7,16 +7,14 @@ sections:
   - block: collection
     content:
       title: "Fieldwork"
-      # This pulls from your publication section:
       filters:
         folders:
           - missions
       count: 20
+      sort_by: Date
+      sort_ascending: false
     design:
-      view: article-grid
-      fill_image: true
-      columns: 1
-      show_date: false
-      show_read_time: true
-      show_read_more: true
+      # Custom view added at layouts/_partials/views/mission.html: a map of the
+      # country with a pin per site, beside the mission details.
+      view: mission
 ---
