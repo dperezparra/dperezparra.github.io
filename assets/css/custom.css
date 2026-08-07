@@ -701,11 +701,17 @@
 }
 
 .dataset-part-text {
-  margin-top: 0.8rem;
+  /* A part with no heading opens straight into its body text, so the run-up
+   * from .dataset-part's own padding is already enough. */
+  margin-top: 0;
   font-size: 0.8125rem;
   line-height: 1.65;
   color: rgb(82 82 91);
   text-align: justify;
+}
+
+.dataset-part-head + .dataset-part-text {
+  margin-top: 0.8rem;
 }
 
 .dataset-part-text p {

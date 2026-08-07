@@ -46,10 +46,14 @@
          panels slice, so .legend / .caption would not resolve. */}}
     {{ $part := . }}
     <section class="dataset-part">
-      <header class="dataset-part-head">
-        <h4>{{ .name }}</h4>
-        {{ with .subtitle }}<p class="dataset-part-sub">{{ . }}</p>{{ end }}
-      </header>
+      {{/* A single-component entry names nothing - the record's own title has
+           already said it, and a lone <h4> repeating it reads as a stutter. */}}
+      {{ with .name }}
+        <header class="dataset-part-head">
+          <h4>{{ . }}</h4>
+          {{ with $part.subtitle }}<p class="dataset-part-sub">{{ . }}</p>{{ end }}
+        </header>
+      {{ end }}
 
       {{ with .detail }}<div class="dataset-part-text">{{ . | markdownify }}</div>{{ end }}
 
@@ -64,7 +68,9 @@
                 <div class="dataset-panel">
                   <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
                        alt="{{ .alt | default .label }}" loading="lazy" decoding="async" />
-                  <p class="dataset-panel-label">{{ .label }}</p>
+                  {{/* A lone panel needs no label - the legend below already
+                       names every series on it. */}}
+                  {{ with .label }}<p class="dataset-panel-label">{{ . }}</p>{{ end }}
                   {{ with .value }}<p class="dataset-panel-value">{{ . }}</p>{{ end }}
                 </div>
               {{ else }}
