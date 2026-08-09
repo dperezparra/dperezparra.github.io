@@ -797,6 +797,16 @@
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
 
+/* Line charts get a short bar, the shape the series actually is. Fixed
+ * dimensions, so it ignores any `size` set on the item. */
+.dataset-swatch--line {
+  width: 1rem !important;
+  height: 0.2rem !important;
+  border: 0;
+  border-radius: 999px;
+  flex: none;
+}
+
 /* provenance + access */
 .dataset-note {
   margin: 1.1rem 0 0;

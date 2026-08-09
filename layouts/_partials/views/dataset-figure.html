@@ -1,0 +1,48 @@
+{{/* ---------------------------------------------------------------------------
+     One figure inside a `dataset` record: small multiples, an optional scale or
+     series legend, and an optional caption.
+
+     Called twice from views/dataset.html - once for a figure belonging to the
+     record as a whole (a chart covering every part), once per part. Takes a
+     dict: `panels` (required), `legend`, `caption`.
+--------------------------------------------------------------------------- */}}
+
+{{ $legend := .legend }}
+
+<figure class="dataset-panels">
+  <div class="dataset-panel-grid dataset-panel-grid--{{ len .panels }}">
+    {{ range .panels }}
+      {{ $img := resources.Get (path.Join "media" .image) }}
+      {{ if $img }}
+        <div class="dataset-panel">
+          <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
+               alt="{{ .alt | default .label }}" loading="lazy" decoding="async" />
+          {{/* A lone panel needs no label - the legend below already names
+               every series on it. */}}
+          {{ with .label }}<p class="dataset-panel-label">{{ . }}</p>{{ end }}
+          {{ with .value }}<p class="dataset-panel-value">{{ . }}</p>{{ end }}
+        </div>
+      {{ else }}
+        {{ warnf "dataset panel image `%s` not found in assets/media/" .image }}
+      {{ end }}
+    {{ end }}
+  </div>
+
+  {{ with $legend }}
+    <div class="dataset-legend">
+      {{ with .label }}<span class="dataset-legend-label">{{ . }}</span>{{ end }}
+      <ul>
+        {{ range .items }}
+          {{/* Optional `shape` and `size` let the key repeat the marks it stands
+               for. Two soft steps of one hue are hard to tell apart in two
+               identical squares - but not when the swatches are the circle and
+               the triangle that are on the map. */}}
+          <li><span class="dataset-swatch{{ with .shape }} dataset-swatch--{{ . }}{{ end }}"
+                    style="background:{{ .color }}{{ with .size }};width:{{ . }};height:{{ . }}{{ end }}"></span>{{ .text }}</li>
+        {{ end }}
+      </ul>
+    </div>
+  {{ end }}
+
+  {{ with .caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

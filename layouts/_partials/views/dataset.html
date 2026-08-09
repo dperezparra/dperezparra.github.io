@@ -41,6 +41,14 @@
     </ul>
   {{ end }}
 
+  {{/* A figure belonging to the whole record rather than to one part - a chart
+       that covers every component at once. Sits between the headline figures
+       and the parts that break it down. */}}
+  {{ with $d.panels }}
+    {{ partial "views/dataset-figure.html"
+       (dict "panels" . "legend" $d.legend "caption" $d.caption) }}
+  {{ end }}
+
   {{ range $d.parts }}
     {{/* Hold onto the part: inside `with .panels` below the dot rebinds to the
          panels slice, so .legend / .caption would not resolve. */}}
@@ -60,44 +68,8 @@
       {{/* Small multiples. One image per panel, labelled - identity comes from
            the label, so the marks can share one validated hue or ramp. */}}
       {{ with .panels }}
-        <figure class="dataset-panels">
-          <div class="dataset-panel-grid dataset-panel-grid--{{ len . }}">
-            {{ range . }}
-              {{ $img := resources.Get (path.Join "media" .image) }}
-              {{ if $img }}
-                <div class="dataset-panel">
-                  <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
-                       alt="{{ .alt | default .label }}" loading="lazy" decoding="async" />
-                  {{/* A lone panel needs no label - the legend below already
-                       names every series on it. */}}
-                  {{ with .label }}<p class="dataset-panel-label">{{ . }}</p>{{ end }}
-                  {{ with .value }}<p class="dataset-panel-value">{{ . }}</p>{{ end }}
-                </div>
-              {{ else }}
-                {{ warnf "dataset panel image `%s` not found in assets/media/" .image }}
-              {{ end }}
-            {{ end }}
-          </div>
-
-          {{/* Scale legend, for panels that encode magnitude by shade. */}}
-          {{ with $part.legend }}
-            <div class="dataset-legend">
-              {{ with .label }}<span class="dataset-legend-label">{{ . }}</span>{{ end }}
-              <ul>
-                {{ range .items }}
-                  {{/* Optional `shape` and `size` let the key repeat the marks it
-                       stands for. Two soft steps of one hue are hard to tell
-                       apart in two identical squares - but not when the swatches
-                       are the circle and the triangle that are on the map. */}}
-                  <li><span class="dataset-swatch{{ with .shape }} dataset-swatch--{{ . }}{{ end }}"
-                            style="background:{{ .color }}{{ with .size }};width:{{ . }};height:{{ . }}{{ end }}"></span>{{ .text }}</li>
-                {{ end }}
-              </ul>
-            </div>
-          {{ end }}
-
-          {{ with $part.caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
-        </figure>
+        {{ partial "views/dataset-figure.html"
+           (dict "panels" . "legend" $part.legend "caption" $part.caption) }}
       {{ end }}
 
       {{ with .collection }}
