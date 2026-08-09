@@ -475,11 +475,6 @@
   padding-bottom: 3rem;
 }
 
-/* The last record already closes with its own line; a further 5rem of section
- * padding on top of that left the request stranded at the bottom of the page. */
-.datasets-access {
-  padding-top: 2rem;
-}
 
 .dataset-wrapper {
   width: 100%;
@@ -494,13 +489,26 @@
   }
 }
 
-/* Jump menu. Three records run long enough that scrolling past two to reach
- * the third is a real cost. */
+/* Catalog. Three records run long enough that scrolling past two to reach the
+ * third is a real cost. */
 .dataset-nav {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0 0 2.5rem;
+  gap: 0.5rem 0.85rem;
+  margin: 0 0 1.75rem;
+}
+
+.dataset-nav-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(113 113 122);
+}
+
+.dark .dataset-nav-label {
+  color: rgb(161 161 170);
 }
 
 .dataset-nav a {
@@ -886,16 +894,41 @@
   color: rgb(63 63 70);
 }
 
-/* Shared access block, below the last record. */
-.datasets-access-title {
-  margin: 0 0 0.75rem;
+/* Shared request block, between the catalog and the first record. The rule
+ * below it does the separating, so record 01 needs no border of its own. */
+.dataset-request {
+  margin: 0 0 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgb(228 228 231);
+}
+
+.dark .dataset-request {
+  border-bottom-color: rgb(63 63 70);
+}
+
+.dataset-request-title {
+  margin: 0 0 0.6rem;
   font-size: 1.05rem;
   font-weight: 700;
   color: rgb(24 24 27);
 }
 
-.dark .datasets-access-title {
+.dark .dataset-request-title {
   color: rgb(244 244 245);
+}
+
+.dataset-request-text {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: rgb(82 82 91);
+}
+
+.dataset-request-text p {
+  margin: 0;
+}
+
+.dark .dataset-request-text {
+  color: rgb(212 212 216);
 }
 
 .dark .dataset-closing {

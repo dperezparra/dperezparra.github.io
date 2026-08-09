@@ -1,19 +1,26 @@
 {{/* Opening fragment for the custom `dataset` view - see dataset.html.
 
-     Also renders the jump menu. It is built from the section rather than
-     hard-coded, so adding a record adds its own entry: the label is
-     `dataset.nav_label` when set, since the full titles are too long to sit on
-     one line, and the anchor is the record's slug, which dataset.html puts on
-     the matching <li>.
+     Renders the catalog and, under it, the shared request block - both have to
+     live here rather than in content, because they sit between the page's
+     introduction and the first record, which is inside the collection block.
 
-     This fragment is handed only `page`/`index` by render_view, never the item
-     list, which is why the records are queried directly. */}}
+     The catalog is built from the section rather than hard-coded, so adding a
+     record adds its own entry: the label is `dataset.nav_label` when set, since
+     the full titles are too long to sit on one line, and the anchor is the
+     record's slug, which dataset.html puts on the matching <li>.
 
+     render_view hands this fragment `page`, but that is the collection BLOCK's
+     config map, not the Hugo page - so the section is fetched directly, and the
+     request wording comes off its front matter rather than being written here.
+--------------------------------------------------------------------------- */}}
+
+{{ $section := site.GetPage "/datasets" }}
 {{ $records := sort (where site.RegularPages "Section" "datasets") "Weight" }}
 
 <div class="dataset-wrapper">
   {{ with $records }}
-    <nav class="dataset-nav" aria-label="Jump to a dataset">
+    <nav class="dataset-nav" aria-label="Dataset catalog">
+      <span class="dataset-nav-label">Catalog</span>
       {{ range . }}
         {{ $d := .Params.dataset }}
         <a href="#{{ .Slug | default (path.Base .RelPermalink) }}">
@@ -22,6 +29,18 @@
         </a>
       {{ end }}
     </nav>
+  {{ end }}
+
+  {{ with $section.Params.request }}
+    <div class="dataset-request">
+      {{ with .title }}<h2 class="dataset-request-title">{{ . }}</h2>{{ end }}
+      {{ with .text }}<div class="dataset-request-text">{{ . | markdownify }}</div>{{ end }}
+      {{ with .url }}
+        <p class="dataset-cta">
+          <a href="{{ . }}">{{ $section.Params.request.label | default "Request a dataset" }}</a>
+        </p>
+      {{ end }}
+    </div>
   {{ end }}
 
   <ol class="dataset-list">
