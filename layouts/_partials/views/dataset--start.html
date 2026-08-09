@@ -19,15 +19,25 @@
 
 <div class="dataset-wrapper">
   {{ with $records }}
-    <nav class="dataset-nav" aria-label="Dataset catalog">
-      <span class="dataset-nav-label">Catalog</span>
-      {{ range . }}
-        {{ $d := .Params.dataset }}
-        <a href="#{{ .Slug | default (path.Base .RelPermalink) }}">
-          {{ with $d.index }}<span class="dataset-nav-index">{{ . }}</span>{{ end }}
-          {{ $d.nav_label | default .Title }}
-        </a>
-      {{ end }}
+    <nav class="dataset-menu" aria-label="Dataset menu">
+      <span class="dataset-menu-label">Menu</span>
+      <ul class="dataset-menu-grid">
+        {{ range . }}
+          {{ $d := .Params.dataset }}
+          <li>
+            <a href="#{{ .Slug | default (path.Base .RelPermalink) }}">
+              {{ with $d.index }}<span class="dataset-menu-index">{{ . }}</span>{{ end }}
+              <span class="dataset-menu-name">{{ $d.nav_label | default .Title }}</span>
+              {{/* The record's own leading figure, so each card says what is
+                   actually in there rather than just naming it. */}}
+              {{ with $d.stats }}
+                {{ $first := index . 0 }}
+                <span class="dataset-menu-meta">{{ $first.value }} {{ $first.label }}</span>
+              {{ end }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
     </nav>
   {{ end }}
 
