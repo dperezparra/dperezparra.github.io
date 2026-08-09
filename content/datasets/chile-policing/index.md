@@ -7,6 +7,7 @@ weight: 30
 # layouts/_partials/views/dataset.html
 dataset:
   index: '03'
+  nav_label: 'Policing programmes'
   region: 'Chile — municipality (comuna) level, 1994–2022'
   stats:
     - value: '345'
@@ -74,16 +75,6 @@ dataset:
         answered, which is why a reliability grade travels with each one.
 
   closing: 'Together they cover two very different eras of Chilean crime policy, and both are in use in my ongoing work.'
-  access: >
-    Happy to share both. Send me a short note about what you are working on and
-    I'll pass them on with the code, flag which municipalities have shakier
-    answers and why, and put you straight on what the Transparency Portal
-    responses can and cannot support. The only conditions are that they are not
-    redistributed and that Carabineros de Chile and the responding
-    municipalities are credited as the sources. Always glad to hear what people
-    are using it for :)
-  request_url: 'mailto:daniel.perezparra@ird.fr?subject=Dataset%20request%3A%20Crime-Reduction%20Policing%20in%20Chile'
-  request_label: 'Request access'
 
 abstract: >
   Municipality-level records of the two policing programmes Chile used against

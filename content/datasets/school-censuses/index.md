@@ -7,6 +7,7 @@ weight: 10
 # layouts/_partials/views/dataset.html
 dataset:
   index: '01'
+  nav_label: 'School censuses'
   region: 'Nigeria · Senegal — pre-primary through secondary'
   stats:
     - value: '160,615'
@@ -93,15 +94,6 @@ dataset:
         [OpenStreetMap](https://www.openstreetmap.org/copyright) (ODbL).
 
   closing: 'Both are still in use in some of my ongoing papers.'
-  access: >
-    Neither dataset is openly published, so I share them as a public good with
-    researchers and master's students. Just send me a short note about what you
-    are working on: I'll explain how the data was put together and what it can
-    and cannot answer, and the only conditions are that it is not redistributed
-    and that the source is credited. Always glad to hear what people are using
-    it for :)
-  request_url: 'mailto:daniel.perezparra@ird.fr?subject=Dataset%20request%3A%20School%20Censuses%20of%20Nigeria%20and%20Senegal'
-  request_label: 'Request access'
 
 abstract: >
   Two national school registers assembled for my work on secondary school

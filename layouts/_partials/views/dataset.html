@@ -17,7 +17,8 @@
 {{ $item := .item }}
 {{ $d := $item.Params.dataset }}
 
-<li class="dataset">
+{{/* The jump menu in dataset--start.html links here by slug. */}}
+<li class="dataset" id="{{ $item.Slug | default (path.Base $item.RelPermalink) }}">
   <div class="dataset-head">
     {{ with $d.index }}<span class="dataset-index">{{ . }}</span>{{ end }}
     <div>

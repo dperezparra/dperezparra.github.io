@@ -1,3 +1,27 @@
-{{/* Opening fragment for the custom `dataset` view - see dataset.html. */}}
+{{/* Opening fragment for the custom `dataset` view - see dataset.html.
+
+     Also renders the jump menu. It is built from the section rather than
+     hard-coded, so adding a record adds its own entry: the label is
+     `dataset.nav_label` when set, since the full titles are too long to sit on
+     one line, and the anchor is the record's slug, which dataset.html puts on
+     the matching <li>.
+
+     This fragment is handed only `page`/`index` by render_view, never the item
+     list, which is why the records are queried directly. */}}
+
+{{ $records := sort (where site.RegularPages "Section" "datasets") "Weight" }}
+
 <div class="dataset-wrapper">
+  {{ with $records }}
+    <nav class="dataset-nav" aria-label="Jump to a dataset">
+      {{ range . }}
+        {{ $d := .Params.dataset }}
+        <a href="#{{ .Slug | default (path.Base .RelPermalink) }}">
+          {{ with $d.index }}<span class="dataset-nav-index">{{ . }}</span>{{ end }}
+          {{ $d.nav_label | default .Title }}
+        </a>
+      {{ end }}
+    </nav>
+  {{ end }}
+
   <ol class="dataset-list">

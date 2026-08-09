@@ -7,6 +7,7 @@ weight: 20
 # layouts/_partials/views/dataset.html
 dataset:
   index: '02'
+  nav_label: 'Health facilities'
   region: 'Nigeria — hospitals and primary health care'
   stats:
     - value: '42,063'
@@ -48,15 +49,6 @@ dataset:
         A flag in the data marks which points came from that pass.
 
   closing: 'It is the backbone of my ongoing work on health facility expansion and fertility in Nigeria.'
-  access: >
-    The register was public while the portal was running; what I add is the
-    cleaning, the opening dates and the geocoding, and I am glad to pass all of
-    it on. Send me a short note about what you are working on and I'll share it
-    along with the code, explain how the geocoding was done and where it is
-    weakest, and the only conditions are that it is not redistributed and that
-    the source is credited. Always glad to hear what people are using it for :)
-  request_url: 'mailto:daniel.perezparra@ird.fr?subject=Dataset%20request%3A%20Health%20Facility%20Register%20of%20Nigeria'
-  request_label: 'Request access'
 
 abstract: >
   The national register of Nigerian health facilities — every hospital and
