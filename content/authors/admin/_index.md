@@ -27,7 +27,7 @@ organizations:
       - name: Université Paris-Dauphine (LEDa-DIAL)
         url: https://leda.dauphine.fr/
       - name: Université Paris 1 Panthéon-Sorbonne (CES)
-        url: https://centredeconomiesorbonne.cnrs.fr/
+        url: https://ces.pantheonsorbonne.fr/en
 
 # Social network links
 # Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.

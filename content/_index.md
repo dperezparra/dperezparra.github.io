@@ -38,7 +38,7 @@ sections:
           alt: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
           title: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
         - filename: paris1-logo.png
-          url: https://centredeconomiesorbonne.cnrs.fr/
+          url: https://ces.pantheonsorbonne.fr/en
           alt: 'Université Paris 1 Panthéon-Sorbonne (CES)'
           title: 'Université Paris 1 Panthéon-Sorbonne (CES)'
       banner:
