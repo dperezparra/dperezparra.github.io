@@ -39,7 +39,12 @@ enableEmoji: true
 enableRobotsTXT: true
 footnotereturnlinkcontents: <sup>^</sup>
 ignoreFiles: [\.ipynb$, .ipynb_checkpoints$, \.Rmd$, \.Rmarkdown$, _cache$]
-disableAliases: true
+# The starter turns alias pages off because it emits a Netlify `_redirects`
+# file from the same front matter instead. GitHub Pages ignores that file, so
+# with it off the /my-website/ aliases produced nothing at all. Hugo's alias
+# HTML is the only redirect mechanism GitHub Pages honours; `_redirects` is
+# still written alongside it, so Netlify keeps its real 301s.
+disableAliases: false
 outputs:
   home: [HTML, RSS, headers, redirects, backlinks]
   section: [HTML, RSS]

@@ -1,4 +1,11 @@
 ---
+# The site used to live at /my-website/ as a GitHub Pages project site.
+# Those URLs are still in Google; these aliases turn each one into a
+# redirect to its replacement instead of a 404, which is what gets the
+# old address out of the results and the ranking on to the new one.
+aliases:
+  - '/my-website/missions/fgm-nigeria/'
+
 title: Qualitative Surveys in Central and Southern Nigeria
 # Mission ran November-December 2024; dated at its close.
 date: 2024-12-01

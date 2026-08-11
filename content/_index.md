@@ -1,4 +1,12 @@
 ---
+# The site used to live at /my-website/ as a GitHub Pages project site.
+# Those URLs are still in Google; these aliases turn each one into a
+# redirect to its replacement instead of a 404, which is what gets the
+# old address out of the results and the ranking on to the new one.
+aliases:
+  - '/my-website/'
+  - '/my-website/curriculum/'
+
 # Leave the homepage title empty to use the site title
 title: ''
 date: 2022-10-24
