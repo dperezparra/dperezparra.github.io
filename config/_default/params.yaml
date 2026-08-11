@@ -15,9 +15,10 @@ marketing:
     local_business_type: ''
     org_name: ''
     description: 'Daniel Pérez-Parra — research, teaching and fieldwork on gender, health, norms and community development.'
-    # Twitter/X handle for `twitter:site` card meta. Left empty on purpose -
-    # this was the starter template's own handle. Add yours to enable it.
-    twitter: ''
+    # Handle for the `twitter:site` card meta, so a shared link is attributed
+    # to this account rather than to nobody. It held the starter template's own
+    # handle until now.
+    twitter: 'danielperezpa'
   analytics:
     google_analytics: ''
     baidu_tongji: ''

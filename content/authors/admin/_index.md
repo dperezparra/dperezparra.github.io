@@ -39,6 +39,14 @@ profiles:
     url: https://github.com/dperezparra
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/daniel-pérez-parra
+  # `brands/x` is the current logo; `brands/twitter` is the old bird if you
+  # prefer it. x.com is the canonical host - twitter.com only 301s to it.
+  - icon: brands/x
+    url: https://x.com/danielperezpa
+    label: '@danielperezpa on X'
+  - icon: brands/bluesky
+    url: https://bsky.app/profile/danielperezpa.bsky.social
+    label: '@danielperezpa.bsky.social on Bluesky'
 
 # Published as schema.org `knowsAbout` in the homepage Person structured data
 # (see layouts/_partials/hooks/head-end/person-jsonld.html). Kept in step with
