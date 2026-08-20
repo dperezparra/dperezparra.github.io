@@ -29,9 +29,11 @@ SIZE = 800          # ~3x the 270px display size, for retina
 QUALITY = 88
 
 # Measured off the photo: hair-top 0.408 of height, chin 0.617, eyes 0.522,
-# face centre 0.533 of width. Square side 0.56 of width puts the head at
-# roughly half the circle's height - a portrait, not a passport photo.
-FACE_CX, EYES_CY, SIDE_W = 0.533, 0.522, 0.560
+# face centre 0.533 of width. Square side 0.70 of width leaves the head at
+# about 40% of the circle - the jacket and the street stay in, and the face
+# is still the thing you see first. Tried 0.56 (head at 50%, too tight a
+# crop) and 0.86 (head at 32%, face starts getting lost).
+FACE_CX, EYES_CY, SIDE_W = 0.533, 0.522, 0.700
 EYES_AT = 0.40      # where the eye line sits in the finished square
 
 
