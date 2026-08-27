@@ -20,7 +20,7 @@ request:
     that it is not redistributed and that the original sources are credited.
     The one exception is the Senegalese school census, which is the Ministry of
     Education's to grant, so a request for that one is passed on to them.
-  url: 'mailto:daniel.perezparra@ird.fr?subject=Dataset%20request'
+  url: 'mailto:daniel.perez-parra@ird.fr?subject=Dataset%20request'
   label: 'Request a dataset'
 
 sections:
