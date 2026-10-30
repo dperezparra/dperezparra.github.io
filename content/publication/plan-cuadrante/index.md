@@ -41,7 +41,7 @@ links:
 
 image:
   filename: "featured.png"
-  focal_point: "top"
+  focal_point: "center"
   preview_only: true
 
 share: false

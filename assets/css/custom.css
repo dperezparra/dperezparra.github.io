@@ -1453,3 +1453,89 @@
 .dark .teaching-courses .meta {
   color: rgb(156 163 175);
 }
+
+/* ---------------------------------------------------------------------------
+ * Phone widths: one shared side inset, and comfortable tap targets.
+ *
+ * On desktop the custom wrappers' 2rem padding sits inside the theme's own
+ * `px-6` column, which is right at 880px but leaves a 390px phone with a 56px
+ * inset - Research cards came out ~278px wide. Here the wrappers drop their
+ * padding and let the theme's 1.5rem stand alone, and the pages that have no
+ * theme column (home, footer, `page-wide` blocks) get the same 1.5rem, so every
+ * page's left edge lands on the same line.
+ * ------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .wip-wrapper,
+  .dataset-wrapper,
+  .mission-wrapper,
+  .research-papers .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .page-wide > div {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Home: the profile column has no inset of its own, so the affiliation
+   * lines and the biography ran to the very edge of the screen. */
+  #profile {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* ...and the affiliations wrap here, where left-aligned text looked out of
+   * place under the centred name and role. The two universities share a line
+   * on desktop; at this width that line broke mid-name ("LEDa- / DIAL"), so
+   * each gets its own line and the separating dot goes. */
+  #profile > .mb-2 {
+    text-align: center;
+  }
+
+  #profile > .mb-2 > a {
+    display: block;
+  }
+
+  #profile > .mb-2 > span[aria-hidden='true'] {
+    display: none;
+  }
+
+  /* Footer copyright had an 8px inset. */
+  footer.container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    text-wrap: balance;
+  }
+
+  /* Research cards: a little less padding and a smaller title, so a long
+   * paper title does not run to five lines. */
+  .research-papers [role='article'] > div:last-child {
+    padding: 1.25rem;
+  }
+
+  .research-papers [role='article'] h3 {
+    font-size: 1.125rem;
+  }
+
+  /* The abstract toggle was an ~18px-tall tap target. Padding brings it to
+   * ~44px; the item spacing shrinks to keep the list's rhythm unchanged. */
+  .wip-abstract {
+    margin-top: 0;
+  }
+
+  .wip-abstract > summary {
+    padding: 0.75rem 0.75rem 0.75rem 0;
+  }
+
+  .wip-item + .wip-item {
+    margin-top: 0.75rem;
+  }
+
+  /* Paper pages: the 2.25rem title broke a long paper name over five lines. */
+  main > h1.text-4xl {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+}
