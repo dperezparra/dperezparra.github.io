@@ -9,7 +9,7 @@ aliases:
 title: > 
   Boots in the Beat: Effects of Beat Policing on Victimization and Crime Perception
 summary: > 
-  R&R at The Economic Journal
+  Conditionally accepted at The Economic Journal
 authors:
   - Andrés Barrios-Fernández
   - Jorge García-Hombrados
@@ -22,7 +22,7 @@ hide_date: true
 
 # Keep this as a working paper (or change to article-journal later)
 publication_types: ["Working Paper"]
-publication: R&R at The Economic Journal
+publication: Conditionally accepted at The Economic Journal
 publication_short: ""
 
 abstract: >
