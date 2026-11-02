@@ -29,7 +29,7 @@ sections:
       text: |
         I am an applied microeconomist working on development and security. My research studies how education, technology, institutions and public policy shape social norms, human capital and safety in West Africa and Latin America, combining original geospatial data with quasi-experimental methods.
 
-        Before joining IRD, I was a research consultant at the World Bank's Africa Gender Innovation Lab and at the University of Oxford's What Works Hub for Global Education, and a research assistant at Oxford's Centre for the Study of African Economies, where I was also a visiting PhD student. I have also worked as a research assistant at the Universidad Autónoma de Madrid and as an intern at the United Nations Economic Commission for Africa.
+        I hold a PhD in Economics from Université Gustave Eiffel (Érudite). Before joining IRD, I was a research consultant at the World Bank's Africa Gender Innovation Lab and at the University of Oxford's What Works Hub for Global Education, and a research assistant at Oxford's Centre for the Study of African Economies, where I was also a visiting PhD student. I have also worked as a research assistant at the Universidad Autónoma de Madrid and as an intern at the United Nations Economic Commission for Africa.
       # Newest first.
       news:
         - date: '2026'

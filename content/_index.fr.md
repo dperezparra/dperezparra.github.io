@@ -15,7 +15,7 @@ sections:
       text: |
         Je suis microéconomiste appliqué et je travaille sur le développement et la sécurité. Mes recherches étudient comment l'éducation, la technologie, les institutions et les politiques publiques façonnent les normes sociales, le capital humain et la sécurité en Afrique de l'Ouest et en Amérique latine, en combinant des données géospatiales originales et des méthodes quasi expérimentales.
 
-        Avant de rejoindre l'IRD, j'ai été consultant de recherche à l'Africa Gender Innovation Lab de la Banque mondiale et au What Works Hub for Global Education de l'Université d'Oxford, ainsi qu'assistant de recherche au Centre for the Study of African Economies d'Oxford, où j'ai également été doctorant invité. J'ai aussi travaillé comme assistant de recherche à l'Universidad Autónoma de Madrid et comme stagiaire à la Commission économique des Nations unies pour l'Afrique.
+        J'ai obtenu mon doctorat en économie à l'Université Gustave Eiffel (Érudite). Avant de rejoindre l'IRD, j'ai été consultant de recherche à l'Africa Gender Innovation Lab de la Banque mondiale et au What Works Hub for Global Education de l'Université d'Oxford, ainsi qu'assistant de recherche au Centre for the Study of African Economies d'Oxford, où j'ai également été doctorant invité. J'ai aussi travaillé comme assistant de recherche à l'Universidad Autónoma de Madrid et comme stagiaire à la Commission économique des Nations unies pour l'Afrique.
       news:
         - date: '2026'
           text: '**Boots in the Beat**, accepté sous conditions à *The Economic Journal*'
