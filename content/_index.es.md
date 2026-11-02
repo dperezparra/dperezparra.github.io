@@ -12,6 +12,7 @@ sections:
     content:
       username: admin
       tagline: 'Microeconomista aplicado y economista del desarrollo: normas sociales, educación y crimen'
+      logo: {filename: 'ird-logo-full.png', url: 'https://en.ird.fr/', alt: 'Institut de Recherche pour le Développement (IRD)'}
       text: |
         Soy un microeconomista aplicado que trabaja en desarrollo y seguridad. Mi investigación estudia cómo la educación, la tecnología, las instituciones y las políticas públicas influyen en las normas sociales, el capital humano y la seguridad en África Occidental y América Latina, combinando datos geoespaciales originales con métodos cuasiexperimentales.
 

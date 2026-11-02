@@ -26,6 +26,8 @@ sections:
     content:
       username: admin
       tagline: 'Applied Microeconomist and Development Economist: Social Norms, Education and Crime'
+      # Logo shown under the tagline (assets/media/).
+      logo: {filename: 'ird-logo-full.png', url: 'https://en.ird.fr/', alt: 'Institut de Recherche pour le Développement (IRD)'}
       text: |
         I am an applied microeconomist working on development and security. My research studies how education, technology, institutions and public policy shape social norms, human capital and safety in West Africa and Latin America, combining original geospatial data with quasi-experimental methods.
 

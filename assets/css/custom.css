@@ -1902,6 +1902,32 @@
   color: rgb(212 212 216);
 }
 
+/* The full IRD logo under the tagline. It sits straight on the light band;
+ * in dark mode it gets a white plate, as the affiliation logos do. */
+.hm-logo {
+  display: inline-flex;
+  margin-top: 1.4rem;
+  padding: 0.45rem 0.7rem;
+  margin-left: -0.7rem;
+  border-radius: 0.6rem;
+  line-height: 0;
+  transition: opacity 0.15s ease;
+}
+
+.hm-logo:hover {
+  opacity: 0.8;
+}
+
+.hm-logo img {
+  width: auto;
+  height: 3.1rem;
+}
+
+.dark .hm-logo {
+  margin-left: 0;
+  background-color: #fff;
+}
+
 /* --- the map --- */
 
 .hm-map {
@@ -2015,6 +2041,7 @@
  * reveals everything after 2.5s should the script never run. */
 .home-map.is-intro .hm-name,
 .home-map.is-intro .hm-tagline,
+.home-map.is-intro .hm-logo,
 .home-map.is-intro .hm-card,
 .home-map.is-intro .hm-main,
 .home-map.is-intro .hm-lands,

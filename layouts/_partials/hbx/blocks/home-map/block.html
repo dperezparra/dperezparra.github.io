@@ -62,6 +62,18 @@
         <h1 class="hm-name">{{ replace $person_page.Title "-" "‑" }}</h1>
         {{/* A tagline in "Field: list" form breaks after its colon. */}}
         {{ with $c.tagline }}<p class="hm-tagline">{{ replace (. | htmlEscape) ": " ":<br>" | safeHTML }}</p>{{ end }}
+        {{/* Optional institution logo under the tagline (`content.logo`). */}}
+        {{ with $c.logo }}
+          {{ $lg := . }}
+          {{ with resources.Get (path.Join "media" $lg.filename) }}
+            {{ $img := .Process "webp" }}
+            <a class="hm-logo" {{ with $lg.url }}href="{{ . }}" target="_blank" rel="noopener"{{ end }} title="{{ $lg.alt }}">
+              <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $lg.alt }}" />
+            </a>
+          {{ else }}
+            {{ warnf "home-map logo `%s` not found in assets/media/" $lg.filename }}
+          {{ end }}
+        {{ end }}
       </div>
 
       {{ with $m }}
@@ -205,6 +217,7 @@
       var rise = function (sel, dy, delay, dur) { A(root.querySelector(sel), [{ opacity: 0, transform: 'translateY(' + dy + 'px)' }, { opacity: 1, transform: 'none' }], { duration: dur, delay: delay }); };
       rise('.hm-name', 14, 150, 600);
       rise('.hm-tagline', 10, 270, 600);
+      rise('.hm-logo', 10, 330, 600);
       rise('.hm-card', 26, 370, 700);
       rise('.hm-main', 18, 490, 700);
       if (!svg) return;
