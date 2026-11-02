@@ -27,9 +27,9 @@ sections:
       username: admin
       tagline: 'Applied Microeconomist and Development Economist: Social Norms, Education and Crime'
       text: |
-        I am an applied microeconomist working on development and security. One strand of my research studies how education, technology and institutions change harmful social norms in West Africa, including female genital cutting and child marriage.
+        I am an applied microeconomist working on development and security. My research studies how education, technology, institutions and public policy shape social norms, human capital and safety in West Africa and Latin America, combining original geospatial data with quasi-experimental methods.
 
-        A second strand studies how policing and peacekeeping shape safety and human capital, from beat policing in Chile to UN peacekeeping in Sierra Leone. Across both, I build original geospatial datasets and use quasi-experimental methods to identify causal effects.
+        Before joining IRD, I was a research consultant at the World Bank's Africa Gender Innovation Lab and at the University of Oxford's What Works Hub for Global Education, and a research assistant at Oxford's Centre for the Study of African Economies, where I was also a visiting PhD student. I have also worked as a research assistant at the Universidad Autónoma de Madrid and as an intern at the United Nations Economic Commission for Africa.
       # Newest first.
       news:
         - date: '2026'

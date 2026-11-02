@@ -13,9 +13,9 @@ sections:
       username: admin
       tagline: 'Microeconomista aplicado y economista del desarrollo: normas sociales, educación y crimen'
       text: |
-        Soy un microeconomista aplicado que trabaja en desarrollo y seguridad. Una línea de mi investigación estudia cómo la educación, la tecnología y las instituciones transforman normas sociales perjudiciales en África Occidental, como la ablación genital femenina y el matrimonio infantil.
+        Soy un microeconomista aplicado que trabaja en desarrollo y seguridad. Mi investigación estudia cómo la educación, la tecnología, las instituciones y las políticas públicas influyen en las normas sociales, el capital humano y la seguridad en África Occidental y América Latina, combinando datos geoespaciales originales con métodos cuasiexperimentales.
 
-        Una segunda línea estudia cómo la actuación policial y las misiones de paz influyen en la seguridad y el capital humano, desde la policía de proximidad en Chile hasta las misiones de paz de la ONU en Sierra Leona. En ambas, construyo bases de datos geoespaciales originales y utilizo métodos cuasiexperimentales para identificar efectos causales.
+        Antes de incorporarme al IRD, fui consultor de investigación en el Africa Gender Innovation Lab del Banco Mundial y en el What Works Hub for Global Education de la Universidad de Oxford, y asistente de investigación en el Centre for the Study of African Economies de Oxford, donde también realicé una estancia como doctorando visitante. También he trabajado como asistente de investigación en la Universidad Autónoma de Madrid y como becario en la Comisión Económica de las Naciones Unidas para África.
       news:
         - date: '2026'
           text: '**Boots in the Beat**, aceptado condicionalmente en *The Economic Journal*'

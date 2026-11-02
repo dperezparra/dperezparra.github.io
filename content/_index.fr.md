@@ -13,9 +13,9 @@ sections:
       username: admin
       tagline: 'Microéconomiste appliqué et économiste du développement : normes sociales, éducation et criminalité'
       text: |
-        Je suis microéconomiste appliqué et je travaille sur le développement et la sécurité. Un premier axe de mes recherches étudie comment l'éducation, la technologie et les institutions font évoluer des normes sociales néfastes en Afrique de l'Ouest, comme l'excision et le mariage des enfants.
+        Je suis microéconomiste appliqué et je travaille sur le développement et la sécurité. Mes recherches étudient comment l'éducation, la technologie, les institutions et les politiques publiques façonnent les normes sociales, le capital humain et la sécurité en Afrique de l'Ouest et en Amérique latine, en combinant des données géospatiales originales et des méthodes quasi expérimentales.
 
-        Un second axe étudie comment la police et les opérations de maintien de la paix façonnent la sécurité et le capital humain, de la police de proximité au Chili aux missions de paix de l'ONU en Sierra Leone. Dans les deux cas, je construis des bases de données géospatiales originales et j'utilise des méthodes quasi expérimentales pour identifier des effets causaux.
+        Avant de rejoindre l'IRD, j'ai été consultant de recherche à l'Africa Gender Innovation Lab de la Banque mondiale et au What Works Hub for Global Education de l'Université d'Oxford, ainsi qu'assistant de recherche au Centre for the Study of African Economies d'Oxford, où j'ai également été doctorant invité. J'ai aussi travaillé comme assistant de recherche à l'Universidad Autónoma de Madrid et comme stagiaire à la Commission économique des Nations unies pour l'Afrique.
       news:
         - date: '2026'
           text: '**Boots in the Beat**, accepté sous conditions à *The Economic Journal*'
