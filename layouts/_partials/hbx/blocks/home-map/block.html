@@ -47,7 +47,9 @@
     <div class="hm-band-inner">
       <div class="hm-intro">
         {{ with $c.eyebrow }}<p class="hm-eyebrow">{{ . }}</p>{{ end }}
-        <h1 class="hm-name">{{ $person_page.Title }}</h1>
+        {{/* U+2011 non-breaking hyphen, so a double-barrelled surname wraps at the
+             space ("Daniel / Pérez-Parra"), never at its hyphen. */}}
+        <h1 class="hm-name">{{ replace $person_page.Title "-" "‑" }}</h1>
         {{ with $c.tagline }}<p class="hm-tagline">{{ . }}</p>{{ end }}
       </div>
 
