@@ -25,7 +25,7 @@ sections:
   - block: home-map
     content:
       username: admin
-      tagline: 'Development Economics: Social Norms, Schooling, and Crime'
+      tagline: 'Applied Microeconomist and Development Economist: Social Norms, Education and Crime'
       text: |
         I am an applied microeconomist working on development and security. One strand of my research studies how education, technology and institutions change harmful social norms in West Africa, including female genital cutting and child marriage.
 

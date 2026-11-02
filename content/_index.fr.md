@@ -11,7 +11,7 @@ sections:
   - block: home-map
     content:
       username: admin
-      tagline: 'Économie du développement : normes sociales, scolarisation et criminalité'
+      tagline: 'Microéconomiste appliqué et économiste du développement : normes sociales, éducation et criminalité'
       text: |
         Je suis microéconomiste appliqué et je travaille sur le développement et la sécurité. Un premier axe de mes recherches étudie comment l'éducation, la technologie et les institutions font évoluer des normes sociales néfastes en Afrique de l'Ouest, comme l'excision et le mariage des enfants.
 

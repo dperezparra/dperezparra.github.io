@@ -11,7 +11,7 @@ sections:
   - block: home-map
     content:
       username: admin
-      tagline: 'Economía del desarrollo: normas sociales, escolarización y crimen'
+      tagline: 'Microeconomista aplicado y economista del desarrollo: normas sociales, educación y crimen'
       text: |
         Soy un microeconomista aplicado que trabaja en desarrollo y seguridad. Una línea de mi investigación estudia cómo la educación, la tecnología y las instituciones transforman normas sociales perjudiciales en África Occidental, como la ablación genital femenina y el matrimonio infantil.
 
