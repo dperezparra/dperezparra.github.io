@@ -67,8 +67,24 @@ sections:
           url: https://leda.dauphine.fr/
           alt: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
           title: 'Université Paris-Dauphine — PSL (LEDa-DIAL)'
+        - filename: dial-logo.png
+          url: https://dial.ird.fr/
+          alt: 'DIAL — Développement, Institutions et Mondialisation (LEDa-DIAL)'
+          title: 'DIAL — Développement, Institutions et Mondialisation (LEDa-DIAL)'
         - filename: paris1-logo.png
           url: https://ces.pantheonsorbonne.fr/en
           alt: 'Université Paris 1 Panthéon-Sorbonne (CES)'
           title: 'Université Paris 1 Panthéon-Sorbonne (CES)'
+        - filename: ces-logo.png
+          url: https://ces.pantheonsorbonne.fr/en
+          alt: 'Centre d’Économie de la Sorbonne (CES)'
+          title: 'Centre d’Économie de la Sorbonne (CES)'
+        - filename: uge-logo.png
+          url: https://www.univ-gustave-eiffel.fr/en/
+          alt: 'Université Gustave Eiffel'
+          title: 'Université Gustave Eiffel'
+        - filename: erudite-logo.png
+          url: https://erudite.univ-paris-est.fr/
+          alt: 'Érudite — Laboratoire d’économie, Université Gustave Eiffel'
+          title: 'Érudite — Laboratoire d’économie, Université Gustave Eiffel'
 ---
