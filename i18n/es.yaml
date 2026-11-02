@@ -42,3 +42,5 @@
   translation: 'Afiliaciones'
 - id: wip_in_progress
   translation: 'En curso'
+- id: read_more
+  translation: 'Leer más'

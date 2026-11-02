@@ -36,6 +36,9 @@ summaryLength: 30
 pagination:
   pagerSize: 10
 enableEmoji: true
+# Keep tag names as written. Hugo's default title-cases them, which turns the
+# French "Économie du crime" into "Économie Du Crime".
+capitalizeListTitles: false
 enableRobotsTXT: true
 footnotereturnlinkcontents: <sup>^</sup>
 ignoreFiles: [\.ipynb$, .ipynb_checkpoints$, \.Rmd$, \.Rmarkdown$, _cache$]
