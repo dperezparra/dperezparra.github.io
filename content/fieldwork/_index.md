@@ -22,7 +22,7 @@ sections:
       sort_by: Date
       sort_ascending: false
     design:
-      # Custom view added at layouts/_partials/views/mission.html: a map of the
-      # country with a pin per site, beside the mission details.
+      # Custom view added at layouts/_partials/views/mission.html: a photo cover
+      # with the mission's figures and a pinned map, the narrative underneath.
       view: mission
 ---

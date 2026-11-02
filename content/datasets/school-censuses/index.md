@@ -9,6 +9,12 @@ dataset:
   index: '01'
   nav_label: 'School censuses'
   region: 'Nigeria · Senegal — pre-primary through secondary'
+  # The headline tile at the top of /datasets/ - see dataset--start.html.
+  tile:
+    theme: 'Education'
+    unit: 'schools'
+    countries: ['Nigeria', 'Senegal']
+    image: 'datasets/nigeria-primary.png'
   stats:
     - value: '160,615'
       label: 'schools listed'

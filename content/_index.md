@@ -16,26 +16,47 @@ design:
   # Default section spacing
   spacing: '4rem'
 
+# The Spanish and French home pages are _index.es.md and _index.fr.md: keep the
+# three in step when editing the text or the news.
 sections:
-  - block: biography
+  # Custom block - layouts/_partials/hbx/blocks/home-map/block.html. Name,
+  # photo, role, affiliations and profile links come from the author page
+  # (content/authors/admin/); everything below is this page's own.
+  - block: home-map
     content:
       username: admin
+      eyebrow: 'Nigeria · Senegal · Sierra Leone · Chile'
+      tagline: 'Development and security economics: norms, schooling and crime.'
       text: |
+        I am an applied microeconomist working on development and security. One strand of my research studies how education, technology and institutions change harmful social norms in West Africa, including female genital cutting and child marriage.
 
-        Welcome to my personal site! I am Daniel Pérez-Parra, Postdoctoral Researcher at the French National Research Institute for Sustainable Development (IRD), based at Université Paris-Dauphine (LEDa-DIAL) and Université Paris 1 Panthéon-Sorbonne (CES). I completed my PhD in Economics at the Université Gustave Eiffel (Érudite) in 2026.
-
-        My research interests lie in development economics and applied microeconomics, with a particular focus on education and gender in West Africa. My work examines two main areas: the expansion of secondary education and the erosion of harmful social norms. Using geospatial data and causal inference methods, I study how public policies and institutional changes affect educational outcomes, gender norms, and practices such as female genital cutting.
-
+        A second strand studies how policing and peacekeeping shape safety and human capital, from beat policing in Chile to UN peacekeeping in Sierra Leone. Across both, I build original geospatial datasets and use quasi-experimental methods to identify causal effects.
+      # Newest first.
+      news:
+        - date: '2026'
+          text: '**Boots in the Beat** conditionally accepted at *The Economic Journal*'
+        - date: '2026'
+          text: 'Postdoctoral researcher at IRD, based at LEDa-DIAL and CES'
+        - date: '2026'
+          text: 'PhD in Economics, Université Gustave Eiffel (Érudite)'
       button:
         text: Download my CV
         url: uploads/daniel-perez-parra-cv.pdf
-      # Show a call-to-action button under your biography? (optional)
+      # Countries filled on the map, each with a pulsing point. `country` must
+      # match a name in data/world_map.json; `label` is what is printed;
+      # `side` puts the label left or right of the point and `dy` nudges it
+      # down (negative: up).
+      map:
+        label: 'Map of the Americas and Africa marking Nigeria, Senegal, Sierra Leone and Chile'
+        pins:
+          - {country: 'Nigeria', label: 'Nigeria', lon: 8.0, lat: 9.6, side: 'right', dy: 5}
+          - {country: 'Senegal', label: 'Senegal', lon: -14.8, lat: 14.6, side: 'left', dy: -4}
+          - {country: 'Sierra Leone', label: 'Sierra Leone', lon: -11.8, lat: 8.5, side: 'left', dy: 12}
+          - {country: 'Chile', label: 'Chile', lon: -70.8, lat: -33.4, side: 'right', dy: 5}
     design:
-      # Apply a gradient background
-      css_class: hbx-bg-gradient
-      # Affiliation logos, centred in a row below the CV button.
-      # Rendered by the shadowed template at
-      # layouts/partials/hbx/blocks/resume-biography/block.html
+      # Sets the section's padding - see `.home-map-section` in custom.css.
+      css_class: home-map-section
+      # Affiliation logos, in a row under the news.
       institution_logos:
         - filename: ird-mark.png
           url: https://en.ird.fr/
@@ -49,14 +70,4 @@ sections:
           url: https://ces.pantheonsorbonne.fr/en
           alt: 'Université Paris 1 Panthéon-Sorbonne (CES)'
           title: 'Université Paris 1 Panthéon-Sorbonne (CES)'
-      banner:
-        # Upload your cover image to the `assets/media/` folder and reference it here
-        filename: ''
-      biography:
-        # Customize the style of your biography text
-        style: 'text-align: center; font-size: 0.8em;'
-      # Avatar customization
-      avatar:
-        size: large # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
-        shape: circle # Options: circle (default), square, rounded   
 ---

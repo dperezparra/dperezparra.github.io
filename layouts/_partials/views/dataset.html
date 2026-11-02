@@ -74,10 +74,10 @@
       {{ end }}
 
       {{ with .collection }}
-        <p class="dataset-note"><span class="dataset-note-label">Collection</span>{{ . | markdownify }}</p>
+        <p class="dataset-note"><span class="dataset-note-label">{{ i18n "dataset_collection" | default "Collection" }}</span>{{ . | markdownify }}</p>
       {{ end }}
       {{ with .caveats }}
-        <p class="dataset-note"><span class="dataset-note-label">Known limits</span>{{ . | markdownify }}</p>
+        <p class="dataset-note"><span class="dataset-note-label">{{ i18n "dataset_limits" | default "Known limits" }}</span>{{ . | markdownify }}</p>
       {{ end }}
     </section>
   {{ end }}
@@ -85,12 +85,12 @@
   {{ with $d.closing }}<p class="dataset-closing">{{ . | markdownify }}</p>{{ end }}
 
   {{ with $d.access }}
-    <p class="dataset-note"><span class="dataset-note-label">Access</span>{{ . | markdownify }}</p>
+    <p class="dataset-note"><span class="dataset-note-label">{{ i18n "dataset_access" | default "Access" }}</span>{{ . | markdownify }}</p>
   {{ end }}
 
   {{ with $d.request_url }}
     <p class="dataset-cta">
-      <a href="{{ . }}">{{ $d.request_label | default "Request this dataset" }}</a>
+      <a href="{{ . }}">{{ $d.request_label | default (i18n "dataset_request" | default "Request this dataset") }}</a>
     </p>
   {{ end }}
 </li>

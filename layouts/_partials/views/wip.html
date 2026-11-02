@@ -48,18 +48,18 @@
 <li class="wip-item">
   <h3 class="wip-title">{{ $item.Title }}</h3>
   {{ with $rendered }}
-    <p class="wip-authors">with {{ delimit . ", " " and " | safeHTML }}</p>
+    <p class="wip-authors">{{ i18n "coauthors_with" | default "with" }} {{ delimit . ", " (printf " %s " (i18n "list_and" | default "and")) | safeHTML }}</p>
   {{ end }}
   {{ with $item.Params.publication }}
     <p class="wip-status">{{ . | markdownify }}</p>
   {{ end }}
   <details class="wip-abstract">
-    <summary>Abstract</summary>
+    <summary>{{ i18n "wip_abstract" | default "Abstract" }}</summary>
     <div class="wip-abstract-body">
       {{ with $item.Params.abstract }}
         {{ . | markdownify }}
       {{ else }}
-        <p>Abstract not available yet.</p>
+        <p>{{ i18n "wip_no_abstract" | default "Abstract not available yet." }}</p>
       {{ end }}
     </div>
   </details>

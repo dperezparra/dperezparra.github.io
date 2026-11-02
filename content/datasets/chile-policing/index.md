@@ -9,6 +9,12 @@ dataset:
   index: '03'
   nav_label: 'Policing programmes'
   region: 'Chile — municipality (comuna) level, 1994–2022'
+  # The headline tile at the top of /datasets/ - see dataset--start.html.
+  tile:
+    theme: 'Security'
+    unit: 'municipalities'
+    countries: ['Chile']
+    image: 'datasets/chile-policing-rollout.png'
   stats:
     - value: '345'
       label: 'municipalities covered'

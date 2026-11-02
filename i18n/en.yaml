@@ -10,3 +10,42 @@
 # Theme default is "min read"; spelled out here so pages read "1 minute read".
 - id: minute_read
   translation: 'minute read'
+
+# Strings used by the site's own templates (layouts/_partials/views/*.html and
+# the home-map block). Spanish and French are in es.yaml and fr.yaml.
+- id: coauthors_with
+  translation: 'with'
+- id: list_and
+  translation: 'and'
+- id: wip_abstract
+  translation: 'Abstract'
+- id: wip_no_abstract
+  translation: 'Abstract not available yet.'
+- id: mission_read_more
+  translation: 'Read about the mission'
+- id: mission_paper
+  translation: 'Paper'
+- id: mission_results_in
+  translation: 'Qualitative results in'
+- id: mission_funding
+  translation: 'Funding'
+- id: mission_collaborators
+  translation: 'Local collaborators'
+- id: dataset_collection
+  translation: 'Collection'
+- id: dataset_limits
+  translation: 'Known limits'
+- id: dataset_access
+  translation: 'Access'
+- id: dataset_request
+  translation: 'Request this dataset'
+- id: datasets_request
+  translation: 'Request a dataset'
+- id: datasets_nav
+  translation: 'Datasets'
+- id: home_about
+  translation: 'About'
+- id: home_news
+  translation: 'News'
+- id: home_affiliations
+  translation: 'Affiliations'

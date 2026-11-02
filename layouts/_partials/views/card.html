@@ -152,7 +152,7 @@
         {{ end }}
       {{ end }}
       {{ with $coauthor_html }}
-        <p class="card-coauthors">with {{ delimit . ", " " and " | safeHTML }}</p>
+        <p class="card-coauthors">{{ i18n "coauthors_with" | default "with" }} {{ delimit . ", " (printf " %s " (i18n "list_and" | default "and")) | safeHTML }}</p>
       {{ end }}
 
       {{ with $item.Params.content_meta.prerequisites }}

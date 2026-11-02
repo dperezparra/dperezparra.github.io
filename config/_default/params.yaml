@@ -38,8 +38,9 @@ header:
     align: center
     show_search: true
     show_theme_chooser: true
-    # The theme reads `show_translations`, not `show_language`.
-    show_translations: false
+    # The theme reads `show_translations`, not `show_language`. Shows the globe
+    # language switcher (English / Español / Français) on translated pages.
+    show_translations: true
     # Institution logos shown just before the search button, in this order.
     # Rendered by the shadowed navbar at
     # layouts/partials/components/headers/navbar.html

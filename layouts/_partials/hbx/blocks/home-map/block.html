@@ -1,0 +1,172 @@
+{{/* ---------------------------------------------------------------------------
+     Custom block: "home-map" - the home page.
+
+     An ADDITION, not an override - the theme has no `home-map` block, and the
+     block parser resolves `block: home-map` to this file by name. Used once,
+     in content/_index*.md.
+
+     Layout:
+       1. A light band (deep purple in dark mode) with the eyebrow, the name and
+          a one-line tagline on the left, and a map of the Americas and Africa
+          on the right. The countries listed under `content.map.pins` are
+          filled and carry a pulsing orange point.
+       2. Under the band, the profile card (photo, role, affiliations, profile
+          links, CV button) overlaps the band's bottom edge; beside it, the
+          About text, the dated news list and the affiliation logos.
+
+     Person details (name, photo, role, organizations, profiles) come from the
+     author page named by `content.username`, as the theme's biography block
+     does, so they are translated with that page. Everything else is in the
+     block's own front matter, one copy per language.
+
+     The map outlines are in data/world_map.json (scripts/build_home_map.py),
+     already projected; pins use the same linear mapping:
+         x = (lon - lon_min) * scale        y = (lat_max - lat) * scale
+--------------------------------------------------------------------------- */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $c := $block.content }}
+
+{{ $username := $c.username | default "admin" }}
+{{ $person_page := site.GetPage (printf "/authors/%s" $username) }}
+{{ if not $person_page }}
+  {{ errorf "home-map block: no author page at /authors/%s for language %s" $username site.Language.Lang }}
+{{ end }}
+{{ $person := $person_page.Params }}
+{{ $avatar := ($person_page.Resources.ByType "image").GetMatch "*avatar*" }}
+
+{{ $m := site.Data.world_map }}
+{{ $pins := $c.map.pins | default slice }}
+{{ $on := slice }}
+{{ range $pins }}{{ $on = $on | append .country }}{{ end }}
+
+<div class="home-map">
+
+  <div class="hm-band">
+    <div class="hm-band-inner">
+      <div class="hm-intro">
+        {{ with $c.eyebrow }}<p class="hm-eyebrow">{{ . }}</p>{{ end }}
+        <h1 class="hm-name">{{ $person_page.Title }}</h1>
+        {{ with $c.tagline }}<p class="hm-tagline">{{ . }}</p>{{ end }}
+      </div>
+
+      {{ with $m }}
+        <svg class="hm-map" viewBox="0 0 {{ .width }} {{ .height }}" role="img"
+             aria-label="{{ $c.map.label | default "Map" }}">
+          {{ range .countries }}
+            <path class="hm-land{{ if in $on .name }} is-on{{ end }}" d="{{ .d }}" />
+          {{ end }}
+          {{ range $pins }}
+            {{ $x := mul (sub (float .lon) (float $m.lon_min)) (float $m.scale) }}
+            {{ $y := mul (sub (float $m.lat_max) (float .lat)) (float $m.scale) }}
+            {{ $left := eq .side "left" }}
+            <g class="hm-pin">
+              <circle class="hm-pulse" cx="{{ $x }}" cy="{{ $y }}" r="7" />
+              <circle class="hm-pulse hm-pulse-late" cx="{{ $x }}" cy="{{ $y }}" r="7" />
+              <circle class="hm-dot" cx="{{ $x }}" cy="{{ $y }}" r="4.5" />
+              <text x="{{ add $x (cond $left -10 10) }}" y="{{ add $y (.dy | default 4) }}"
+                    text-anchor="{{ cond $left "end" "start" }}">{{ .label | default .country }}</text>
+            </g>
+          {{ end }}
+        </svg>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="hm-body">
+    <aside class="hm-card">
+      {{ with $avatar }}
+        {{ $a := .Fill "320x320 Center webp" }}
+        <img class="hm-avatar" src="{{ $a.RelPermalink }}" width="160" height="160" alt="{{ $person_page.Title }}" />
+      {{ end }}
+
+      {{ with $person.role }}<p class="hm-role">{{ . | markdownify }}</p>{{ end }}
+
+      {{/* Organizations, flattened: an entry may carry a `group:` list (see the
+           shadowed biography block), whose members are listed in turn. */}}
+      {{ $orgs := slice }}
+      {{ range $person.organizations }}
+        {{ with .group }}
+          {{ range . }}{{ $orgs = $orgs | append . }}{{ end }}
+        {{ else }}
+          {{ $orgs = $orgs | append . }}
+        {{ end }}
+      {{ end }}
+      {{ with $orgs }}
+        <ul class="hm-affs">
+          {{ range . }}
+            <li>{{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}{{ .name }}{{ if .url }}</a>{{ end }}</li>
+          {{ end }}
+        </ul>
+      {{ end }}
+
+      {{ with $person.profiles }}
+        <ul class="hm-socials">
+          {{ range . }}
+            {{ $link := .url | default .link }}
+            {{ $scheme := (urls.Parse $link).Scheme }}
+            {{ $target := "" }}
+            {{ if not $scheme }}
+              {{ $link = $link | relLangURL }}
+            {{ else if in (slice "http" "https") $scheme }}
+              {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+            {{ end }}
+            <li>
+              <a href="{{ $link | safeURL }}" {{ $target | safeHTMLAttr }}
+                 aria-label="{{ .label | default .icon }}" title="{{ .label | default .icon }}">
+                {{ partial "functions/get_icon" (dict "name" .icon "attributes" "style=\"height: 1.15rem;\"") }}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+
+      {{ with $c.button }}
+        {{/* relURL, not relLangURL: the CV is one file at /uploads/, shared
+             by every language. */}}
+        <a class="hm-cv" href="{{ .url | relURL }}" target="_blank" rel="noopener">
+          <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor"><path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"/><path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
+          {{ .text }}
+        </a>
+      {{ end }}
+    </aside>
+
+    <div class="hm-main">
+      {{ with $c.text }}
+        <h2 class="hm-label">{{ i18n "home_about" | default "About" }}</h2>
+        <div class="hm-bio">{{ $page.RenderString (dict "display" "block") . }}</div>
+      {{ end }}
+
+      {{ with $c.news }}
+        <h2 class="hm-label">{{ i18n "home_news" | default "News" }}</h2>
+        <ol class="hm-news">
+          {{ range . }}
+            <li><span class="hm-news-date">{{ .date }}</span><span class="hm-news-text">{{ .text | markdownify }}</span></li>
+          {{ end }}
+        </ol>
+      {{ end }}
+
+      {{ with $block.design.institution_logos }}
+        <h2 class="hm-label">{{ i18n "home_affiliations" | default "Affiliations" }}</h2>
+        <div class="hm-logos">
+          {{ range . }}
+            {{ $l := resources.Get (path.Join "media" .filename) }}
+            {{ if $l }}
+              {{ $img := cond (eq (path.Ext .filename) ".svg") $l ($l.Process "Resize x160 webp") }}
+              <a {{ with .url }}href="{{ . }}" target="_blank" rel="noopener"{{ end }}
+                 {{ with .title }}title="{{ . }}"{{ end }}
+                 aria-label="{{ .alt | default "Institution" }}">
+                <img src="{{ $img.RelPermalink }}" alt="{{ .alt | default "" }}"
+                     width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy" />
+              </a>
+            {{ else }}
+              {{ warnf "institution logo `%s` not found in assets/media/" .filename }}
+            {{ end }}
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </div>
+
+</div>

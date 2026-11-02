@@ -9,6 +9,12 @@ dataset:
   index: '02'
   nav_label: 'Health facilities'
   region: 'Nigeria — hospitals and primary health care'
+  # The headline tile at the top of /datasets/ - see dataset--start.html.
+  tile:
+    theme: 'Health'
+    unit: 'facilities'
+    countries: ['Nigeria']
+    image: 'datasets/nigeria-health-facilities.png'
   stats:
     - value: '42,063'
       label: 'facilities listed'

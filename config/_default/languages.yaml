@@ -1,22 +1,91 @@
 # Languages
-#   Create a section for each of your site's languages.
 #   Documentation: https://docs.hugoblox.com/reference/language/
+#
+# English is the default and stays at the site root; Spanish and French are
+# served under /es/ and /fr/. Translations sit next to the English files, named
+# by suffix - index.es.md, _index.fr.md, teaching.es.md - so each page and its
+# translations share one folder (and its images).
+#
+# Each language carries its own main menu. Entries use `pageRef`, which Hugo
+# resolves to that language's version of the page, so the Spanish menu links
+# to /es/research/ and so on.
 
-# Default language
 en:
   languageCode: en-us
-  # Uncomment for multi-lingual sites, and move English content into `en` sub-folder.
-  #contentDir: content/en
+  languageName: English
+  weight: 1
+  menus:
+    main:
+      - name: Home
+        pageRef: /
+        weight: 10
+      - name: Research
+        pageRef: /research
+        weight: 30
+      - name: Fieldwork
+        pageRef: /fieldwork
+        weight: 40
+      - name: Datasets
+        pageRef: /datasets
+        weight: 45
+      - name: Teaching
+        pageRef: /teaching
+        weight: 50
 
-# Uncomment the lines below to configure your website in a second language.
-#zh:
-#  languageCode: zh-Hans
-#  contentDir: content/zh
-#  title: Chinese website title...
-#  params:
-#    description: Site description in Chinese...
-#  menu:
-#    main:
-#      - name: 传
-#        url: '#about'
-#        weight: 1
+es:
+  languageCode: es
+  languageName: Español
+  weight: 2
+  params:
+    marketing:
+      seo:
+        description: 'Daniel Pérez-Parra — investigación, docencia y trabajo de campo sobre género, salud, normas sociales y desarrollo comunitario.'
+    footer:
+      copyright:
+        notice: '© {year} Daniel Pérez-Parra. Esta obra está bajo una licencia {license}'
+  menus:
+    main:
+      - name: Inicio
+        pageRef: /
+        weight: 10
+      - name: Investigación
+        pageRef: /research
+        weight: 30
+      - name: Trabajo de campo
+        pageRef: /fieldwork
+        weight: 40
+      - name: Datos
+        pageRef: /datasets
+        weight: 45
+      - name: Docencia
+        pageRef: /teaching
+        weight: 50
+
+fr:
+  languageCode: fr
+  languageName: Français
+  weight: 3
+  params:
+    marketing:
+      seo:
+        description: 'Daniel Pérez-Parra — recherche, enseignement et terrain sur le genre, la santé, les normes sociales et le développement communautaire.'
+    footer:
+      copyright:
+        notice: '© {year} Daniel Pérez-Parra. Cette œuvre est mise à disposition sous licence {license}'
+  menus:
+    main:
+      - name: Accueil
+        pageRef: /
+        weight: 10
+      - name: Recherche
+        pageRef: /research
+        weight: 30
+      - name: Terrain
+        pageRef: /fieldwork
+        weight: 40
+      - name: Données
+        pageRef: /datasets
+        weight: 45
+      - name: Enseignement
+        pageRef: /teaching
+        weight: 50

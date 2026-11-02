@@ -5,9 +5,10 @@
      `functions/render_view` resolves views by name. Select it with
      `design.view: mission` on a collection block.
 
-     Layout: the mission title, dates, headline figures, narrative and credits
-     on the left; on the right, a map of the country with a pin at each site
-     visited, and the field photograph beneath it at the same width.
+     Layout: a photo cover - the field photograph edge to edge, with the dates,
+     title, headline figures and paper link set over a dark gradient, and a
+     white outline of the country with a pin at each site. The narrative and
+     credits follow underneath the cover.
 
      The map outline comes from data/maps.yaml, already projected into a
      0,0 -> width,height box. Pins are placed here with the SAME linear mapping,
@@ -23,85 +24,85 @@
 {{ $fw := $item.Params.fieldwork }}
 {{ $map := "" }}
 {{ with $fw }}{{ with .map }}{{ $map = index (site.Data.maps | default dict) . }}{{ end }}{{ end }}
+{{ $id := $item.Slug | default (path.Base $item.RelPermalink) }}
 
-<li class="mission">
+{{/* Resolve the paper page once, so a missing/renamed page degrades to nothing
+     rather than a dead link. */}}
+{{ $paper := "" }}
+{{ with $fw }}{{ with .paper }}{{ $paper = site.GetPage . }}{{ end }}{{ end }}
 
-  <div class="mission-body">
-    <h3 class="mission-title">{{ $item.Title }}</h3>
+<li class="mission" id="{{ $id }}">
 
-    {{ with $fw }}
-      <p class="mission-when">
-        {{- with .sites -}}
-          {{- $names := slice -}}
-          {{- range . }}{{ $names = $names | append .name }}{{ end -}}
-          {{ delimit $names ", " " & " }}
-        {{- end -}}
-        {{- with .dates }} &middot; {{ . }}{{ end -}}
-      </p>
-
-      {{ with .stats }}
-        <ul class="mission-stats">
-          {{ range . }}
-            <li><span class="mission-stat-value">{{ .value }}</span><span class="mission-stat-label">{{ .label }}</span></li>
-          {{ end }}
-        </ul>
-      {{ end }}
+  <div class="mission-cover">
+    {{ with partial "functions/get_featured_image.html" $item }}
+      {{ $img := .Resize "1600x webp q80" }}
+      <img class="mission-cover-img" src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
+           alt="{{ $item.Title | plainify }}" decoding="async" />
     {{ end }}
 
-    {{ with $item.Params.abstract }}
-      <div class="mission-text">{{ . | markdownify }}</div>
-    {{ end }}
+    <div class="mission-cover-body">
+      <div class="mission-cover-text">
+        {{ with $fw }}
+          <p class="mission-when">
+            {{- with .dates }}{{ . }}{{ end -}}
+            {{- with .sites -}}
+              {{- $names := slice -}}
+              {{- range . }}{{ $names = $names | append .name }}{{ end -}}
+              {{ if $fw.dates }} &middot; {{ end }}{{ delimit $names ", " " & " }}
+            {{- end -}}
+          </p>
+        {{ end }}
 
-    {{ with $fw }}
-      {{/* Resolve the paper page once, so a missing/renamed page degrades to
-           nothing rather than a dead link. */}}
-      {{ $paper := "" }}
-      {{ with .paper }}{{ $paper = site.GetPage . }}{{ end }}
+        <h3 class="mission-title">{{ $item.Title }}</h3>
 
-      {{ if or $paper .funding .collaborators }}
-        <div class="mission-credits">
-          {{ with $paper }}
-            <p><span class="mission-credit-label">Qualitative results in</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-          {{ end }}
-          {{ with .funding }}
-            <p><span class="mission-credit-label">Funding</span>{{ . }}</p>
-          {{ end }}
-          {{ with .collaborators }}
-            <p><span class="mission-credit-label">Local collaborators</span>{{ . }}</p>
-          {{ end }}
-        </div>
-      {{ end }}
-    {{ end }}
-  </div>
+        {{ with $fw.stats }}
+          <ul class="mission-stats">
+            {{ range . }}
+              <li><b>{{ .value }}</b> {{ .label }}</li>
+            {{ end }}
+          </ul>
+        {{ end }}
 
-  {{/* Map and photograph share this column, so they line up at equal width. */}}
-  <div class="mission-media">
-    {{ with $map }}
-      <div class="mission-map">
-        <p class="mission-map-caption">{{ .label }}</p>
-        <svg viewBox="-10 -10 {{ add .width 20 }} {{ add .height 20 }}" role="img"
+        <p class="mission-cover-links">
+          {{ with $item.Params.abstract }}<a href="#{{ $id }}-details">{{ i18n "mission_read_more" | default "Read about the mission" }}</a>{{ end }}
+          {{ with $paper }}<a href="{{ .RelPermalink }}">{{ i18n "mission_paper" | default "Paper" }} &rarr;</a>{{ end }}
+        </p>
+      </div>
+
+      {{ with $map }}
+        <svg class="mission-map" viewBox="-10 -10 {{ add .width 20 }} {{ add .height 20 }}" role="img"
              aria-label="Map of {{ .label }} showing the fieldwork sites">
           <path class="mission-map-land" d="{{ .path | safeHTMLAttr }}" />
           {{ $m := . }}
           {{ range $fw.sites }}
             {{ $x := mul (div (sub .lon $m.lon_min) (sub $m.lon_max $m.lon_min)) $m.width }}
             {{ $y := mul (div (sub $m.lat_max .lat) (sub $m.lat_max $m.lat_min)) $m.height }}
-            <g class="mission-pin">
-              <circle cx="{{ $x }}" cy="{{ $y }}" r="9" class="mission-pin-halo" />
-              <circle cx="{{ $x }}" cy="{{ $y }}" r="5" class="mission-pin-dot" />
-              <text x="{{ add $x 14 }}" y="{{ add $y 5 }}">{{ .name }}</text>
-            </g>
+            <circle cx="{{ $x }}" cy="{{ $y }}" r="16" class="mission-pin"><title>{{ .name }}</title></circle>
           {{ end }}
         </svg>
-      </div>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="mission-details" id="{{ $id }}-details">
+    {{ with $item.Params.abstract }}
+      <div class="mission-text">{{ . | markdownify }}</div>
     {{ end }}
 
-    {{ with partial "functions/get_featured_image.html" $item }}
-      {{ $img := .Fill "1200x900 Center" }}
-      <figure class="mission-photo">
-        <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
-             alt="{{ $item.Title | plainify }}" loading="lazy" decoding="async" />
-      </figure>
+    {{ with $fw }}
+      {{ if or $paper .funding .collaborators }}
+        <div class="mission-credits">
+          {{ with $paper }}
+            <p><span class="mission-credit-label">{{ i18n "mission_results_in" | default "Qualitative results in" }}</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+          {{ end }}
+          {{ with .funding }}
+            <p><span class="mission-credit-label">{{ i18n "mission_funding" | default "Funding" }}</span>{{ . }}</p>
+          {{ end }}
+          {{ with .collaborators }}
+            <p><span class="mission-credit-label">{{ i18n "mission_collaborators" | default "Local collaborators" }}</span>{{ . }}</p>
+          {{ end }}
+        </div>
+      {{ end }}
     {{ end }}
   </div>
 

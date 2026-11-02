@@ -1,0 +1,42 @@
+# Spanish strings for the site's own templates. The theme's own Spanish strings
+# come from blox-tailwind; these add the custom ones (see en.yaml).
+- id: 'pub_Working Paper'
+  translation: 'Documento de trabajo'
+- id: 'pub_Work in Progress'
+  translation: 'Trabajo en curso'
+- id: coauthors_with
+  translation: 'con'
+- id: list_and
+  translation: 'y'
+- id: wip_abstract
+  translation: 'Resumen'
+- id: wip_no_abstract
+  translation: 'Resumen aún no disponible.'
+- id: mission_read_more
+  translation: 'Más sobre la misión'
+- id: mission_paper
+  translation: 'Artículo'
+- id: mission_results_in
+  translation: 'Resultados cualitativos en'
+- id: mission_funding
+  translation: 'Financiación'
+- id: mission_collaborators
+  translation: 'Colaboradores locales'
+- id: dataset_collection
+  translation: 'Recopilación'
+- id: dataset_limits
+  translation: 'Limitaciones conocidas'
+- id: dataset_access
+  translation: 'Acceso'
+- id: dataset_request
+  translation: 'Solicitar estos datos'
+- id: datasets_request
+  translation: 'Solicitar datos'
+- id: datasets_nav
+  translation: 'Datos'
+- id: home_about
+  translation: 'Sobre mí'
+- id: home_news
+  translation: 'Novedades'
+- id: home_affiliations
+  translation: 'Afiliaciones'

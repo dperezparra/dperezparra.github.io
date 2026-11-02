@@ -1,0 +1,42 @@
+# French strings for the site's own templates. The theme's own French strings
+# come from blox-tailwind; these add the custom ones (see en.yaml).
+- id: 'pub_Working Paper'
+  translation: 'Document de travail'
+- id: 'pub_Work in Progress'
+  translation: 'Travail en cours'
+- id: coauthors_with
+  translation: 'avec'
+- id: list_and
+  translation: 'et'
+- id: wip_abstract
+  translation: 'Résumé'
+- id: wip_no_abstract
+  translation: 'Résumé pas encore disponible.'
+- id: mission_read_more
+  translation: 'En savoir plus sur la mission'
+- id: mission_paper
+  translation: 'Article'
+- id: mission_results_in
+  translation: 'Résultats qualitatifs dans'
+- id: mission_funding
+  translation: 'Financement'
+- id: mission_collaborators
+  translation: 'Collaborateurs locaux'
+- id: dataset_collection
+  translation: 'Collecte'
+- id: dataset_limits
+  translation: 'Limites connues'
+- id: dataset_access
+  translation: 'Accès'
+- id: dataset_request
+  translation: 'Demander ces données'
+- id: datasets_request
+  translation: 'Demander des données'
+- id: datasets_nav
+  translation: 'Données'
+- id: home_about
+  translation: 'À propos'
+- id: home_news
+  translation: 'Actualités'
+- id: home_affiliations
+  translation: 'Affiliations'
