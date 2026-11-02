@@ -49,4 +49,10 @@ links:
     url: "#"
 
 share: false
+
+# Card details on /research/ - see layouts/_partials/views/wip.html.
+wip:
+  icon: 'shield-check'
+  countries: ['Sierra Leone']
+
 ---

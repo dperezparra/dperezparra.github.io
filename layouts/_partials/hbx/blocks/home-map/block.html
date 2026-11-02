@@ -14,6 +14,12 @@
           links, CV button) overlaps the band's bottom edge; beside it, the
           About text, the dated news list and the affiliation logos.
 
+     Entrance ("routes from Paris"): on a visitor's first arrival in a browser
+     session, orange routes draw from `content.map.origin` to each pinned
+     country, which lights up as its route lands, while the text rises in.
+     Skipped on later visits in the session, for reduced-motion visitors, and
+     without the Web Animations API; the page underneath is always complete.
+
      Person details (name, photo, role, organizations, profiles) come from the
      author page named by `content.username`, as the theme's biography block
      does, so they are translated with that page. Everything else is in the
@@ -42,6 +48,10 @@
 {{ range $pins }}{{ $on = $on | append .country }}{{ end }}
 
 <div class="home-map">
+  {{/* Decide before first paint whether the entrance plays; if so, the
+       `is-intro` class holds the animated parts hidden until the script at
+       the end of the block takes over (with a CSS failsafe reveal). */}}
+  <script>(function(h){try{if(!h.animate||matchMedia('(prefers-reduced-motion: reduce)').matches||sessionStorage.getItem('hm-intro'))return;sessionStorage.setItem('hm-intro','1');h.parentElement.classList.add('is-intro')}catch(e){}})(document.currentScript)</script>
 
   <div class="hm-band">
     <div class="hm-band-inner">
@@ -50,25 +60,37 @@
         {{/* U+2011 non-breaking hyphen, so a double-barrelled surname wraps at the
              space ("Daniel / Pérez-Parra"), never at its hyphen. */}}
         <h1 class="hm-name">{{ replace $person_page.Title "-" "‑" }}</h1>
-        {{ with $c.tagline }}<p class="hm-tagline">{{ . }}</p>{{ end }}
+        {{/* A tagline in "Field: list" form breaks after its colon. */}}
+        {{ with $c.tagline }}<p class="hm-tagline">{{ replace (. | htmlEscape) ": " ":<br>" | safeHTML }}</p>{{ end }}
       </div>
 
       {{ with $m }}
         <svg class="hm-map" viewBox="0 0 {{ .width }} {{ .height }}" role="img"
              aria-label="{{ $c.map.label | default "Map" }}">
-          {{ range .countries }}
-            <path class="hm-land{{ if in $on .name }} is-on{{ end }}" d="{{ .d }}" />
-          {{ end }}
+          <g class="hm-lands">
+            {{ range .countries }}
+              <path class="hm-land{{ if in $on .name }} is-on{{ end }}"{{ if in $on .name }} data-name="{{ .name }}"{{ end }} d="{{ .d }}" />
+            {{ end }}
+          </g>
+          <g class="hm-routes"></g>
           {{ range $pins }}
             {{ $x := mul (sub (float .lon) (float $m.lon_min)) (float $m.scale) }}
             {{ $y := mul (sub (float $m.lat_max) (float .lat)) (float $m.scale) }}
             {{ $left := eq .side "left" }}
-            <g class="hm-pin">
+            <g class="hm-pin" data-country="{{ .country }}">
               <circle class="hm-pulse" cx="{{ $x }}" cy="{{ $y }}" r="7" />
               <circle class="hm-pulse hm-pulse-late" cx="{{ $x }}" cy="{{ $y }}" r="7" />
               <circle class="hm-dot" cx="{{ $x }}" cy="{{ $y }}" r="4.5" />
               <text x="{{ add $x (cond $left -10 10) }}" y="{{ add $y (.dy | default 4) }}"
                     text-anchor="{{ cond $left "end" "start" }}">{{ .label | default .country }}</text>
+            </g>
+          {{ end }}
+          {{ with $c.map.origin }}
+            {{ $ox := mul (sub (float .lon) (float $m.lon_min)) (float $m.scale) }}
+            {{ $oy := mul (sub (float $m.lat_max) (float .lat)) (float $m.scale) }}
+            <g class="hm-origin">
+              <circle cx="{{ $ox }}" cy="{{ $oy }}" r="5" />
+              <text x="{{ add $ox 9 }}" y="{{ add $oy 4 }}">{{ .label }}</text>
             </g>
           {{ end }}
         </svg>
@@ -171,4 +193,55 @@
     </div>
   </div>
 
+  {{/* The entrance. Runs only when the opening script added `is-intro`. */}}
+  <script>
+  (function () {
+    var root = document.currentScript.parentElement;
+    if (!root.classList.contains('is-intro')) return;
+    try {
+      var svg = root.querySelector('.hm-map');
+      var ease = 'cubic-bezier(.2,.7,.2,1)';
+      var A = function (el, frames, o) { if (el) el.animate(frames, Object.assign({ fill: 'both', easing: ease }, o)); };
+      var rise = function (sel, dy, delay, dur) { A(root.querySelector(sel), [{ opacity: 0, transform: 'translateY(' + dy + 'px)' }, { opacity: 1, transform: 'none' }], { duration: dur, delay: delay }); };
+      rise('.hm-name', 14, 150, 600);
+      rise('.hm-tagline', 10, 270, 600);
+      rise('.hm-card', 26, 370, 700);
+      rise('.hm-main', 18, 490, 700);
+      if (!svg) return;
+      A(svg.querySelector('.hm-lands'), [{ opacity: 0 }, { opacity: 1 }], { duration: 500 });
+      var origin = svg.querySelector('.hm-origin');
+      var oc = origin && origin.querySelector('circle');
+      var plain = svg.querySelector('.hm-land:not(.is-on)');
+      var landFill = plain ? getComputedStyle(plain).fill : null;
+      var pins = svg.querySelectorAll('.hm-pin');
+      if (!oc) { pins.forEach(function (p, i) { A(p, [{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 600 + i * 150 }); }); return; }
+      var ox = +oc.getAttribute('cx'), oy = +oc.getAttribute('cy');
+      A(origin, [{ opacity: 0, transform: 'scale(.3)' }, { opacity: 1, transform: 'scale(1.2)', offset: .7 }, { opacity: 1, transform: 'none' }], { duration: 500, delay: 350, fill: 'forwards' });
+      var g = svg.querySelector('.hm-routes'), last = 0;
+      pins.forEach(function (p, i) {
+        var dot = p.querySelector('.hm-dot');
+        var tx = +dot.getAttribute('cx'), ty = +dot.getAttribute('cy');
+        var dx = tx - ox, dy = ty - oy, len = Math.hypot(dx, dy) || 1;
+        var side = tx < ox - 150 ? 1 : -1, bend = Math.min(0.35 * len, 90) * side;
+        var cx = (ox + tx) / 2 - dy / len * bend, cy = (oy + ty) / 2 + dx / len * bend;
+        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('class', 'hm-route');
+        path.setAttribute('d', 'M' + ox + ',' + oy + ' Q' + cx + ',' + cy + ' ' + tx + ',' + ty);
+        g.appendChild(path);
+        var L = path.getTotalLength();
+        path.style.strokeDasharray = L;
+        var start = 650 + i * 260, dur = 420 + L * 0.9, land = start + dur - 60;
+        last = Math.max(last, land);
+        A(path, [{ strokeDashoffset: L, opacity: 1 }, { strokeDashoffset: 0, opacity: 1 }], { duration: dur, delay: start, easing: 'cubic-bezier(.45,0,.25,1)' });
+        A(path, [{ opacity: 1 }, { opacity: 0 }], { duration: 700, delay: land + 560, fill: 'forwards' });
+        var shape = svg.querySelector('.hm-land[data-name="' + p.getAttribute('data-country') + '"]');
+        if (shape && landFill) A(shape, [{ fill: landFill }, { fill: getComputedStyle(shape).fill }], { duration: 450, delay: land, easing: 'ease-out' });
+        A(p, [{ opacity: 0, transform: 'translateY(-14px) scale(.4)' }, { opacity: 1, transform: 'translateY(2px) scale(1.25)', offset: .7 }, { opacity: 1, transform: 'none' }], { duration: 520, delay: land });
+      });
+      A(origin, [{ opacity: 1 }, { opacity: 0 }], { duration: 600, delay: last + 900, fill: 'forwards' });
+    } finally {
+      root.classList.remove('is-intro');
+    }
+  })();
+  </script>
 </div>

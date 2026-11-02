@@ -38,4 +38,9 @@ links:
     url: "#"
 
 share: false
+
+wip:
+  icon: 'shield-check'
+  countries: ['Sierra Leone']
+
 ---

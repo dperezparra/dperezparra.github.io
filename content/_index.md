@@ -25,7 +25,7 @@ sections:
   - block: home-map
     content:
       username: admin
-      tagline: 'Development and security economics: norms, schooling and crime.'
+      tagline: 'Development Economics: Social Norms, Schooling, and Crime'
       text: |
         I am an applied microeconomist working on development and security. One strand of my research studies how education, technology and institutions change harmful social norms in West Africa, including female genital cutting and child marriage.
 
@@ -47,10 +47,12 @@ sections:
       # down (negative: up).
       map:
         label: 'Map of the Americas and Africa marking Nigeria, Senegal, Sierra Leone and Chile'
+        # Where the entrance's routes start (home-map block).
+        origin: {label: 'Paris', lon: 2.35, lat: 48.86}
         pins:
-          - {country: 'Nigeria', label: 'Nigeria', lon: 8.0, lat: 9.6, side: 'right', dy: 5}
           - {country: 'Senegal', label: 'Senegal', lon: -14.8, lat: 14.6, side: 'left', dy: -4}
           - {country: 'Sierra Leone', label: 'Sierra Leone', lon: -11.8, lat: 8.5, side: 'left', dy: 12}
+          - {country: 'Nigeria', label: 'Nigeria', lon: 8.0, lat: 9.6, side: 'right', dy: 5}
           - {country: 'Chile', label: 'Chile', lon: -70.8, lat: -33.4, side: 'right', dy: 5}
     design:
       # Sets the section's padding - see `.home-map-section` in custom.css.

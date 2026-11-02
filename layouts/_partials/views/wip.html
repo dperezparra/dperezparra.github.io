@@ -10,11 +10,12 @@
      which suits a list of unpublished projects. It also opens with a large
      `mt-16 sm:mt-20` gap under the block title.
 
-     Renders, per entry: the title (deliberately NOT a link - these entries have
-     no page body, so a click led nowhere), then co-authors, each linked to
-     their homepage where one is listed in data/author_links.yaml, then an
-     optional status such as "Early stage project" taken from the `publication`
-     front-matter field, and finally an expandable abstract.
+     Renders each entry as a card: a topic icon (`wip.icon`, a Heroicons name)
+     and a stage line with a pulsing dot - the `publication` field, such as
+     "Early stage project", or "In progress" - then the title (deliberately NOT
+     a link - these entries have no page body), co-authors linked to their
+     homepages via data/author_links.yaml, the countries studied
+     (`wip.countries`), and finally an expandable abstract.
 
      The abstract uses a native <details>/<summary>, so it needs no JavaScript
      and stays keyboard-accessible. Entries with no `abstract` in front matter
@@ -45,14 +46,32 @@
   {{ end }}
 {{ end }}
 
+{{ $w := $item.Params.wip | default dict }}
+
 <li class="wip-item">
+  <div class="wip-top">
+    {{ with $w.icon }}
+      <span class="wip-icon" aria-hidden="true">{{ partial "functions/get_icon" (dict "name" . "attributes" "style=\"height: 1.25rem;\"") }}</span>
+    {{ end }}
+    {{/* The stage reads the `publication` field ("Early stage project"), and
+         falls back to a generic "In progress". The dot pulses - the same
+         orange as the home page map. */}}
+    <span class="wip-stage">
+      <span class="wip-live" aria-hidden="true"></span>
+      {{- with $item.Params.publication }}{{ . | plainify }}{{ else }}{{ i18n "wip_in_progress" | default "In progress" }}{{ end -}}
+    </span>
+  </div>
+
   <h3 class="wip-title">{{ $item.Title }}</h3>
+
   {{ with $rendered }}
     <p class="wip-authors">{{ i18n "coauthors_with" | default "with" }} {{ delimit . ", " (printf " %s " (i18n "list_and" | default "and")) | safeHTML }}</p>
   {{ end }}
-  {{ with $item.Params.publication }}
-    <p class="wip-status">{{ . | markdownify }}</p>
+
+  {{ with $w.countries }}
+    <p class="wip-countries">{{ range . }}<span>{{ . }}</span>{{ end }}</p>
   {{ end }}
+
   <details class="wip-abstract">
     <summary>{{ i18n "wip_abstract" | default "Abstract" }}</summary>
     <div class="wip-abstract-body">

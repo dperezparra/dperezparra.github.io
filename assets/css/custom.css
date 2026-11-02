@@ -272,6 +272,98 @@
   white-space: normal;
 }
 
+/* Animated card art (card.svg overlays - see views/card.html and
+ * scripts/build_paper_illustrations.py). The overlay shares the image's box
+ * and follows its hover zoom, so the moving parts stay on the drawing. */
+.card-anim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform 0.5s ease-out;
+}
+
+.group:hover .card-anim {
+  transform: scale(1.05);
+}
+
+/* Elements scale about their own centre; strokes keep their width. */
+.card-anim .ca-ring,
+.card-anim .ca-ripple {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.card-anim .ca-ring {
+  animation: ca-ring 2.6s ease-out infinite;
+}
+
+.card-anim .ca-ring-late {
+  animation-delay: 1.3s;
+}
+
+@keyframes ca-ring {
+  from { transform: scale(0.7); opacity: 0.8; }
+  to { transform: scale(2.2); opacity: 0; }
+}
+
+/* The patrol car's light bar: amber and purple take turns. */
+.card-anim .ca-blink {
+  animation: ca-blink 0.9s steps(1, end) infinite;
+}
+
+.card-anim .ca-blink-alt {
+  animation-delay: 0.45s;
+}
+
+@keyframes ca-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* Signal ripples rolling out of the tower, three a cycle. */
+.card-anim .ca-ripple {
+  opacity: 0;
+  animation: ca-ripple 4.2s ease-out infinite;
+}
+
+.card-anim .ca-ripple-1 {
+  animation-delay: 1.4s;
+}
+
+.card-anim .ca-ripple-2 {
+  animation-delay: 2.8s;
+}
+
+@keyframes ca-ripple {
+  from { transform: scale(0.6); opacity: 0.7; }
+  to { transform: scale(13); opacity: 0; }
+}
+
+.card-anim .ca-beacon {
+  animation: ca-beacon 1.6s ease-in-out infinite;
+}
+
+@keyframes ca-beacon {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-anim .ca-ring,
+  .card-anim .ca-ripple,
+  .card-anim .ca-blink,
+  .card-anim .ca-beacon {
+    animation: none;
+  }
+
+  .card-anim .ca-ring,
+  .card-anim .ca-ripple {
+    opacity: 0;
+  }
+}
+
 /* Co-authors under the status line inside a working-paper card. */
 .card-coauthors {
   margin: 0.35rem 0 0;
@@ -325,39 +417,133 @@
   }
 }
 
+/* Cards in a two-column grid. `start` alignment, so opening one abstract grows
+ * that card alone instead of stretching its neighbour. */
 .wip-list {
-  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+  margin: 0.5rem 0 0;
   padding: 0;
   list-style: none;
 }
 
-.wip-item + .wip-item {
-  margin-top: 1.5rem;
+.wip-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.1rem 1.2rem 1rem;
+  border: 1px solid rgb(228 228 231);
+  border-radius: 1rem;
+  background-color: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wip-item:hover {
+  border-color: var(--color-primary-300);
+  box-shadow: 0 12px 26px -20px rgb(88 28 135 / 0.5);
+}
+
+.dark .wip-item {
+  border-color: rgb(63 63 70);
+  background-color: rgb(24 24 27);
+}
+
+.dark .wip-item:hover {
+  border-color: var(--color-primary-500);
+}
+
+.wip-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.wip-icon {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.65rem;
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-700);
+}
+
+.dark .wip-icon {
+  background-color: rgb(88 28 135 / 0.4);
+  color: var(--color-primary-300);
+}
+
+/* Stage line, right-aligned; the pulsing dot says "still moving". */
+.wip-stage {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-left: auto;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(113 113 122);
+}
+
+.dark .wip-stage {
+  color: rgb(161 161 170);
+}
+
+.wip-live {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: #f97316;
+}
+
+.wip-live::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid #f97316;
+  animation: wip-live 2.2s ease-out infinite;
+}
+
+@keyframes wip-live {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(2.8); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wip-live::after {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 /* Plain heading, not a link: these entries have no page body of their own. */
 .wip-title {
-  margin: 0;
-  font-size: 1.05rem;
+  margin: 0.35rem 0 0;
+  font-size: 1.02rem;
   line-height: 1.4;
-  font-weight: 600;
+  font-weight: 700;
   color: rgb(24 24 27);
+  text-wrap: balance;
 }
 
 .dark .wip-title {
   color: rgb(244 244 245);
 }
 
-.wip-authors,
-.wip-status {
-  margin: 0.2rem 0 0;
+.wip-authors {
+  margin: 0;
   font-size: 0.8125rem;
   line-height: 1.45;
   color: rgb(107 114 128);
 }
 
-.dark .wip-authors,
-.dark .wip-status {
+.dark .wip-authors {
   color: rgb(156 163 175);
 }
 
@@ -384,15 +570,41 @@
   color: var(--color-primary-400);
 }
 
-.wip-status {
-  font-style: italic;
+.wip-countries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.1rem 0 0;
+}
+
+.wip-countries span {
+  padding: 0.1rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-800);
+  border: 1px solid var(--color-primary-200);
+}
+
+.dark .wip-countries span {
+  background-color: transparent;
+  border-color: rgb(107 33 168 / 0.6);
+  color: var(--color-primary-300);
+}
+
+@media (max-width: 720px) {
+  .wip-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Expandable abstract. The toggle carries the site's accent purple - the same
  * colour as the role line on the homepage - while the abstract itself stays in
  * normal body text so it is comfortable to read. */
 .wip-abstract {
-  margin-top: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.1rem;
 }
 
 .wip-abstract > summary {
@@ -1572,18 +1784,14 @@
     font-size: 1.125rem;
   }
 
-  /* The abstract toggle was an ~18px-tall tap target. Padding brings it to
-   * ~44px; the item spacing shrinks to keep the list's rhythm unchanged. */
+  /* The abstract toggle was an ~18px-tall tap target; padding brings it to
+   * ~44px. */
   .wip-abstract {
     margin-top: 0;
   }
 
   .wip-abstract > summary {
     padding: 0.75rem 0.75rem 0.75rem 0;
-  }
-
-  .wip-item + .wip-item {
-    margin-top: 0.75rem;
   }
 
   /* Paper pages: the 2.25rem title broke a long paper name over five lines. */
@@ -1762,6 +1970,61 @@
   paint-order: stroke;
   stroke: var(--hm-label-halo);
   stroke-width: 3px;
+}
+
+/* --- entrance: routes from Paris (script at the end of the home-map block) --- */
+
+/* Pins pop about their own centre. */
+.hm-pin,
+.hm-origin {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Paris only appears during the entrance. */
+.hm-origin {
+  opacity: 0;
+}
+
+.hm-origin circle {
+  fill: var(--color-primary-700);
+}
+
+.dark .hm-origin circle {
+  fill: var(--color-primary-300);
+}
+
+.hm-origin text {
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--hm-label);
+  paint-order: stroke;
+  stroke: var(--hm-label-halo);
+  stroke-width: 3px;
+}
+
+.hm-route {
+  fill: none;
+  stroke: var(--hm-orange);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+/* Held hidden between first paint and the script taking over. The failsafe
+ * reveals everything after 2.5s should the script never run. */
+.home-map.is-intro .hm-name,
+.home-map.is-intro .hm-tagline,
+.home-map.is-intro .hm-card,
+.home-map.is-intro .hm-main,
+.home-map.is-intro .hm-lands,
+.home-map.is-intro .hm-pin {
+  opacity: 0;
+  animation: hm-failsafe 0.3s 2.5s forwards;
+}
+
+@keyframes hm-failsafe {
+  to { opacity: 1; }
 }
 
 /* --- under the band: card + main column --- */

@@ -40,3 +40,5 @@
   translation: 'Novedades'
 - id: home_affiliations
   translation: 'Afiliaciones'
+- id: wip_in_progress
+  translation: 'En curso'

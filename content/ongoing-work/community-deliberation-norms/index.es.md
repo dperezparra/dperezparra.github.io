@@ -16,4 +16,8 @@ publication_short: ""
 slug: "community-deliberation-norms"
 
 share: false
+
+wip:
+  icon: 'user-group'
+
 ---

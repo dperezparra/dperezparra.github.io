@@ -25,4 +25,10 @@ slug: "fgm-education"
 # file path (e.g., "uploads/beyond-classroom-poster.pdf") when available.
 
 share: false
+
+# Card details on /research/ - see layouts/_partials/views/wip.html.
+wip:
+  icon: 'academic-cap'
+  countries: ['Senegal']
+
 ---

@@ -25,4 +25,9 @@ publication_short: ""
 slug: "community-deliberation-norms"
 
 share: false
+
+# Card details on /research/ - see layouts/_partials/views/wip.html.
+wip:
+  icon: 'user-group'
+
 ---

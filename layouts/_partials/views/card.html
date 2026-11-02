@@ -2,9 +2,11 @@
      SHADOWED THEME TEMPLATE - overrides blox-tailwind v0.9.0
      layouts/_partials/views/card.html
 
-     Verbatim copy of upstream with TWO changes, each marked "CUSTOMISED":
+     Verbatim copy of upstream with THREE changes, each marked "CUSTOMISED":
        1. co-authors listed under the summary, linked via data/author_links.yaml
        2. the single-author avatar byline removed from the footer
+       3. animated card art: a bundle's card.svg is laid over its card.png
+          (see scripts/build_paper_illustrations.py)
 
      Only /research/ is affected in practice: /fieldwork/ uses the same view but
      its entries have no `authors`, so both changes are no-ops there.
@@ -22,6 +24,11 @@
 {{ end }}
 
 {{ $resource := partial "functions/get_featured_image.html" $item }}
+{{/* CUSTOMISED (3): when the bundle has a card.svg overlay, the card shows
+     card.png - the scene minus the parts the overlay animates - beneath it.
+     Without card.png the overlay sits on the featured image itself. */}}
+{{ $anim := $item.Resources.GetMatch "card.svg" }}
+{{ if $anim }}{{ with $item.Resources.GetMatch "card.png" }}{{ $resource = . }}{{ end }}{{ end }}
 {{ $anchor := $item.Params.image.focal_point | default "Center" }}
 {{ $fill_image := .config.fill_image | default true }}
 {{ $showDate := .config.show_date | default true }}
@@ -91,6 +98,14 @@
         </div>
       {{end}}
       
+      {{/* CUSTOMISED (3): the animated overlay, inline so its CSS classes apply.
+           SMIL motion ignores prefers-reduced-motion, so the script pauses it
+           for those visitors; the CSS pulses are switched off in custom.css. */}}
+      {{ with $anim }}
+        {{ .Content | safeHTML }}
+        <script>(function(s){if(s&&s.pauseAnimations&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)s.pauseAnimations()})(document.currentScript.previousElementSibling)</script>
+      {{ end }}
+
       <!-- Subtle overlay for better text contrast (allow clicks to pass through) -->
       <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
     </div>

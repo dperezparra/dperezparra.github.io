@@ -17,4 +17,8 @@ publication_short: ""
 slug: "religious-leaders-norms"
 
 share: false
+
+wip:
+  icon: 'chat-bubble-left-right'
+
 ---

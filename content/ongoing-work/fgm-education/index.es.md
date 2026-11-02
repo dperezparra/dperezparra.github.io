@@ -14,4 +14,9 @@ publication_short: ""
 slug: "fgm-education"
 
 share: false
+
+wip:
+  icon: 'academic-cap'
+  countries: ['Senegal']
+
 ---

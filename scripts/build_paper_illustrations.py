@@ -3,8 +3,13 @@
 Regenerate the illustrations on the Working Papers cards on /research/.
 
 One flat-vector scene per paper, drawn from scratch - no data, no figures from
-the papers themselves. Output overwrites each paper's featured.png, which the
-card view crops to 16:9 and the paper page uses as its share image.
+the papers themselves. Per paper bundle it writes:
+
+  featured.png  the complete scene - the paper page and its share image.
+  card.png      the scene minus anything card.svg animates (only when that
+                differs from featured.png - here, the police car).
+  card.svg      a transparent overlay of the moving parts, laid over the image
+                on the /research/ card by layouts/_partials/views/card.html.
 
     python3 scripts/build_paper_illustrations.py
 
@@ -20,6 +25,11 @@ DESIGN NOTES
 
   * No text in either image: the card already carries the title, and baked-in
     words would be unreadable at phone width.
+
+  * The overlays share the PNGs' 1600x900 coordinate space (viewBox), so every
+    moving part is placed from the same geometry the drawing used. Motion along
+    paths is SMIL (<animateMotion>), pulses and blinks are CSS classes styled in
+    assets/css/custom.css; card.html pauses both for reduced-motion visitors.
 """
 
 import math
@@ -112,7 +122,7 @@ def star(cx, cy, r_out, r_in, n=5, rot=-90):
 # Boots in the Beat - a city carved into patrol quadrants
 # ---------------------------------------------------------------------------
 
-def beat_policing(path):
+def beat_policing(path, with_car=True):
     rnd = random.Random(7)
     cv = Canvas(P100, P50)
     d = ImageDraw.Draw(cv.im)
@@ -251,7 +261,8 @@ def beat_policing(path):
         for sy in (-14, 14):
             d.ellipse(cv.box(cx + L / 2 - 9, cy + sy - 4, cx + L / 2 - 1, cy + sy + 4), fill=AMBER_LIGHT)
 
-    car(lx0 + (lx1 - lx0) * 0.62, ly1)
+    if with_car:
+        car(lx0 + (lx1 - lx0) * 0.62, ly1)
 
     # one officer per quadrant - a map pin with a badge star
     def pin(cx, cy, size=1.0, pulse=False):
@@ -292,6 +303,7 @@ def beat_policing(path):
     pin(street_x(5), street_y(4), 1.05)
 
     cv.save(path)
+    return {"loop": (lx0, ly0, lx1, ly1), "pin": (street_x(4), street_y(4))}
 
 
 # ---------------------------------------------------------------------------
@@ -448,8 +460,79 @@ def fast_internet(path):
         phone(x, y, i % 2)
 
     cv.save(path)
+    return {"tower": (TX, TY), "tops": tops}
+
+
+# ---------------------------------------------------------------------------
+# Animated overlays for the /research/ cards
+# ---------------------------------------------------------------------------
+
+def _svg(anim_id, body):
+    return (f'<svg class="card-anim" id="{anim_id}" viewBox="0 0 {W} {H}" '
+            f'preserveAspectRatio="none" aria-hidden="true" focusable="false">{body}</svg>\n')
+
+
+def beat_policing_overlay(path, g):
+    """The police car driving the beat, and a ring pulsing from the quadrant's
+    officer. The car is drawn heading +x at the origin; rotate="auto" turns it
+    with the road."""
+    lx0, ly0, lx1, ly1 = g["loop"]
+    R = 22                                   # rounded corners, so the turn is smooth
+    loop = (f"M{lx0 + R:.1f},{ly0:.1f} H{lx1 - R:.1f} A{R},{R} 0 0 1 {lx1:.1f},{ly0 + R:.1f} "
+            f"V{ly1 - R:.1f} A{R},{R} 0 0 1 {lx1 - R:.1f},{ly1:.1f} H{lx0 + R:.1f} "
+            f"A{R},{R} 0 0 1 {lx0:.1f},{ly1 - R:.1f} V{ly0 + R:.1f} A{R},{R} 0 0 1 {lx0 + R:.1f},{ly0:.1f} Z")
+    px, py = g["pin"]
+    L, Wd = 92, 50
+    car = (
+        f'<rect x="{-L / 2 + 4}" y="{-Wd / 2 + 8}" width="{L}" height="{Wd}" rx="16" fill="{P950}" fill-opacity=".24"/>'
+        f'<rect x="{-L / 2}" y="{-Wd / 2}" width="{L}" height="{Wd}" rx="16" fill="{P800}"/>'
+        f'<rect x="-24" y="{-Wd / 2 + 7}" width="48" height="{Wd - 14}" rx="9" fill="{WHITE}"/>'
+        f'<rect x="18" y="{-Wd / 2 + 9}" width="12" height="{Wd - 18}" rx="4" fill="{P300}"/>'
+        f'<rect x="-30" y="{-Wd / 2 + 9}" width="10" height="{Wd - 18}" rx="4" fill="{P300}"/>'
+        f'<rect class="ca-blink" x="-5" y="-16" width="10" height="15" rx="3" fill="{AMBER}"/>'
+        f'<rect class="ca-blink ca-blink-alt" x="-5" y="1" width="10" height="15" rx="3" fill="{P500}"/>'
+        f'<ellipse cx="{L / 2 - 5}" cy="-14" rx="4" ry="4" fill="{AMBER_LIGHT}"/>'
+        f'<ellipse cx="{L / 2 - 5}" cy="14" rx="4" ry="4" fill="{AMBER_LIGHT}"/>'
+    )
+    body = (
+        f'<ellipse class="ca-ring" cx="{px:.1f}" cy="{py + 6:.1f}" rx="46" ry="25" fill="none" stroke="{P500}" stroke-width="4" vector-effect="non-scaling-stroke"/>'
+        f'<ellipse class="ca-ring ca-ring-late" cx="{px:.1f}" cy="{py + 6:.1f}" rx="46" ry="25" fill="none" stroke="{P500}" stroke-width="4" vector-effect="non-scaling-stroke"/>'
+        f'<g>{car}<animateMotion dur="16s" repeatCount="indefinite" rotate="auto" path="{loop}"/></g>'
+    )
+    open(path, "w").write(_svg("anim-plan-cuadrante", body))
+    print("wrote", path)
+
+
+def fast_internet_overlay(path, g):
+    """Signal ripples rolling out from the tower over the sky, a blinking beacon,
+    and data packets running back and forth between the households' phones."""
+    tx, ty = g["tower"]
+    tops = g["tops"]
+    body = (f'<defs><clipPath id="fi-sky"><rect x="0" y="0" width="{W}" height="585"/></clipPath></defs>'
+            f'<g clip-path="url(#fi-sky)">')
+    for i in range(3):
+        body += (f'<circle class="ca-ripple ca-ripple-{i}" cx="{tx}" cy="{ty}" r="100" fill="none" '
+                 f'stroke="{P600}" stroke-width="5" vector-effect="non-scaling-stroke"/>')
+    body += "</g>"
+    body += (f'<circle class="ca-beacon" cx="{tx}" cy="{ty - 50}" r="22" fill="{AMBER}" fill-opacity=".35"/>'
+             f'<circle class="ca-beacon" cx="{tx}" cy="{ty - 50}" r="10" fill="{AMBER}"/>')
+    for i, ((x0, y0), (x1, y1)) in enumerate(zip(tops, tops[1:])):
+        mx, my = (x0 + x1) / 2, min(y0, y1) - 70
+        d = f"M{x0:.1f},{y0:.1f} Q{mx:.1f},{my:.1f} {x1:.1f},{y1:.1f}"
+        back = 'keyPoints="1;0" keyTimes="0;1" calcMode="linear"' if i % 2 else ""
+        body += (f'<circle r="12" fill="{AMBER}" stroke="{WHITE}" stroke-width="4">'
+                 f'<animateMotion dur="{2.6 + 0.4 * i:.1f}s" begin="{0.5 * i:.1f}s" repeatCount="indefinite" '
+                 f'path="{d}" {back}/></circle>')
+    open(path, "w").write(_svg("anim-fgm-3g", body))
+    print("wrote", path)
 
 
 if __name__ == "__main__":
-    beat_policing(os.path.join(OUT, "plan-cuadrante", "featured.png"))
-    fast_internet(os.path.join(OUT, "fgm-3g", "featured.png"))
+    pc = os.path.join(OUT, "plan-cuadrante")
+    g = beat_policing(os.path.join(pc, "featured.png"))
+    beat_policing(os.path.join(pc, "card.png"), with_car=False)
+    beat_policing_overlay(os.path.join(pc, "card.svg"), g)
+
+    fg = os.path.join(OUT, "fgm-3g")
+    g = fast_internet(os.path.join(fg, "featured.png"))
+    fast_internet_overlay(os.path.join(fg, "card.svg"), g)

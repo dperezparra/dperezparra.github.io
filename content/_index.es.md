@@ -11,7 +11,7 @@ sections:
   - block: home-map
     content:
       username: admin
-      tagline: 'Economía del desarrollo y de la seguridad: normas, escolarización y crimen.'
+      tagline: 'Economía del desarrollo: normas sociales, escolarización y crimen'
       text: |
         Soy un microeconomista aplicado que trabaja en desarrollo y seguridad. Una línea de mi investigación estudia cómo la educación, la tecnología y las instituciones transforman normas sociales perjudiciales en África Occidental, como la ablación genital femenina y el matrimonio infantil.
 
@@ -28,10 +28,11 @@ sections:
         url: uploads/daniel-perez-parra-cv.pdf
       map:
         label: 'Mapa de América y África que señala Nigeria, Senegal, Sierra Leona y Chile'
+        origin: {label: 'París', lon: 2.35, lat: 48.86}
         pins:
-          - {country: 'Nigeria', label: 'Nigeria', lon: 8.0, lat: 9.6, side: 'right', dy: 5}
           - {country: 'Senegal', label: 'Senegal', lon: -14.8, lat: 14.6, side: 'left', dy: -4}
           - {country: 'Sierra Leone', label: 'Sierra Leona', lon: -11.8, lat: 8.5, side: 'left', dy: 12}
+          - {country: 'Nigeria', label: 'Nigeria', lon: 8.0, lat: 9.6, side: 'right', dy: 5}
           - {country: 'Chile', label: 'Chile', lon: -70.8, lat: -33.4, side: 'right', dy: 5}
     design:
       css_class: home-map-section

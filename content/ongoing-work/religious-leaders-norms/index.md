@@ -28,4 +28,9 @@ slug: "religious-leaders-norms"
 # file path when available.
 
 share: false
+
+# Card details on /research/ - see layouts/_partials/views/wip.html.
+wip:
+  icon: 'chat-bubble-left-right'
+
 ---
