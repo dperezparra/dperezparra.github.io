@@ -41,18 +41,11 @@ header:
     # The theme reads `show_translations`, not `show_language`. Shows the globe
     # language switcher (English / Español / Français) on translated pages.
     show_translations: true
-    # Institution logos shown just before the search button, in this order.
-    # Rendered by the shadowed navbar at
-    # layouts/partials/components/headers/navbar.html
-    # IRD uses the symbol rather than the full lockup: at navbar height the
-    # "Institut de Recherche pour le Développement" wordmark is illegible.
-    # Only IRD here - the full set of three is shown on the homepage, below the
-    # CV button (see `design.institution_logos` in content/_index.md).
-    institution_logos:
-      - filename: ird-mark.png
-        url: https://en.ird.fr/
-        alt: 'Institut de Recherche pour le Développement (IRD)'
-        title: 'Institut de Recherche pour le Développement (IRD)'
+    # Institution logos just before the search button are supported by the
+    # shadowed navbar (layouts/partials/components/headers/navbar.html) via an
+    # `institution_logos:` list here (filename / url / alt / title). Removed:
+    # the full IRD logo now sits under the name on the home page, and the
+    # affiliation logos are listed in the home page's About column.
 # Site footer
 footer:
   copyright:
