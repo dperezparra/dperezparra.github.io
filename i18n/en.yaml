@@ -52,3 +52,17 @@
 
 - id: wip_in_progress
   translation: 'In progress'
+- id: paper_research
+  translation: 'Research'
+- id: paper_download
+  translation: 'Download PDF'
+- id: paper_copy_cite
+  translation: 'Copy citation'
+- id: paper_copied
+  translation: 'Copied'
+- id: paper_glance
+  translation: 'At a glance'
+- id: paper_cite
+  translation: 'Cite'
+- id: paper_more
+  translation: 'More research'

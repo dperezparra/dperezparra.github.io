@@ -1,0 +1,174 @@
+{{/* ---------------------------------------------------------------------------
+     Paper page ("illustrated hero"), used by layouts/single.html for pages in
+     the `publication` section. Everything else keeps the theme layout.
+
+       1. Hero: breadcrumb, status badge (`publication`, green once accepted),
+          topic chip (first tag), title, authors (co-authors linked through
+          data/author_links.yaml), PDF / other links and a Copy citation
+          button; on the right the paper's illustration - card.png with the
+          animated card.svg overlay when the bundle has them, as on the
+          /research/ card, else featured.png.
+       2. Body: the abstract, its first sentence set as a lead; beside it an
+          "At a glance" box (`glance:` list of label/value in front matter,
+          values take markdown) and a ready-made citation.
+       3. More research: the other working papers in this language.
+--------------------------------------------------------------------------- */}}
+{{ $p := . }}
+{{ $links := site.Data.author_links | default dict }}
+{{ $status := $p.Params.publication | default "" }}
+{{ $accepted := gt (len (findRE `(?i)accept|acept` $status)) 0 }}
+
+{{/* Authors: display markup and citation form ("Surname, I.") together. */}}
+{{ $shown := slice }}
+{{ $cited := slice }}
+{{ range $p.Params.authors }}
+  {{ $name := . }}
+  {{ if eq (lower .) "admin" }}
+    {{ with site.GetPage "/authors/admin" }}{{ $name = .Title }}{{ end }}
+    {{ $shown = $shown | append (printf "<b>%s</b>" ($name | htmlEscape)) }}
+  {{ else }}
+    {{ with index $links . }}
+      {{ $shown = $shown | append (printf `<a href="%s" target="_blank" rel="noopener">%s</a>` . ($name | htmlEscape)) }}
+    {{ else }}
+      {{ $shown = $shown | append ($name | htmlEscape) }}
+    {{ end }}
+  {{ end }}
+  {{ $parts := split $name " " }}
+  {{ $first := index $parts 0 }}
+  {{ $last := delimit (after 1 $parts) " " }}
+  {{ $cited = $cited | append (printf "%s, %s." $last (substr $first 0 1)) }}
+{{ end }}
+{{ $and := printf " %s " (i18n "list_and" | default "and") }}
+{{ $where := cond $accepted $status (i18n "pub_Working Paper" | default "Working paper") }}
+{{ $citation := printf "%s (%d). %s. %s." (delimit $cited ", " $and) $p.Date.Year $p.Title $where }}
+
+{{/* The illustration, as on the Research card. */}}
+{{ $anim := $p.Resources.GetMatch "card.svg" }}
+{{ $art := partial "functions/get_featured_image.html" $p }}
+{{ if $anim }}{{ with $p.Resources.GetMatch "card.png" }}{{ $art = . }}{{ end }}{{ end }}
+
+<div class="pp">
+  <header class="pp-hero">
+    <div class="pp-hero-inner">
+      <div class="pp-intro">
+        <p class="pp-crumb">
+          <a href="{{ "research/" | relLangURL }}">{{ i18n "paper_research" | default "Research" }}</a>
+          <span aria-hidden="true">/</span>
+          {{ i18n "pub_Working Paper" | default "Working paper" }}
+        </p>
+        <div class="pp-chips">
+          {{ with $status }}<span class="pp-status{{ if $accepted }} is-accepted{{ end }}">{{ . | plainify }}</span>{{ end }}
+          {{ with $p.GetTerms "tags" }}{{ with index . 0 }}<a class="pp-topic" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+        </div>
+        <h1 class="pp-title">{{ $p.Title }}</h1>
+        {{ with $shown }}<p class="pp-authors">{{ delimit . ", " $and | safeHTML }}</p>{{ end }}
+
+        <div class="pp-actions">
+          {{ range $p.Params.links }}
+            {{ $url := .url }}
+            {{ if not (urls.Parse $url).Scheme }}{{ $url = $url | relURL }}{{ end }}
+            {{ if eq .type "pdf" }}
+              <a class="pp-btn is-primary" href="{{ $url }}" target="_blank" rel="noopener">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+                {{ i18n "paper_download" | default "Download PDF" }}
+              </a>
+            {{ else if and $url (ne $url "#") }}
+              <a class="pp-btn" href="{{ $url }}" target="_blank" rel="noopener">{{ .name | default (title .type) }}</a>
+            {{ end }}
+          {{ end }}
+          <button type="button" class="pp-btn" data-pp-copy
+                  data-copied="{{ i18n "paper_copied" | default "Copied" }}">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+            <span>{{ i18n "paper_copy_cite" | default "Copy citation" }}</span>
+          </button>
+        </div>
+      </div>
+
+      {{ with $art }}
+        {{ $img := .Resize "1200x webp q82" }}
+        <div class="pp-art">
+          <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
+               alt="{{ $p.Title | plainify }}" fetchpriority="high" />
+          {{ with $anim }}
+            {{ .Content | safeHTML }}
+            <script>(function(s){if(s&&s.pauseAnimations&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)s.pauseAnimations()})(document.currentScript.previousElementSibling)</script>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="pp-body">
+    <div class="pp-main">
+      {{ with $p.Params.abstract }}
+        <h2 class="pp-label">{{ i18n "wip_abstract" | default "Abstract" }}</h2>
+        {{ $abs := . | plainify | htmlUnescape | strings.TrimSpace }}
+        {{ $lead := "" }}
+        {{ with findRE `^.+?[.!?](\s|$)` $abs 1 }}{{ $lead = index . 0 }}{{ end }}
+        <div class="pp-abstract">
+          {{ if $lead }}
+            <p class="pp-lead">{{ strings.TrimSpace $lead }}</p>
+            {{ with strings.TrimSpace (strings.TrimPrefix $lead $abs) }}<p>{{ . }}</p>{{ end }}
+          {{ else }}
+            <p>{{ $abs }}</p>
+          {{ end }}
+        </div>
+      {{ end }}
+      {{ with $p.Content }}<div class="pp-content">{{ . }}</div>{{ end }}
+    </div>
+
+    <aside class="pp-side">
+      {{ with $p.Params.glance }}
+        <div class="pp-box">
+          <h2 class="pp-label">{{ i18n "paper_glance" | default "At a glance" }}</h2>
+          <dl class="pp-glance">
+            {{ range . }}<dt>{{ .label }}</dt><dd>{{ .value | markdownify }}</dd>{{ end }}
+          </dl>
+        </div>
+      {{ end }}
+      <div class="pp-box">
+        <h2 class="pp-label">{{ i18n "paper_cite" | default "Cite" }}</h2>
+        <p class="pp-cite" id="pp-citation">{{ $citation }}</p>
+      </div>
+    </aside>
+  </div>
+
+  {{ $others := where (where site.RegularPages "Section" "publication") "Permalink" "ne" $p.Permalink }}
+  {{ with $others }}
+    <section class="pp-more">
+      <h2 class="pp-label">{{ i18n "paper_more" | default "More research" }}</h2>
+      <ul class="pp-more-grid">
+        {{ range . }}
+          <li>
+            <a href="{{ .RelPermalink }}">
+              {{ with partial "functions/get_featured_image.html" . }}
+                {{ $t := .Fill "224x126 Center webp" }}
+                <img src="{{ $t.RelPermalink }}" width="112" height="63" alt="" loading="lazy" />
+              {{ end }}
+              <span>
+                <b>{{ index (split .Title ":") 0 }}</b>
+                {{ with .Params.publication }}<span>{{ . | plainify }}</span>{{ end }}
+              </span>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+</div>
+
+<script>
+(function () {
+  var b = document.querySelector('[data-pp-copy]');
+  var c = document.getElementById('pp-citation');
+  if (!b || !c) return;
+  b.addEventListener('click', function () {
+    var label = b.querySelector('span'), was = label.textContent;
+    function done() { label.textContent = b.getAttribute('data-copied'); setTimeout(function () { label.textContent = was; }, 1800); }
+    function select() { var r = document.createRange(); r.selectNodeContents(c); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(c.textContent).then(done, select);
+    } else { select(); }
+  });
+})();
+</script>

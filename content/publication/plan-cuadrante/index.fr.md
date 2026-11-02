@@ -33,4 +33,10 @@ image:
   preview_only: true
 
 share: false
+
+glance:
+  - {label: 'Pays', value: 'Chili'}
+  - {label: 'Politique', value: 'Plan Cuadrante'}
+  - {label: 'Données', value: 'Enquêtes auprès des ménages et registres de police'}
+  - {label: 'Méthode', value: 'Déploiement échelonné entre communes'}
 ---

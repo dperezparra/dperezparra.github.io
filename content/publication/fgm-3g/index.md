@@ -45,4 +45,11 @@ image:
   preview_only: true
 
 share: false
+
+# Facts in the paper page's sidebar - see layouts/_partials/paper-page.html.
+glance:
+  - {label: 'Country', value: 'Nigeria'}
+  - {label: 'Shock', value: 'Fast (3G) internet roll-out'}
+  - {label: 'Outcome', value: 'Female genital cutting: prevalence and support'}
+  - {label: 'Fieldwork', value: '[Abuja & Calabar, 2024](/fieldwork/)'}
 ---

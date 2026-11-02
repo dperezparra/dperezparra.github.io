@@ -33,4 +33,10 @@ image:
   preview_only: true
 
 share: false
+
+glance:
+  - {label: 'País', value: 'Chile'}
+  - {label: 'Política', value: 'Plan Cuadrante'}
+  - {label: 'Datos', value: 'Encuestas de hogares y registros policiales'}
+  - {label: 'Diseño', value: 'Implementación escalonada entre comunas'}
 ---

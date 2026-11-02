@@ -2328,3 +2328,460 @@
     max-width: 7.5rem;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Paper pages ("illustrated hero" - layouts/_partials/paper-page.html).
+ *
+ * A hero band with the status, title, authors and buttons beside the paper's
+ * moving illustration; then the abstract with a lead sentence beside an
+ * "At a glance" box and a citation; then the other working papers.
+ * ------------------------------------------------------------------------- */
+
+.pp-hero {
+  background: linear-gradient(180deg, var(--color-primary-100) 0%, rgb(255 255 255 / 0) 100%);
+}
+
+.dark .pp-hero {
+  background: linear-gradient(180deg, #2e1065 0%, rgb(24 24 27 / 0) 100%);
+}
+
+.pp-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.pp-crumb {
+  display: flex;
+  gap: 0.45rem;
+  margin: 0 0 0.9rem;
+  font-size: 0.8125rem;
+  color: rgb(113 113 122);
+}
+
+.pp-crumb a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pp-crumb a:hover {
+  color: var(--color-primary-600);
+  text-decoration: underline;
+}
+
+.dark .pp-crumb {
+  color: rgb(161 161 170);
+}
+
+.pp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.pp-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-800);
+}
+
+.pp-status::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background-color: currentColor;
+}
+
+.pp-status.is-accepted {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.dark .pp-status {
+  background-color: rgb(88 28 135 / 0.45);
+  color: var(--color-primary-200);
+}
+
+.dark .pp-status.is-accepted {
+  background-color: rgb(22 101 52 / 0.4);
+  color: #86efac;
+}
+
+.pp-topic {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--color-primary-200);
+  border-radius: 9999px;
+  background-color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary-700);
+  text-decoration: none;
+}
+
+.pp-topic:hover {
+  border-color: var(--color-primary-400);
+}
+
+.dark .pp-topic {
+  background-color: transparent;
+  border-color: rgb(107 33 168 / 0.7);
+  color: var(--color-primary-300);
+}
+
+.pp-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: rgb(24 24 27);
+  text-wrap: balance;
+}
+
+.dark .pp-title {
+  color: #fff;
+}
+
+.pp-authors {
+  margin: 0.9rem 0 0;
+  font-size: 0.975rem;
+  line-height: 1.55;
+  color: rgb(63 63 70);
+}
+
+.pp-authors a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(209 213 219);
+  text-underline-offset: 3px;
+}
+
+.pp-authors a:hover {
+  color: var(--color-primary-600);
+  text-decoration-color: currentColor;
+}
+
+.pp-authors b {
+  font-weight: 600;
+  color: rgb(24 24 27);
+}
+
+.dark .pp-authors {
+  color: rgb(212 212 216);
+}
+
+.dark .pp-authors a {
+  text-decoration-color: rgb(82 82 91);
+}
+
+.dark .pp-authors b {
+  color: #fff;
+}
+
+.pp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.4rem;
+}
+
+.pp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.62rem 1.05rem;
+  border: 1px solid rgb(228 228 231);
+  border-radius: 0.65rem;
+  background-color: #fff;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(24 24 27);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.pp-btn:hover {
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-700);
+}
+
+.pp-btn:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.pp-btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.pp-btn.is-primary {
+  border-color: var(--color-primary-600);
+  background-color: var(--color-primary-600);
+  color: #fff;
+}
+
+.pp-btn.is-primary:hover {
+  background-color: var(--color-primary-700);
+  color: #fff;
+}
+
+.dark .pp-btn {
+  border-color: rgb(63 63 70);
+  background-color: rgb(24 24 27);
+  color: rgb(244 244 245);
+}
+
+.dark .pp-btn:hover {
+  border-color: var(--color-primary-400);
+  color: var(--color-primary-200);
+}
+
+.dark .pp-btn.is-primary {
+  border-color: var(--color-primary-500);
+  background-color: var(--color-primary-500);
+  color: #fff;
+}
+
+.pp-art {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 1rem;
+  background-color: var(--color-primary-100);
+  box-shadow: 0 18px 40px -24px rgb(59 7 100 / 0.45);
+}
+
+.pp-art > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pp-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 2.75rem;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 3rem;
+}
+
+.pp-label {
+  margin: 0 0 0.7rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(113 113 122);
+}
+
+.dark .pp-label {
+  color: rgb(161 161 170);
+}
+
+.pp-abstract {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgb(63 63 70);
+}
+
+.pp-abstract p {
+  margin: 0;
+}
+
+.pp-abstract p + p {
+  margin-top: 0.9rem;
+}
+
+.pp-lead {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  font-weight: 500;
+  color: rgb(24 24 27);
+}
+
+.dark .pp-abstract {
+  color: rgb(212 212 216);
+}
+
+.dark .pp-lead {
+  color: #fff;
+}
+
+.pp-side {
+  display: grid;
+  gap: 1rem;
+}
+
+.pp-box {
+  padding: 1rem 1.1rem;
+  border: 1px solid rgb(228 228 231);
+  border-radius: 1rem;
+  background-color: #fff;
+}
+
+.dark .pp-box {
+  border-color: rgb(63 63 70);
+  background-color: rgb(24 24 27);
+}
+
+.pp-glance {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.45rem 0.9rem;
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.pp-glance dt {
+  color: rgb(113 113 122);
+}
+
+.pp-glance dd {
+  margin: 0;
+  font-weight: 600;
+  color: rgb(24 24 27);
+}
+
+.pp-glance dd p {
+  margin: 0;
+}
+
+.pp-glance a {
+  color: var(--color-primary-700);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.dark .pp-glance dt {
+  color: rgb(161 161 170);
+}
+
+.dark .pp-glance dd {
+  color: rgb(244 244 245);
+}
+
+.dark .pp-glance a {
+  color: var(--color-primary-300);
+}
+
+.pp-cite {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgb(228 228 231);
+  border-radius: 0.6rem;
+  background-color: rgb(250 250 250);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: rgb(63 63 70);
+  overflow-wrap: anywhere;
+}
+
+.dark .pp-cite {
+  border-color: rgb(63 63 70);
+  background-color: rgb(39 39 42);
+  color: rgb(212 212 216);
+}
+
+.pp-more {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+.pp-more-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pp-more a {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: center;
+  padding: 0.6rem;
+  border: 1px solid rgb(228 228 231);
+  border-radius: 0.85rem;
+  background-color: #fff;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.pp-more a:hover {
+  border-color: var(--color-primary-400);
+}
+
+.pp-more img {
+  width: 112px;
+  height: auto;
+  border-radius: 0.55rem;
+}
+
+.pp-more b {
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: rgb(24 24 27);
+}
+
+.pp-more a span span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  color: rgb(113 113 122);
+}
+
+.dark .pp-more a {
+  border-color: rgb(63 63 70);
+  background-color: rgb(24 24 27);
+}
+
+.dark .pp-more b {
+  color: rgb(244 244 245);
+}
+
+@media (max-width: 860px) {
+  .pp-hero-inner,
+  .pp-body {
+    grid-template-columns: 1fr;
+  }
+
+  .pp-hero-inner {
+    gap: 1.5rem;
+    padding: 1.75rem 1.25rem;
+  }
+
+  .pp-body {
+    gap: 2rem;
+    padding-inline: 1.25rem;
+  }
+
+  .pp-more {
+    padding-inline: 1.25rem;
+  }
+}

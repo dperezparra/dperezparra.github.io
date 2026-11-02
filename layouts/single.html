@@ -2,9 +2,11 @@
      SHADOWED THEME TEMPLATE - overrides blox-tailwind v0.9.0
      layouts/single.html
 
-     Verbatim copy of upstream with TWO changes, each marked "CUSTOMISED":
+     Verbatim copy of upstream with THREE changes, each marked "CUSTOMISED":
        1. a single dot separator between all authors
        2. read time floored at 1, so pages never say "0 minute read"
+       3. working papers (the `publication` section) render through
+          layouts/_partials/paper-page.html instead
 
      The date is hidden per page via `hide_date: true` in front matter - that
      is an upstream feature and needed no change here.
@@ -13,6 +15,11 @@
      re-apply these two edits - or delete this file to fall back to stock.
 --------------------------------------------------------------------------- */}}
 {{ define "main" }}
+
+{{/* CUSTOMISED (3): working papers get the illustrated paper page. */}}
+{{ if eq .Section "publication" }}
+  {{ partial "paper-page.html" . }}
+{{ else }}
 
 {{ $pub_type_csl := "" }}
 {{ $pub_type_display := "" }}
@@ -285,4 +292,5 @@
     </main>
   </article>
 </div>
+{{ end }}{{/* end CUSTOMISED (3) */}}
 {{ end }}

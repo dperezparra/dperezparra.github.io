@@ -33,4 +33,10 @@ image:
   preview_only: true
 
 share: false
+
+glance:
+  - {label: 'País', value: 'Nigeria'}
+  - {label: 'Shock', value: 'Llegada del internet rápido (3G)'}
+  - {label: 'Resultado', value: 'Ablación genital femenina: prevalencia y apoyo'}
+  - {label: 'Trabajo de campo', value: '[Abuja y Calabar, 2024](/es/fieldwork/)'}
 ---

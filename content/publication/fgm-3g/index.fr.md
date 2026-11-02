@@ -33,4 +33,10 @@ image:
   preview_only: true
 
 share: false
+
+glance:
+  - {label: 'Pays', value: 'Nigeria'}
+  - {label: 'Choc', value: 'Arrivée de l''internet rapide (3G)'}
+  - {label: 'Résultat', value: 'Excision : prévalence et soutien'}
+  - {label: 'Terrain', value: '[Abuja et Calabar, 2024](/fr/fieldwork/)'}
 ---

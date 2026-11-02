@@ -45,4 +45,11 @@ image:
   preview_only: true
 
 share: false
+
+# Facts in the paper page's sidebar - see layouts/_partials/paper-page.html.
+glance:
+  - {label: 'Country', value: 'Chile'}
+  - {label: 'Policy', value: 'Plan Cuadrante'}
+  - {label: 'Data', value: 'Household surveys and police records'}
+  - {label: 'Design', value: 'Staggered roll-out across municipalities'}
 ---

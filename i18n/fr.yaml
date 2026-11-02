@@ -44,3 +44,17 @@
   translation: 'En cours'
 - id: read_more
   translation: 'Lire la suite'
+- id: paper_research
+  translation: 'Recherche'
+- id: paper_download
+  translation: 'Télécharger le PDF'
+- id: paper_copy_cite
+  translation: 'Copier la citation'
+- id: paper_copied
+  translation: 'Copiée'
+- id: paper_glance
+  translation: 'En bref'
+- id: paper_cite
+  translation: 'Citer'
+- id: paper_more
+  translation: 'Autres travaux'
