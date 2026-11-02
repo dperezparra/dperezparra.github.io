@@ -2337,6 +2337,12 @@
  * "At a glance" box and a citation; then the other working papers.
  * ------------------------------------------------------------------------- */
 
+/* The theme's .page-body carries a my-10 margin; cancel the top one so the
+ * hero band meets the navbar. */
+.page-body > .pp:first-child {
+  margin-top: -2.5rem;
+}
+
 .pp-hero {
   background: linear-gradient(180deg, var(--color-primary-100) 0%, rgb(255 255 255 / 0) 100%);
 }
