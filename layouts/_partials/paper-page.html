@@ -40,7 +40,7 @@
 {{ end }}
 {{ $and := printf " %s " (i18n "list_and" | default "and") }}
 {{ $where := cond $accepted $status (i18n "pub_Working Paper" | default "Working paper") }}
-{{ $citation := printf "%s (%d). %s. %s." (delimit $cited ", " $and) $p.Date.Year $p.Title $where }}
+{{ $citation := printf "%s (%d). %s. %s." (delimit $cited ", " $and) $p.Date.Year (strings.TrimSpace $p.Title) (strings.TrimSpace $where) }}
 
 {{/* The illustration, as on the Research card. */}}
 {{ $anim := $p.Resources.GetMatch "card.svg" }}
