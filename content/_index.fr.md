@@ -11,7 +11,6 @@ sections:
   - block: home-map
     content:
       username: admin
-      eyebrow: 'Nigeria · Sénégal · Sierra Leone · Chili'
       tagline: 'Économie du développement et de la sécurité : normes, scolarisation et criminalité.'
       text: |
         Je suis microéconomiste appliqué et je travaille sur le développement et la sécurité. Un premier axe de mes recherches étudie comment l'éducation, la technologie et les institutions font évoluer des normes sociales néfastes en Afrique de l'Ouest, comme l'excision et le mariage des enfants.

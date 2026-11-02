@@ -25,7 +25,6 @@ sections:
   - block: home-map
     content:
       username: admin
-      eyebrow: 'Nigeria · Senegal · Sierra Leone · Chile'
       tagline: 'Development and security economics: norms, schooling and crime.'
       text: |
         I am an applied microeconomist working on development and security. One strand of my research studies how education, technology and institutions change harmful social norms in West Africa, including female genital cutting and child marriage.

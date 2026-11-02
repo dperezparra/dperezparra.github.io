@@ -79,8 +79,8 @@
   <div class="hm-body">
     <aside class="hm-card">
       {{ with $avatar }}
-        {{ $a := .Fill "320x320 Center webp" }}
-        <img class="hm-avatar" src="{{ $a.RelPermalink }}" width="160" height="160" alt="{{ $person_page.Title }}" />
+        {{ $a := .Fill "400x400 Center webp" }}
+        <img class="hm-avatar" src="{{ $a.RelPermalink }}" width="192" height="192" alt="{{ $person_page.Title }}" />
       {{ end }}
 
       {{ with $person.role }}<p class="hm-role">{{ . | markdownify }}</p>{{ end }}
