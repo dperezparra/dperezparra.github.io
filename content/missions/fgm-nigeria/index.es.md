@@ -34,15 +34,15 @@ fieldwork:
       text: 'Cómo usa la gente internet y cómo percibe sus efectos sobre las normas sociales, en particular sobre el comportamiento sexual y el estigma asociado.'
   gallery:
     - {file: 'gallery/01.jpg', caption: 'Grupo focal en una comunidad rural', focus: '50% 0%'}
-    - {file: 'gallery/02.jpg', caption: 'Grupo focal junto a la carretera', focus: '50% 75%'}
+    - {file: 'gallery/02.jpg', caption: 'Grupo focal junto a la carretera', focus: '50% 80%'}
     - {file: 'gallery/03.jpg', caption: 'Conversación a la sombra', focus: '50% 0%'}
     - {file: 'gallery/04.jpg', caption: 'Entrevista individual', focus: '50% 0%'}
-    - {file: 'gallery/05.jpg', caption: 'Reunión en un centro de salud', focus: '50% 40%'}
-    - {file: 'gallery/06.jpg', caption: 'El equipo de campo', focus: '50% 40%'}
-    - {file: 'gallery/07.jpg', caption: 'Conversación con vecinos junto al camino', focus: '50% 5%'}
+    - {file: 'gallery/05.jpg', caption: 'Reunión en un centro de salud', focus: '50% 38%'}
+    - {file: 'gallery/06.jpg', caption: 'El equipo de campo', focus: '50% 43%'}
+    - {file: 'gallery/07.jpg', caption: 'Conversación con vecinos junto al camino', focus: '50% 2%'}
     - {file: 'gallery/08.jpg', caption: 'Entrevista de noche', focus: '50% 0%'}
     - {file: 'gallery/09.jpg', caption: 'Entrevista de noche', focus: '50% 0%'}
-    - {file: 'gallery/10.jpg', caption: 'Grupo focal bajo los árboles', focus: '50% 75%'}
+    - {file: 'gallery/10.jpg', caption: 'Grupo focal bajo los árboles', focus: '50% 74%'}
   paper: '/publication/fgm-3g'
   funding: 'Érudite, Université Gustave Eiffel'
   collaborators: 'Hadiza Kande Jidda, Anthony Ekere, Stephen Adibe y Susan Michael'

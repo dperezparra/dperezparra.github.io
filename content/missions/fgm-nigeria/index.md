@@ -15,7 +15,7 @@ date: 2024-12-01
 #   regions  - the locations grouped by state
 #   sections - the three short headed blocks under the summary
 #   gallery  - carousel photos, in order; `focus` is the CSS object-position
-#              that keeps the faces in frame when the slide is cropped
+#              that keeps the faces in frame in the 16:7 slide
 fieldwork:
   map: nigeria
   dates: 'November – December 2024'
@@ -48,15 +48,15 @@ fieldwork:
       text: 'How people use the internet, and how they see its effects on social norms, particularly sexual behaviour and the stigma around it.'
   gallery:
     - {file: 'gallery/01.jpg', caption: 'Focus group in a rural community', focus: '50% 0%'}
-    - {file: 'gallery/02.jpg', caption: 'Focus group by the roadside', focus: '50% 75%'}
+    - {file: 'gallery/02.jpg', caption: 'Focus group by the roadside', focus: '50% 80%'}
     - {file: 'gallery/03.jpg', caption: 'Discussion in the shade', focus: '50% 0%'}
     - {file: 'gallery/04.jpg', caption: 'One-to-one interview', focus: '50% 0%'}
-    - {file: 'gallery/05.jpg', caption: 'Meeting at a health facility', focus: '50% 40%'}
-    - {file: 'gallery/06.jpg', caption: 'The field team', focus: '50% 40%'}
-    - {file: 'gallery/07.jpg', caption: 'Talking with residents by the road', focus: '50% 5%'}
+    - {file: 'gallery/05.jpg', caption: 'Meeting at a health facility', focus: '50% 38%'}
+    - {file: 'gallery/06.jpg', caption: 'The field team', focus: '50% 43%'}
+    - {file: 'gallery/07.jpg', caption: 'Talking with residents by the road', focus: '50% 2%'}
     - {file: 'gallery/08.jpg', caption: 'Evening interview', focus: '50% 0%'}
     - {file: 'gallery/09.jpg', caption: 'Evening interview', focus: '50% 0%'}
-    - {file: 'gallery/10.jpg', caption: 'Focus group under the trees', focus: '50% 75%'}
+    - {file: 'gallery/10.jpg', caption: 'Focus group under the trees', focus: '50% 74%'}
   paper: '/publication/fgm-3g'
   funding: 'Érudite, Université Gustave Eiffel'
   collaborators: 'Hadiza Kande Jidda, Anthony Ekere, Stephen Adibe and Susan Michael'
