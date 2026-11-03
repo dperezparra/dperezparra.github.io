@@ -37,7 +37,7 @@ sections:
         - date: '2026'
           text: '**Boots in the Beat** conditionally accepted at *The Economic Journal*'
         - date: '2026'
-          text: 'Postdoctoral researcher at IRD, based at LEDa-DIAL and CES'
+          text: 'Postdoctoral researcher at the French National Research Institute for Sustainable Development (IRD)'
         - date: '2026'
           text: 'PhD in Economics, Université Gustave Eiffel (Érudite)'
       button:

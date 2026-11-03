@@ -21,7 +21,7 @@ sections:
         - date: '2026'
           text: '**Boots in the Beat**, aceptado condicionalmente en *The Economic Journal*'
         - date: '2026'
-          text: 'Investigador posdoctoral en el IRD, con sede en LEDa-DIAL y CES'
+          text: 'Investigador posdoctoral en el Instituto Francés de Investigación para el Desarrollo Sostenible (IRD)'
         - date: '2026'
           text: 'Doctorado en Economía, Université Gustave Eiffel (Érudite)'
       button:
