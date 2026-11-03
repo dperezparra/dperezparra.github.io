@@ -67,7 +67,6 @@
                    sizes="(max-width: 900px) 100vw, 900px" width="{{ $big.Width }}" height="{{ $big.Height }}"
                    style="object-position: {{ $s.focus | safeCSS }}"
                    alt="{{ $s.caption | default $item.Title }}" {{ if gt $k 0 }}loading="lazy"{{ end }} decoding="async" />
-              {{ with $s.caption }}<figcaption>{{ . }}</figcaption>{{ end }}
             </figure>
           {{ end }}
         </div>

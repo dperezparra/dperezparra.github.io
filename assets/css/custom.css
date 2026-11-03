@@ -1457,20 +1457,6 @@
   object-fit: cover;
 }
 
-.mission-slide figcaption {
-  position: absolute;
-  left: 0.85rem;
-  bottom: 0.85rem;
-  max-width: calc(100% - 7rem);
-  padding: 0.3rem 0.7rem;
-  border-radius: 9999px;
-  background-color: rgb(10 6 18 / 0.62);
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 600;
-  backdrop-filter: blur(4px);
-}
-
 .mission-car-btn {
   position: absolute;
   top: 50%;
@@ -1833,10 +1819,6 @@
 
   .mission-car-thumbs {
     grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  .mission-slide figcaption {
-    font-size: 0.72rem;
   }
 }
 
