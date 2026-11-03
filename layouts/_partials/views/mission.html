@@ -5,105 +5,189 @@
      `functions/render_view` resolves views by name. Select it with
      `design.view: mission` on a collection block.
 
-     Layout: a photo cover - the field photograph edge to edge, with the dates,
-     title, headline figures and paper link set over a dark gradient, and a
-     white outline of the country with a pin at each site. The narrative and
-     credits follow underneath the cover.
+     Layout (all text shown, nothing folded):
+       1. Dates, title.
+       2. A photo carousel from `fieldwork.gallery` (arrows, swipe, a row of
+          thumbnails). Each photo's `focus` is a CSS object-position chosen so
+          the faces stay in frame when the slide crops the photo. Without a
+          gallery the featured image is shown alone.
+       3. Two columns: on the left the summary (`abstract`), the locations by
+          state (`fieldwork.regions`) and the short headed sections
+          (`fieldwork.sections`); on the right the figures (`fieldwork.stats`),
+          a map of the country with a pin per site, and the credits.
 
      The map outline comes from data/maps.yaml, already projected into a
-     0,0 -> width,height box. Pins are placed here with the SAME linear mapping,
-     so the two always agree:
+     0,0 -> width,height box. Pins use the SAME linear mapping:
          x = (lon - lon_min) / (lon_max - lon_min) * width
          y = (lat_max - lat) / (lat_max - lat_min) * height
-
-     Everything is inline SVG - no mapping library, no JavaScript, no tiles to
-     request at run time.
 --------------------------------------------------------------------------- */}}
 
 {{ $item := .item }}
-{{ $fw := $item.Params.fieldwork }}
+{{ $fw := $item.Params.fieldwork | default dict }}
 {{ $map := "" }}
-{{ with $fw }}{{ with .map }}{{ $map = index (site.Data.maps | default dict) . }}{{ end }}{{ end }}
+{{ with $fw.map }}{{ $map = index (site.Data.maps | default dict) . }}{{ end }}
 {{ $id := $item.Slug | default (path.Base $item.RelPermalink) }}
 
-{{/* Resolve the paper page once, so a missing/renamed page degrades to nothing
-     rather than a dead link. */}}
 {{ $paper := "" }}
-{{ with $fw }}{{ with .paper }}{{ $paper = site.GetPage . }}{{ end }}{{ end }}
+{{ with $fw.paper }}{{ $paper = site.GetPage . }}{{ end }}
+
+{{/* Slides: the gallery, or the featured image on its own. */}}
+{{ $slides := slice }}
+{{ range $g := $fw.gallery }}
+  {{ with $item.Resources.GetMatch $g.file }}
+    {{ $slides = $slides | append (dict "img" . "caption" ($g.caption | default "") "focus" ($g.focus | default "50% 50%")) }}
+  {{ else }}
+    {{ warnf "mission %s: gallery photo %q not found" $item.File.Path $g.file }}
+  {{ end }}
+{{ end }}
+{{ if not $slides }}
+  {{ with partial "functions/get_featured_image.html" $item }}
+    {{ $slides = slice (dict "img" . "caption" "" "focus" "50% 50%") }}
+  {{ end }}
+{{ end }}
+{{ $n := len $slides }}
 
 <li class="mission" id="{{ $id }}">
 
-  <div class="mission-cover">
-    {{ with partial "functions/get_featured_image.html" $item }}
-      {{ $img := .Resize "1600x webp q80" }}
-      <img class="mission-cover-img" src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
-           alt="{{ $item.Title | plainify }}" decoding="async" />
-    {{ end }}
+  <header class="mission-head">
+    {{ with $fw.dates }}<p class="mission-when">{{ . }}</p>{{ end }}
+    <h3 class="mission-title">{{ $item.Title }}</h3>
+  </header>
 
-    <div class="mission-cover-body">
-      <div class="mission-cover-text">
-        {{ with $fw }}
-          <p class="mission-when">
-            {{- with .dates }}{{ . }}{{ end -}}
-            {{- with .sites -}}
-              {{- $names := slice -}}
-              {{- range . }}{{ $names = $names | append .name }}{{ end -}}
-              {{ if $fw.dates }} &middot; {{ end }}{{ delimit $names ", " " & " }}
-            {{- end -}}
-          </p>
+  {{ with $slides }}
+    <div class="mission-car" data-mission-car>
+      <div class="mission-car-frame">
+        <div class="mission-car-track" tabindex="0" role="region"
+             aria-label="{{ i18n "mission_photos" | default "Photos" }}" aria-roledescription="carousel">
+          {{ range $k, $s := . }}
+            {{ $big := $s.img.Resize "1600x webp q80" }}
+            {{ $mid := $s.img.Resize "900x webp q78" }}
+            <figure class="mission-slide" aria-roledescription="slide" aria-label="{{ add $k 1 }} / {{ $n }}">
+              <img src="{{ $mid.RelPermalink }}" srcset="{{ $mid.RelPermalink }} 900w, {{ $big.RelPermalink }} 1600w"
+                   sizes="(max-width: 900px) 100vw, 900px" width="{{ $big.Width }}" height="{{ $big.Height }}"
+                   style="object-position: {{ $s.focus | safeCSS }}"
+                   alt="{{ $s.caption | default $item.Title }}" {{ if gt $k 0 }}loading="lazy"{{ end }} decoding="async" />
+              {{ with $s.caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+            </figure>
+          {{ end }}
+        </div>
+        {{ if gt $n 1 }}
+          <button type="button" class="mission-car-btn is-prev" data-car-prev aria-label="{{ i18n "mission_prev" | default "Previous photo" }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="mission-car-btn is-next" data-car-next aria-label="{{ i18n "mission_next" | default "Next photo" }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+          <span class="mission-car-count" data-car-count aria-live="polite">1 / {{ $n }}</span>
         {{ end }}
-
-        <h3 class="mission-title">{{ $item.Title }}</h3>
-
-        {{ with $fw.stats }}
-          <ul class="mission-stats">
-            {{ range . }}
-              <li><b>{{ .value }}</b> {{ .label }}</li>
-            {{ end }}
-          </ul>
-        {{ end }}
-
-        <p class="mission-cover-links">
-          {{ with $item.Params.abstract }}<a href="#{{ $id }}-details">{{ i18n "mission_read_more" | default "Read about the mission" }}</a>{{ end }}
-          {{ with $paper }}<a href="{{ .RelPermalink }}">{{ i18n "mission_paper" | default "Paper" }} &rarr;</a>{{ end }}
-        </p>
       </div>
+
+      {{ if gt $n 1 }}
+        <div class="mission-car-thumbs">
+          {{ range $k, $s := . }}
+            {{ $t := $s.img.Fill "200x150 Center webp q70" }}
+            <button type="button" data-car-go="{{ $k }}" {{ if eq $k 0 }}aria-current="true"{{ end }}
+                    aria-label="{{ i18n "mission_show_photo" | default "Show photo" }} {{ add $k 1 }}">
+              <img src="{{ $t.RelPermalink }}" width="100" height="75" alt="" loading="lazy" decoding="async"
+                   style="object-position: {{ $s.focus | safeCSS }}" />
+            </button>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+
+  <div class="mission-grid">
+    <div class="mission-main">
+      {{ with $item.Params.abstract }}
+        <div class="mission-summary">{{ . | markdownify }}</div>
+      {{ end }}
+
+      {{ with $fw.regions }}
+        <div class="mission-regions">
+          {{ range . }}
+            <div class="mission-region">
+              <h4>{{ .name }}</h4>
+              {{ with .places }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+              {{ with .note }}<p>{{ . }}</p>{{ end }}
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{ with $fw.sections }}
+        <div class="mission-sections">
+          {{ range . }}
+            <section><h4>{{ .title }}</h4><p>{{ .text | markdownify }}</p></section>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+
+    <aside class="mission-side">
+      {{ with $fw.stats }}
+        <ul class="mission-stats">
+          {{ range . }}<li><b>{{ .value }}</b> {{ .label }}</li>{{ end }}
+        </ul>
+      {{ end }}
 
       {{ with $map }}
         <svg class="mission-map" viewBox="-10 -10 {{ add .width 20 }} {{ add .height 20 }}" role="img"
-             aria-label="Map of {{ .label }} showing the fieldwork sites">
+             aria-label="{{ i18n "mission_map" | default "Map of the fieldwork sites in" }} {{ .label }}">
           <path class="mission-map-land" d="{{ .path | safeHTMLAttr }}" />
           {{ $m := . }}
           {{ range $fw.sites }}
             {{ $x := mul (div (sub .lon $m.lon_min) (sub $m.lon_max $m.lon_min)) $m.width }}
             {{ $y := mul (div (sub $m.lat_max .lat) (sub $m.lat_max $m.lat_min)) $m.height }}
-            <circle cx="{{ $x }}" cy="{{ $y }}" r="16" class="mission-pin"><title>{{ .name }}</title></circle>
+            <circle cx="{{ $x }}" cy="{{ $y }}" r="10" class="mission-pin"><title>{{ .name }}</title></circle>
           {{ end }}
         </svg>
       {{ end }}
-    </div>
-  </div>
 
-  <div class="mission-details" id="{{ $id }}-details">
-    {{ with $item.Params.abstract }}
-      <div class="mission-text">{{ . | markdownify }}</div>
-    {{ end }}
-
-    {{ with $fw }}
-      {{ if or $paper .funding .collaborators }}
+      {{ if or $paper $fw.funding $fw.collaborators }}
         <div class="mission-credits">
-          {{ with $paper }}
-            <p><span class="mission-credit-label">{{ i18n "mission_results_in" | default "Qualitative results in" }}</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-          {{ end }}
-          {{ with .funding }}
-            <p><span class="mission-credit-label">{{ i18n "mission_funding" | default "Funding" }}</span>{{ . }}</p>
-          {{ end }}
-          {{ with .collaborators }}
-            <p><span class="mission-credit-label">{{ i18n "mission_collaborators" | default "Local collaborators" }}</span>{{ . }}</p>
-          {{ end }}
+          {{ with $paper }}<p><span class="mission-credit-label">{{ i18n "mission_results_in" | default "Results in" }}</span><a href="{{ .RelPermalink }}">{{ index (split .Title ":") 0 }}</a></p>{{ end }}
+          {{ with $fw.funding }}<p><span class="mission-credit-label">{{ i18n "mission_funding" | default "Funding" }}</span>{{ . }}</p>{{ end }}
+          {{ with $fw.collaborators }}<p><span class="mission-credit-label">{{ i18n "mission_collaborators" | default "Local collaborators" }}</span>{{ . }}</p>{{ end }}
         </div>
       {{ end }}
-    {{ end }}
+    </aside>
   </div>
 
 </li>
+
+{{/* Carousel behaviour, once per page. Native scroll-snap does the work;
+     the script only wires the arrows, thumbnails and counter. */}}
+{{ if not ($item.Store.Get "mission-car-js") }}
+  {{ $item.Store.Set "mission-car-js" true }}
+  <script>
+  (function () {
+    var smooth = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    document.querySelectorAll('[data-mission-car]').forEach(function (car) {
+      var track = car.querySelector('.mission-car-track');
+      var thumbs = car.querySelectorAll('[data-car-go]');
+      var count = car.querySelector('[data-car-count]');
+      var n = track.children.length;
+      function cur() { return Math.round(track.scrollLeft / track.clientWidth); }
+      function go(k) { k = (k + n) % n; track.scrollTo({ left: k * track.clientWidth, behavior: smooth }); }
+      var p = car.querySelector('[data-car-prev]'), x = car.querySelector('[data-car-next]');
+      if (p) p.addEventListener('click', function () { go(cur() - 1); });
+      if (x) x.addEventListener('click', function () { go(cur() + 1); });
+      thumbs.forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-car-go')); }); });
+      track.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(cur() + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur() - 1); }
+      });
+      var t;
+      track.addEventListener('scroll', function () {
+        clearTimeout(t);
+        t = setTimeout(function () {
+          var k = cur();
+          if (count) count.textContent = (k + 1) + ' / ' + n;
+          thumbs.forEach(function (b, j) { if (j === k) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+        }, 60);
+      }, { passive: true });
+    });
+  })();
+  </script>
+{{ end }}

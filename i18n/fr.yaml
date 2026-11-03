@@ -17,7 +17,7 @@
 - id: mission_paper
   translation: 'Article'
 - id: mission_results_in
-  translation: 'Résultats qualitatifs dans'
+  translation: 'Résultats dans'
 - id: mission_funding
   translation: 'Financement'
 - id: mission_collaborators
@@ -58,3 +58,13 @@
   translation: 'Citer'
 - id: paper_more
   translation: 'Autres travaux'
+- id: mission_photos
+  translation: 'Photos'
+- id: mission_prev
+  translation: 'Photo précédente'
+- id: mission_next
+  translation: 'Photo suivante'
+- id: mission_show_photo
+  translation: 'Voir la photo'
+- id: mission_map
+  translation: 'Carte des lieux de terrain au'
