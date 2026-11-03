@@ -18,11 +18,11 @@ sections:
 
         Me doctoré en Economía en la Université Gustave Eiffel (Érudite). Antes de incorporarme al IRD, fui consultor de investigación en el Africa Gender Innovation Lab del Banco Mundial y en el What Works Hub for Global Education de la Universidad de Oxford, y asistente de investigación en el Centre for the Study of African Economies de Oxford, donde también realicé una estancia como doctorando visitante. También he trabajado como asistente de investigación en la Universidad Autónoma de Madrid y como becario en la Comisión Económica de las Naciones Unidas para África.
       news:
-        - date: '2026'
+        - date: 'oct. 2026'
           text: '**Boots in the Beat**, aceptado condicionalmente en *The Economic Journal*'
-        - date: '2026'
+        - date: 'sept. 2026'
           text: 'Investigador posdoctoral en el Instituto Francés de Investigación para el Desarrollo Sostenible (IRD)'
-        - date: '2026'
+        - date: 'abr. 2026'
           text: 'Doctorado en Economía, Université Gustave Eiffel (Érudite)'
       button:
         text: Descargar mi CV

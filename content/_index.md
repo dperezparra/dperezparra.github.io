@@ -34,11 +34,11 @@ sections:
         I hold a PhD in Economics from Université Gustave Eiffel (Érudite). Before joining IRD, I was a research consultant at the World Bank's Africa Gender Innovation Lab and at the University of Oxford's What Works Hub for Global Education, and a research assistant at Oxford's Centre for the Study of African Economies, where I was also a visiting PhD student. I have also worked as a research assistant at the Universidad Autónoma de Madrid and as an intern at the United Nations Economic Commission for Africa.
       # Newest first.
       news:
-        - date: '2026'
+        - date: 'Oct 2026'
           text: '**Boots in the Beat** conditionally accepted at *The Economic Journal*'
-        - date: '2026'
+        - date: 'Sep 2026'
           text: 'Postdoctoral researcher at the French National Research Institute for Sustainable Development (IRD)'
-        - date: '2026'
+        - date: 'Apr 2026'
           text: 'PhD in Economics, Université Gustave Eiffel (Érudite)'
       button:
         text: Download my CV

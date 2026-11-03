@@ -46,7 +46,7 @@ education:
     institution: Érudite - Université Gustave Eiffel (France)
     icon: ""
     date_start: 2022-09-01
-    date_end: 2025-10-01
+    date_end: 2026-04-01
     summary: |
       - Thèse : Essays on Women's Education and Harmful Social Norms in West Africa
       - Directrices : Marine de Talancé • Catherine Bros

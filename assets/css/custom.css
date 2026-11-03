@@ -2239,7 +2239,7 @@
 
 .hm-news li {
   display: grid;
-  grid-template-columns: 3.5rem minmax(0, 1fr);
+  grid-template-columns: 5.5rem minmax(0, 1fr);
   gap: 1rem;
   padding: 0.7rem 0;
   border-top: 1px solid var(--hm-line);
